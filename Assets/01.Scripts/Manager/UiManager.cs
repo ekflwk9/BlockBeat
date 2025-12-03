@@ -2,18 +2,36 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 public static class UiManager
 {
-    private static Dictionary<Type, UiBase> ui = Init();
-    private static Transform Instance;
+    public static Transform Instance { get; private set; } = Init();
+    private static Dictionary<Type, UiBase> ui = new();
 
-    private static Dictionary<Type, UiBase> Init()
+    private static Transform Init()
+    {
+        FindEventSystem();
+        SpawnManager();
+        return Instance;
+    }
+
+    private static void SpawnManager()
     {
         Instance = new GameObject("UiManager").transform;
         MonoBehaviour.DontDestroyOnLoad(Instance);
+    }
 
-        return new();
+    private static void FindEventSystem()
+    {
+        if (!MonoBehaviour.FindAnyObjectByType<EventSystem>())
+        {
+            var spawnObj = new GameObject("EventSystem");
+            spawnObj.AddComponent<EventSystem>();
+            spawnObj.AddComponent<InputSystemUIInputModule>();
+            MonoBehaviour.DontDestroyOnLoad(spawnObj);
+        }
     }
 
     /// <summary>
@@ -26,7 +44,10 @@ public static class UiManager
         if (ui.ContainsKey(key)) return;
 
         var path = Path.Combine("Prefabs", "Ui");
-        var spawn = Resources.Load<T>(path);
+        var load = Resources.Load<T>(path);
+        var spawn = MonoBehaviour.Instantiate(load);
+        spawn.transform.SetParent(Instance.transform);
+
         ui.Add(key, spawn);
     }
 
