@@ -1,9 +1,11 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
     public static BlockController Instance { get; private set; }
+
+    [SerializeField] private int currentBlockIndex;
+    [SerializeField] private int lastBlockIndex;
     [SerializeField] private Block[] blocks;
 
     private PlayerBlock player;
@@ -13,11 +15,16 @@ public class BlockController : MonoBehaviour
     private void Reset()
     {
         blocks = GetComponentsInChildren<Block>(true);
+        var nextPos = Vector3.zero;
 
-        var viewportPos = new Vector3(Screen.width * 0.5f, 0f, 0f);
-        var worldPos = Camera.main.ScreenToWorldPoint(viewportPos);
-        worldPos.z = 0f;
-        blocks[0].transform.position = worldPos;
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            blocks[i].transform.position = nextPos;
+            nextPos.y += blocks[i].transform.localScale.y;
+        }
+
+        currentBlockIndex = 0;
+        lastBlockIndex = blocks.Length - 1;
     }
 #endif
 
@@ -57,5 +64,10 @@ public class BlockController : MonoBehaviour
         else nexPos = _isLeft ? -trasform.localScale.x : trasform.localScale.x;
 
         player.transform.position = new Vector3(nexPos + nexPos, 0, 0);
+    }
+
+    private void SetBlock()
+    {
+
     }
 }
