@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour
 {
-    public CamController Instatnce { get; private set; }
-    public Camera cam { get; private set; }
+    public static CamController Instatnce { get; private set; }
+    [field: SerializeField] public Camera cam { get; private set; }
     private Coroutine shakeCoroutine;
 
 #if UNITY_EDITOR

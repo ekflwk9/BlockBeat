@@ -4,6 +4,6 @@ public class PlayerBlock : MonoBehaviour
 {
     private void Awake()
     {
-        BlockManager.Add(this);
+        BlockController.Instance?.Add(this);
     }
 }

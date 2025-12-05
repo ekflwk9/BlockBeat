@@ -16,7 +16,7 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.position.x < this.transform.position.x) BlockManager.MovePlayer(-1);
-        else BlockManager.MovePlayer(1);
+        if (eventData.position.x < this.transform.position.x) BlockController.Instance?.MovePlayer(true);
+        else BlockController.Instance?.MovePlayer(false);
     }
 }
