@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class ButtonBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private GameObject touch;
 
@@ -24,9 +24,7 @@ public abstract class ButtonBase : MonoBehaviour, IPointerClickHandler, IPointer
 
     protected virtual void OnDisable() => touch?.SetActive(false);
 
-    public abstract void OnPointerClick(PointerEventData eventData);
+    public virtual void OnPointerDown(PointerEventData eventData) => touch?.SetActive(true);
 
-    public virtual void OnPointerEnter(PointerEventData eventData) => touch?.SetActive(true);
-
-    public virtual void OnPointerExit(PointerEventData eventData) => touch?.SetActive(false);
+    public void OnPointerUp(PointerEventData eventData) => touch?.SetActive(false);
 }

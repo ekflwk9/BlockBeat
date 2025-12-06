@@ -21,6 +21,6 @@ public class ResultUi : UiBase
 
     private void Awake()
     {
-        //score.text = json.data.maxScore;
+        score.text = Json.GetPlayerScore().ToString();
     }
 }

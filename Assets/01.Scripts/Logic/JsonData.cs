@@ -6,13 +6,14 @@ public class PlayerData
 {
     public bool musicSound;
     public bool effectSound;
+    public int currentScore;
     public int maxScore;
 }
 
 public class Data
 {
     private const string fileName = "S2c.Json";
-    [JsonProperty] public PlayerData playerData { get; private set; }
+    [JsonProperty] public PlayerData playerData { get; private set; } = new();
 
     public void Save()
     {
@@ -50,5 +51,13 @@ public static class Json
 
     public static void MusicSound(bool _isOff) => data.playerData.musicSound = _isOff;
     public static void EffectSound(bool _isOff) => data.playerData.effectSound = _isOff;
-    public static void PlayerMaxScore(int _score) => data.playerData.maxScore = _score;
+    public static int GetPlayerScore() => data.playerData.currentScore;
+    public static int GetPlayerMaxScore() => data.playerData.maxScore;
+
+    public static void PlayerScore(int _score)
+    {
+        data.playerData.currentScore = _score;
+        if (data.playerData.maxScore < _score) data.playerData.maxScore = _score;
+    }
+
 }

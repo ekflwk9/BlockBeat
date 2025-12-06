@@ -72,6 +72,7 @@ public class BlockManager : MonoBehaviour
         if (isBreak)
         {
             score++;
+            Json.PlayerScore(score);
             CamController.Instatnce?.Shake(0.2f, 0.1f);
 
             UiManager.Get<ScoreUi>().UpScore();
