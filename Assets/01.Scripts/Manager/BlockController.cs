@@ -16,7 +16,9 @@ public class BlockController : MonoBehaviour
     {
         blocks = GetComponentsInChildren<Block>(true);
         lastIndex = blocks.Length - 1;
-        var nextPos = Vector3.zero;
+
+        var ground = FindAnyObjectByType<Ground>();
+        var nextPos = ground ? ground.transform.position + Vector3.up * 2f: Vector3.zero;
 
         for (int i = 0; i < blocks.Length; i++)
         {
@@ -29,6 +31,7 @@ public class BlockController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        MoveBlock();
     }
 
     /// <summary>
@@ -63,8 +66,18 @@ public class BlockController : MonoBehaviour
         var direction = isLeft ? Block.DirectionType.Left : Block.DirectionType.Right;
         var isBreak = blocks[currentIndex].CanBreak(direction);
 
-        if (isBreak) SetNextBlock();
-        else Service.Log("게임 오버"); //test
+        if (isBreak)
+        {
+            CamController.Instatnce?.Shake(0.2f, 0.1f);
+            UiManager.Get<ScoreUi>().UpScore();
+            UiManager.Get<TimerUi>().UpTimer();
+            SetNextBlock();
+        }
+
+        else
+        {
+            Service.Log("게임 오버"); //test
+        }
     }
 
     private void SetNextBlock()

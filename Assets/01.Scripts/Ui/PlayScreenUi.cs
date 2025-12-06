@@ -14,6 +14,12 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
     }
 #endif
 
+    private void Start()
+    {
+        UiManager.On<ScoreUi>();
+        UiManager.On<TimerUi>();
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.position.x < this.transform.position.x) BlockController.Instance?.MovePlayer(true);

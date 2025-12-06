@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.UI;
 
 public static class UiManager
 {
-    public static Transform Instance { get; private set; } = Init();
+    private static Transform Instance = Init();
     private static Dictionary<Type, UiBase> ui = new();
 
     private static Transform Init()
@@ -41,12 +41,18 @@ public static class UiManager
     public static void New<T>() where T : UiBase
     {
         var key = typeof(T);
-        if (ui.ContainsKey(key)) return;
 
-        var path = Path.Combine("Prefabs", "Ui");
+        if (ui.ContainsKey(key))
+        {
+            var value = ui[key];
+
+            if (!value) ui.Remove(key);
+            else return;
+        }
+
+        var path = Path.Combine("Ui", $"{key.Name}");
         var load = Resources.Load<T>(path);
         var spawn = MonoBehaviour.Instantiate(load);
-        spawn.transform.SetParent(Instance.transform);
 
         ui.Add(key, spawn);
     }
