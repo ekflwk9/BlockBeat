@@ -5,8 +5,14 @@ public class Ground : MonoBehaviour
 #if UNITY_EDITOR
     private void Reset()
     {
-        this.RequireComponent<SpriteRenderer>();
+        var render = this.RequireComponent<SpriteRenderer>();
+        render.sortingOrder = 100;
+
         var box  = this.RequireComponent<BoxCollider2D>();
+        box.isTrigger = true;
+
+        this.tag = Tag.Ground;
+        this.gameObject.layer = Layer.Name.Ground;
     }
 #endif
 
@@ -20,15 +26,5 @@ public class Ground : MonoBehaviour
         worldPos.y += 0.5f;
         this.transform.position = worldPos;
         this.transform.localScale = new Vector3(100f, 1, 1f);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(Tag.Block)) BlockController.Instance?.EnterBlock();
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(Tag.Block)) BlockController.Instance?.ExitBlock();
     }
 }

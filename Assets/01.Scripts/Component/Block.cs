@@ -15,13 +15,17 @@ public class Block : MonoBehaviour
 
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
+    [SerializeField] private Rigidbody2D rigid;
 
 #if UNITY_EDITOR
     private void Reset()
     {
         var box = this.RequireComponent<BoxCollider2D>();
-        var rigid = this.RequireComponent<Rigidbody2D>();
-        rigid.gravityScale = 2f;
+        box.isTrigger = true;
+
+        rigid = this.RequireComponent<Rigidbody2D>();
+        rigid.bodyType = RigidbodyType2D.Kinematic;
+        rigid.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
 
         left = this.TryFindChild("Left");
         right = this.TryFindChild("Right");
@@ -44,9 +48,9 @@ public class Block : MonoBehaviour
     /// </summary>
     /// <param name="_type"></param>
     /// <returns></returns>
-    public bool Breakable(DirectionType _type)
+    public bool CanBreak(DirectionType _type)
     {
-        if(!type.ContainsKey(_type)) return true;
+        if (!type.ContainsKey(_type)) return true;
         return !type[_type].activeSelf;
     }
 
@@ -60,11 +64,25 @@ public class Block : MonoBehaviour
         SetBlokcDirection();
     }
 
+    /// <summary>
+    /// 블록 아래로 이동
+    /// </summary>
+    /// <param name="_moveSpeed"></param>
+    public void MoveBlock(float _moveSpeed)
+    {
+        rigid.linearVelocity = Vector2.down * _moveSpeed;
+    }
+
     private void SetBlokcDirection()
     {
         if (type.ContainsKey(currentType)) type[currentType].SetActive(false);
 
-        var ranType = (DirectionType)Random.Range((int)DirectionType.None, (int)DirectionType.Right + 1);
-        if (type.ContainsKey(ranType)) type[ranType].SetActive(true);
+        currentType = (DirectionType)Random.Range((int)DirectionType.None, (int)DirectionType.Right + 1);
+        if (type.ContainsKey(currentType)) type[currentType].SetActive(true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(Tag.Ground)) BlockController.Instance.TouchGround();
     }
 }

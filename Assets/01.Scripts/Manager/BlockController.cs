@@ -4,8 +4,8 @@ public class BlockController : MonoBehaviour
 {
     public static BlockController Instance { get; private set; }
 
-    [SerializeField] private int currentBlockIndex;
-    [SerializeField] private int lastBlockIndex;
+    private int currentIndex;
+    [SerializeField] private int lastIndex;
     [SerializeField] private Block[] blocks;
 
     private PlayerBlock player;
@@ -15,6 +15,7 @@ public class BlockController : MonoBehaviour
     private void Reset()
     {
         blocks = GetComponentsInChildren<Block>(true);
+        lastIndex = blocks.Length - 1;
         var nextPos = Vector3.zero;
 
         for (int i = 0; i < blocks.Length; i++)
@@ -22,15 +23,12 @@ public class BlockController : MonoBehaviour
             blocks[i].transform.position = nextPos;
             nextPos.y += blocks[i].transform.localScale.y;
         }
-
-        currentBlockIndex = 0;
-        lastBlockIndex = blocks.Length - 1;
     }
 #endif
 
     private void Awake()
     {
-        if (this.Singleton(Instance)) Instance = this;
+        Instance = this;
     }
 
     /// <summary>
@@ -40,34 +38,75 @@ public class BlockController : MonoBehaviour
     public void Add(PlayerBlock _player) => player = _player;
 
     /// <summary>
-    /// 블록이 없어졌을 경우
-    /// </summary>
-    public void ExitBlock() => isDone = false;
-
-    /// <summary>
-    /// 블록이 땅에 닿아 준비를 완료했을 경우
-    /// </summary>
-    public void EnterBlock() => isDone = true;
-
-    /// <summary>
     /// 플레이어 블록 1칸 이동
     /// </summary>
     /// <param name="_value"></param>
     public void MovePlayer(bool _isLeft)
     {
         if (!isDone) return;
+        isDone = false;
 
         var trasform = player.transform;
-        var nexPos = trasform.position.x;
+        var thisPosX = trasform.position.x;
+        var nexPosX = 0f;
 
-        if ((nexPos < 0 && _isLeft) || (0 < nexPos && !_isLeft)) return;
-        else nexPos = _isLeft ? -trasform.localScale.x : trasform.localScale.x;
+        if ((thisPosX < 0 && _isLeft) || (0 < thisPosX && !_isLeft)) nexPosX = thisPosX;
+        else nexPosX = -thisPosX;
 
-        player.transform.position = new Vector3(nexPos + nexPos, 0, 0);
+        player.transform.position = new Vector3(nexPosX, 0, 0);
+        BreakBlock();
     }
 
-    private void SetBlock()
+    private void BreakBlock()
     {
+        var isLeft = player.transform.position.x < 0f;
+        var direction = isLeft ? Block.DirectionType.Left : Block.DirectionType.Right;
+        var isBreak = blocks[currentIndex].CanBreak(direction);
 
+        if (isBreak) SetNextBlock();
+        else Service.Log("게임 오버"); //test
+    }
+
+    private void SetNextBlock()
+    {
+        var lastBlockPos = blocks[lastIndex].transform.position;
+        lastBlockPos.y += blocks[lastIndex].transform.localScale.y;
+        blocks[currentIndex].SetBlock(lastBlockPos);
+
+        lastIndex = SetIndex(lastIndex);
+        currentIndex = SetIndex(currentIndex);
+
+        MoveBlock();
+    }
+
+    private void MoveBlock()
+    {
+        var speed = 10f;
+
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            blocks[i].MoveBlock(speed);
+        }
+    }
+
+    /// <summary>
+    /// 블록이 땅에 닿았을 경우 모두 정지
+    /// </summary>
+    public void TouchGround()
+    {
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            blocks[i].MoveBlock(0f);
+        }
+
+        isDone = true;
+    }
+
+    private int SetIndex(int _index)
+    {
+        _index++;
+
+        if (blocks.Length <= _index) _index = 0;
+        return _index;
     }
 }
