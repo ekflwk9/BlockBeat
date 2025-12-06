@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimerUi : UiBase
 {
     [SerializeField] private Image slide;
+    [SerializeField] private CanvasGroup group;
 
-    private bool gameOver;
     private float score;
 
 #if UNITY_EDITOR
@@ -17,9 +18,18 @@ public class TimerUi : UiBase
         var canvas = this.TryGetComponent<Canvas>();
         if (canvas) canvas.sortingOrder = 11;
 
+        group = this.RequireComponent<CanvasGroup>();
         slide = this.TryGetChildComponent<Image>("Slide");
     }
 #endif
+
+    public override void On()
+    {
+        base.On();
+
+        group.alpha = 0f;
+        group.DOFade(1f, 0.5f);
+    }
 
     /// <summary>
     /// 타이머 시간 점점 빨라지게
@@ -27,15 +37,7 @@ public class TimerUi : UiBase
     public void UpTimer()
     {
         if (this.gameObject.activeSelf) StartCoroutine(Timer());
-        if (score < 0.5f) score += 0.01f;
-    }
-
-    /// <summary>
-    /// 타이머 정지
-    /// </summary>
-    public void StopTimer()
-    {
-        gameOver = true;
+        if (score < 0.7f) score += 0.01f;
     }
 
     private void ResetSlide()
@@ -46,13 +48,18 @@ public class TimerUi : UiBase
 
     private IEnumerator Timer()
     {
-        if (gameOver) yield return null;
+        var manager = BlockManager.Instance;
+
+        if (!manager || manager.gameOver) yield return null;
         ResetSlide();
 
-        while (!gameOver)
+        while (!manager.gameOver)
         {
             slide.fillAmount -= (score * 0.01f) * Time.smoothDeltaTime;
-            if (slide.fillAmount < 0.4f) slide.color = Color.red;
+
+            if (slide.fillAmount <= 0f) manager.GameOver();
+            else if (slide.fillAmount < 0.5f) slide.color = Color.red;
+
             yield return null;
         }
     }

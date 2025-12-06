@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 5891558555597569862}
   - component: {fileID: 833465504401876275}
   - component: {fileID: 1426165956015729425}
+  - component: {fileID: 8879411641610745718}
   - component: {fileID: 2966962395502028495}
   m_Layer: 5
   m_Name: TimerUi
@@ -179,6 +180,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &8879411641610745718
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7197159991057288071}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &2966962395502028495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slide: {fileID: 6817675156306499237}
+  group: {fileID: 8879411641610745718}
 --- !u!1 &8936001749207596912
 GameObject:
   m_ObjectHideFlags: 0

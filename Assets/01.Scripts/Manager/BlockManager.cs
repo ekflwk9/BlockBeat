@@ -5,6 +5,7 @@ public class BlockManager : MonoBehaviour
 {
     public static BlockManager Instance { get; private set; }
     public int score { get; private set; }
+    public bool gameOver { get; private set; }
 
     private int currentIndex;
     [SerializeField] private int lastIndex;
@@ -48,7 +49,7 @@ public class BlockManager : MonoBehaviour
     /// <param name="_value"></param>
     public void MovePlayer(bool _isLeft)
     {
-        if (!isDone) return;
+        if (!isDone || gameOver) return;
         isDone = false;
 
         var trasform = player.transform;
@@ -80,21 +81,30 @@ public class BlockManager : MonoBehaviour
 
         else
         {
-            StartCoroutine(OverTimer());
-            UiManager.Get<TimerUi>().StopTimer();
-            //Json.Save();
+            GameOver();
         }
     }
 
-    private IEnumerator OverTimer()
+    /// <summary>
+    /// 게임 오버
+    /// </summary>
+    public void GameOver()
+    {
+        if (gameOver) return;
+        gameOver = true;
+        StartCoroutine(GameOverTimer());
+        //Json.Save();
+    }
+
+    private IEnumerator GameOverTimer()
     {
         yield return CoroutineManager.Wait(1.5f);
 
         SceneChangeManager.Add(EndLoad);
-        UiManager.Get<FadeUi>().FadeIn(0.5f, GameOver);
+        UiManager.Get<FadeUi>().FadeIn(0.5f, ChangeResultScene);
     }
 
-    private void GameOver()
+    private void ChangeResultScene()
     {
         SceneChangeManager.Change(SceneChangeManager.SceneName.Result);
     }

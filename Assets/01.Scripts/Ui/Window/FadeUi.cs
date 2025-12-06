@@ -38,6 +38,7 @@ public class FadeUi : UiBase
     /// <param name="_func"></param>
     public void FadeIn(float _timer = 1f, Action _func = null)
     {
+        image.raycastTarget = true;
         image.color = Color.clear;
         fadeFunc = _func;
 
@@ -57,6 +58,7 @@ public class FadeUi : UiBase
     /// <param name="_timer"></param>
     public void FadeOut(float _timer = 1f)
     {
+        image.raycastTarget = false;
         image.color = Color.black;
         image.DOFade(0f, _timer);
     }

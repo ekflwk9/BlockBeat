@@ -1,27 +1,43 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayScreenUi : UiBase, IPointerClickHandler
 {
+    private bool isStart;
+
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<PlayScreenUi>();
 
         var image = this.TryGetChildComponent<Image>();
-        if(image) image.color = Color.clear;
+        if (image) image.color = Color.clear;
     }
 #endif
 
     private void Start()
     {
-        UiManager.On<ScoreUi>();
-        UiManager.On<TimerUi>();
+        UiManager.Off<ScoreUi>();
+        UiManager.Off<TimerUi>();
+    }
+
+    private void OnScoreUi()
+    {
+        if (!isStart)
+        {
+            isStart = true;
+
+            UiManager.On<ScoreUi>();
+            UiManager.On<TimerUi>();
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        OnScoreUi();
+
         if (eventData.position.x < this.transform.position.x) BlockManager.Instance?.MovePlayer(true);
         else BlockManager.Instance?.MovePlayer(false);
     }
