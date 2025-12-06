@@ -22,7 +22,7 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.position.x < this.transform.position.x) BlockController.Instance?.MovePlayer(true);
-        else BlockController.Instance?.MovePlayer(false);
+        if (eventData.position.x < this.transform.position.x) BlockManager.Instance?.MovePlayer(true);
+        else BlockManager.Instance?.MovePlayer(false);
     }
 }

@@ -6,7 +6,7 @@ public class TimerUi : UiBase
 {
     [SerializeField] private Image slide;
 
-    private Coroutine coroutine;
+    private bool gameOver;
     private float score;
 
 #if UNITY_EDITOR
@@ -15,7 +15,7 @@ public class TimerUi : UiBase
         SetName<TimerUi>();
 
         var canvas = this.TryGetComponent<Canvas>();
-        canvas.sortingOrder = 11;
+        if (canvas) canvas.sortingOrder = 11;
 
         slide = this.TryGetChildComponent<Image>("Slide");
     }
@@ -26,7 +26,7 @@ public class TimerUi : UiBase
     /// </summary>
     public void UpTimer()
     {
-        if (this.gameObject.activeSelf) coroutine = StartCoroutine(Timer());
+        if (this.gameObject.activeSelf) StartCoroutine(Timer());
         if (score < 0.5f) score += 0.01f;
     }
 
@@ -35,16 +35,24 @@ public class TimerUi : UiBase
     /// </summary>
     public void StopTimer()
     {
-        if (coroutine != null) StopCoroutine(coroutine);
+        gameOver = true;
+    }
+
+    private void ResetSlide()
+    {
+        slide.fillAmount = 1f;
+        slide.color = Color.white;
     }
 
     private IEnumerator Timer()
     {
-        slide.fillAmount = 1f;
+        if (gameOver) yield return null;
+        ResetSlide();
 
-        while (true)
+        while (!gameOver)
         {
             slide.fillAmount -= (score * 0.01f) * Time.smoothDeltaTime;
+            if (slide.fillAmount < 0.4f) slide.color = Color.red;
             yield return null;
         }
     }

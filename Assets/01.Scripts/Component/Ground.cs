@@ -18,7 +18,7 @@ public class Ground : MonoBehaviour
 
     private void Start()
     {
-        var viewportPos = new Vector3(Screen.width * 0.5f, 0f, 0f);
+        var viewportPos = new Vector3(Screen.width * 0.5f, 0f, 0f); //Screen.height은 Top 포지션
         var cam = CamController.Instatnce.cam;
         var worldPos = cam.ScreenToWorldPoint(viewportPos);
 

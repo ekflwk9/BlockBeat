@@ -1,7 +1,7 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class FadeUi : UiBase
 {
@@ -12,9 +12,24 @@ public class FadeUi : UiBase
     private void Reset()
     {
         SetName<FadeUi>();
+
+        var canvas = this.TryGetComponent<Canvas>();
+        if (canvas) canvas.sortingOrder = 100;
+
         image = this.TryGetChildComponent<Image>();
+
+        if (image)
+        {
+            image.color = Color.black;
+            image.color = Color.clear;
+        }
     }
 #endif
+
+    private void Start()
+    {
+        this.transform.SetParent(UiManager.Instance);
+    }
 
     /// <summary>
     /// 페이드 인
@@ -23,8 +38,10 @@ public class FadeUi : UiBase
     /// <param name="_func"></param>
     public void FadeIn(float _timer = 1f, Action _func = null)
     {
+        image.color = Color.clear;
         fadeFunc = _func;
-        var tween =  image.DOFade(1f, _timer);
+
+        var tween = image.DOFade(1f, _timer);
         if (_func != null) tween.OnComplete(EndFadeIn);
     }
 
@@ -38,8 +55,9 @@ public class FadeUi : UiBase
     /// 페이드 아웃
     /// </summary>
     /// <param name="_timer"></param>
-    public void FadeOut(float _timer)
+    public void FadeOut(float _timer = 1f)
     {
+        image.color = Color.black;
         image.DOFade(0f, _timer);
     }
 }

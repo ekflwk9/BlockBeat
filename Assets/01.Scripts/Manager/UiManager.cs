@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.UI;
 
 public static class UiManager
 {
-    private static Transform Instance = Init();
+    public static Transform Instance { get; private set; } = Init();
     private static Dictionary<Type, UiBase> ui = new();
 
     private static Transform Init()

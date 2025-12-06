@@ -17,7 +17,7 @@ public static class Service
 
         else
         {
-            MonoBehaviour.Destroy(_this);
+            MonoBehaviour.Destroy(_this.gameObject);
             return false;
         }
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class ScoreUi : UiBase
 {
     [SerializeField] private TMP_Text text;
-    private int score;
 
 #if UNITY_EDITOR
     private void Reset()
@@ -12,10 +11,10 @@ public class ScoreUi : UiBase
         SetName<ScoreUi>();
 
         var canvas = this.TryGetComponent<Canvas>();
-        canvas.sortingOrder = 10;
+        if (canvas) canvas.sortingOrder = 10;
 
         text = this.TryGetChildComponent<TMP_Text>();
-        if(text) text.text = "0";
+        if (text) text.text = "0";
     }
 #endif
 
@@ -24,7 +23,6 @@ public class ScoreUi : UiBase
     /// </summary>
     public void UpScore()
     {
-        score++;
-        text.text = score.ToString();
+        text.text = BlockManager.Instance.score.ToString();
     }
 }
