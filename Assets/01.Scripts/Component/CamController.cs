@@ -11,6 +11,7 @@ public class CamController : MonoBehaviour
     private void Reset()
     {
         cam = this.TryGetChildComponent<Camera>();
+        this.name = $"[Camera]";
     }
 #endif
 

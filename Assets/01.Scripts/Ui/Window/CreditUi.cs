@@ -17,6 +17,9 @@ public class CreditUi : UiBase
 
     private void Awake()
     {
-        info.text = "";
+        var sound = "https://pixabay.com/";
+        var font = "PFStarders";
+
+        info.text = $"Sound : {sound}\nFont : {font}";
     }
 }

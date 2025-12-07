@@ -36,8 +36,8 @@ public class SoundButton : ButtonBase
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if (type == SoundType.Music)  Json.SetMusicSound();
-        else Json.SetEffectSound();
+        if (type == SoundType.Music) SoundManager.SetMusicVolume();
+        else SoundManager.SetEffectVolume();
 
         SetText();
         base.OnPointerDown(eventData);

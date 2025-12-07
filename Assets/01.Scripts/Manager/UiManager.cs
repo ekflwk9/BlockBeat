@@ -19,7 +19,7 @@ public static class UiManager
 
     private static void SpawnManager()
     {
-        Instance = new GameObject("UiManager").transform;
+        Instance = new GameObject("[UiManager]").transform;
         MonoBehaviour.DontDestroyOnLoad(Instance);
     }
 
@@ -27,7 +27,7 @@ public static class UiManager
     {
         if (!MonoBehaviour.FindAnyObjectByType<EventSystem>())
         {
-            var spawnObj = new GameObject("EventSystem");
+            var spawnObj = new GameObject("[EventSystem]");
             spawnObj.AddComponent<EventSystem>();
             spawnObj.AddComponent<InputSystemUIInputModule>();
             MonoBehaviour.DontDestroyOnLoad(spawnObj);

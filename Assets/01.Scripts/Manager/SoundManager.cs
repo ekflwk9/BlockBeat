@@ -16,7 +16,9 @@ public static class SoundManager
 
     private static AudioSource Init()
     {
-        var manager = new GameObject("SoundManager");
+        var manager = new GameObject("[SoundManager]");
+        MonoBehaviour.DontDestroyOnLoad(manager);
+
         music = manager.AddComponent<AudioSource>();
         music.playOnAwake = false;
         music.loop = true;
@@ -67,12 +69,13 @@ public static class SoundManager
     }
 
     /// <summary>
-    /// 효과음 볼륨 음소거 여부
+    /// 효과음 볼륨 음소거 여부 (모바일 전용)
     /// </summary>
     /// <param name="_isOff"></param>
-    public static void EffectVolume(bool _isOff)
+    public static void SetEffectVolume()
     {
-        var newVolume = _isOff ? 0f : 1f;
+        var newVolume = Json.GetEffectSound() ? 1f : 0f;
+        Json.SetEffectSound();
 
         for (int i = 0; i < effect.Length; i++)
         {
@@ -81,11 +84,12 @@ public static class SoundManager
     }
 
     /// <summary>
-    /// 음악 볼륨 음소거 여부
+    /// 음악 볼륨 음소거 여부 (모바일 전용)
     /// </summary>
     /// <param name="_isOff"></param>
-    public static void MusicVolume(bool _isOff)
+    public static void SetMusicVolume()
     {
-        music.volume = _isOff ? 0f : 1f;
+        music.volume = Json.GetMusicSound() ? 1f : 0f;
+        Json.SetMusicSound();
     }
 }
