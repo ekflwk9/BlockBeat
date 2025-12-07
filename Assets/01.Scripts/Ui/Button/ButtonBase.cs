@@ -16,13 +16,17 @@ public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler, IPointerU
             var thisRect = this.GetComponent<RectTransform>();
 
             touch.transform.position = this.transform.position;
-            rect.sizeDelta = thisRect.sizeDelta;
+
+            var size = thisRect.sizeDelta;
+            size.x = size.x < 0 ? -size.x : size.x;
+
+            rect.sizeDelta = size;
             touch.SetActive(false);
         }
     }
 #endif
 
-    protected virtual void OnDisable() => touch?.SetActive(false);
+    private void OnDisable() => touch?.SetActive(false);
 
     public virtual void OnPointerDown(PointerEventData eventData) => touch?.SetActive(true);
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerData
 {
-    public bool musicSound;
-    public bool effectSound;
+    public bool musicSound = true;
+    public bool effectSound = true;
     public int currentScore;
     public int maxScore;
 }
@@ -49,8 +49,10 @@ public static class Json
     /// </summary>
     public static void Save() => data.Save();
 
-    public static void MusicSound(bool _isOff) => data.playerData.musicSound = _isOff;
-    public static void EffectSound(bool _isOff) => data.playerData.effectSound = _isOff;
+    public static void SetMusicSound() => data.playerData.musicSound = !data.playerData.musicSound;
+    public static void SetEffectSound() => data.playerData.effectSound = !data.playerData.effectSound;
+    public static bool GetMusicSound() => data.playerData.musicSound;
+    public static bool GetEffectSound() => data.playerData.effectSound;
     public static int GetPlayerScore() => data.playerData.currentScore;
     public static int GetPlayerMaxScore() => data.playerData.maxScore;
 

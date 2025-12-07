@@ -8,4 +8,9 @@ public class MainUi : UiBase
         SetName<MainUi>();
     }
 #endif
+
+    private void Start()
+    {
+        UiManager.Get<FadeUi>().FadeOut(0.5f);
+    }
 }
