@@ -38,9 +38,8 @@ public class TimerUi : UiBase
     public void UpTimer()
     {
         if (coroutine != null) StopCoroutine(coroutine);
-        else if (this.gameObject.activeSelf) coroutine = StartCoroutine(Timer());
-
-        if (score < 0.7f) score += 0.01f;
+        if (this.gameObject.activeSelf) coroutine = StartCoroutine(Timer());
+        if (score < 13f) score += 0.05f;
     }
 
     private void ResetSlide()
@@ -58,7 +57,7 @@ public class TimerUi : UiBase
 
         while (!manager.gameOver)
         {
-            slide.fillAmount -= (score * 0.01f) * Time.smoothDeltaTime;
+            slide.fillAmount -= (score * 0.1f) * Time.smoothDeltaTime;
 
             if (slide.fillAmount <= 0f) manager.GameOver();
             else if (slide.fillAmount < 0.5f) slide.color = Color.red;

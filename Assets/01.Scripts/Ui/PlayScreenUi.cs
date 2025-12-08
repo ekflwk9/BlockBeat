@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -14,6 +13,21 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
 
         var image = this.TryGetChildComponent<Image>();
         if (image) image.color = Color.clear;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            OnScoreUi();
+            BlockManager.Instance?.MovePlayer(true);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            OnScoreUi();
+            BlockManager.Instance?.MovePlayer(false);
+        }
     }
 #endif
 

@@ -79,6 +79,7 @@ public class BlockManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Json.PlayerScore(0);
         MoveBlock();
     }
 
@@ -199,7 +200,7 @@ public class BlockManager : MonoBehaviour
 
     private void MoveBlock()
     {
-        var speed = 10f;
+        var speed = 14f;
 
         for (int i = 0; i < blocks.Length; i++)
         {
