@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
+using System.IO;
 using UnityEngine;
-using NaughtyAttributes;
 
 public class BlockManager : MonoBehaviour
 {
@@ -11,32 +12,66 @@ public class BlockManager : MonoBehaviour
     private int currentIndex;
     [SerializeField] private int lastIndex;
     [SerializeField] private Block[] blocks;
+    [SerializeField] private Effect[] effects;
 
+    private int effectIndex;
     private bool isDone = true;
     private PlayerBlock player;
 
 #if UNITY_EDITOR
     private void Reset()
     {
+        ResetBlocks();
+        ResetEffects();
+    }
+
+    private void ResetBlocks()
+    {
         blocks = GetComponentsInChildren<Block>(true);
-        lastIndex = blocks.Length - 1;
 
-        var ground = FindAnyObjectByType<Ground>();
-        var nextPos = ground ? ground.transform.position + Vector3.up * 2f : Vector3.zero;
-
-        for (int i = 0; i < blocks.Length; i++)
+        if (blocks.Length == 0)
         {
-            blocks[i].transform.position = nextPos;
-            nextPos.y += blocks[i].transform.localScale.y;
+            var path = Path.Combine("Prefabs", "Block");
+            var load = Resources.Load<Block>(path);
+
+            var ground = FindAnyObjectByType<Ground>();
+            var nextPos = ground ? ground.transform.position + Vector3.up * 2f : Vector3.zero;
+
+            var spawnCount = 20;
+            blocks = new Block[spawnCount];
+
+            for (int i = 0; i < spawnCount; i++)
+            {
+                blocks[i] = Instantiate(load);
+                blocks[i].transform.position = nextPos;
+
+                blocks[i].transform.SetParent(this.transform);
+                nextPos.y += blocks[i].transform.localScale.y;
+            }
+        }
+
+        lastIndex = blocks.Length - 1;
+    }
+
+    private void ResetEffects()
+    {
+        effects = GetComponentsInChildren<Effect>(true);
+        if (effects.Length != 0) return;
+
+        var effectCount = 8;
+        effects = new Effect[effectCount];
+
+        var path = Path.Combine("Prefabs", "BreakBlockEffect");
+        var load = Resources.Load<Effect>(path);
+
+        for (int i = 0; i < effectCount; i++)
+        {
+            effects[i] = Instantiate(load);
+            effects[i].transform.SetParent(this.transform);
+            effects[i].gameObject.SetActive(false);
         }
     }
 #endif
-
-    [Button]
-    private void Test()
-    {
-        GlobalVolumeManager.SetVignette(1f);
-    }
 
     private void Awake()
     {
@@ -73,14 +108,13 @@ public class BlockManager : MonoBehaviour
     private void BreakBlock()
     {
         var isLeft = player.transform.position.x < 0f;
-        var direction = isLeft ? Block.DirectionType.Left : Block.DirectionType.Right;
+        var direction = isLeft ? Block.Type.Left : Block.Type.Right;
         var isBreak = blocks[currentIndex].CanBreak(direction);
 
         if (isBreak)
         {
             score++;
             Json.PlayerScore(score);
-            CamController.Instatnce?.Shake(0.2f, 0.1f);
 
             UiManager.Get<ScoreUi>().UpScore();
             UiManager.Get<TimerUi>().UpTimer();
@@ -126,12 +160,34 @@ public class BlockManager : MonoBehaviour
     {
         var lastBlockPos = blocks[lastIndex].transform.position;
         lastBlockPos.y += blocks[lastIndex].transform.localScale.y;
-        blocks[currentIndex].SetBlock(lastBlockPos);
+
+        var currentBlockType = blocks[currentIndex].BlockType();
+        blocks[currentIndex].BreakBlock(lastBlockPos);
 
         lastIndex = SetIndex(lastIndex);
         currentIndex = SetIndex(currentIndex);
 
+        var nextBlock = blocks[currentIndex].BlockType();
+
+        if ((currentBlockType == Block.Type.Left && nextBlock == Block.Type.Right) ||
+            (currentBlockType == Block.Type.Right && nextBlock == Block.Type.Left))
+            CamController.Instatnce.Shake(0.2f, 0.1f);
+
+        OnEffect();
         MoveBlock();
+    }
+
+    private void OnEffect()
+    {
+        effectIndex++;
+        if (effects.Length <= effectIndex) effectIndex = 0;
+
+        var block = blocks[currentIndex].transform;
+        var effectPos = block.position;
+        effectPos.y -= block.localScale.y;
+
+        effects[effectIndex].transform.position = effectPos;
+        effects[effectIndex].gameObject.SetActive(true);
     }
 
     private void MoveBlock()

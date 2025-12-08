@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public enum DirectionType
+    public enum Type
     {
         None,
         Left,
         Right,
     }
 
-    private Dictionary<DirectionType, GameObject> type = new();
-    private DirectionType currentType;
+    private Dictionary<Type, GameObject> type = new();
+    private Type currentType;
 
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
@@ -37,10 +37,10 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
-        type.Add(DirectionType.Left, left);
-        type.Add(DirectionType.Right, right);
+        type.Add(Type.Left, left);
+        type.Add(Type.Right, right);
 
-        SetBlock(this.transform.position);
+        BreakBlock(this.transform.position);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class Block : MonoBehaviour
     /// </summary>
     /// <param name="_type"></param>
     /// <returns></returns>
-    public bool CanBreak(DirectionType _type)
+    public bool CanBreak(Type _type)
     {
         if (!type.ContainsKey(_type)) return true;
         return !type[_type].activeSelf;
@@ -58,7 +58,7 @@ public class Block : MonoBehaviour
     /// 해당 블록 상태 업데이트
     /// </summary>
     /// <param name="_newPosition"></param>
-    public void SetBlock(Vector3 _newPosition)
+    public void BreakBlock(Vector3 _newPosition)
     {
         this.transform.position = _newPosition;
         SetBlokcDirection();
@@ -73,11 +73,20 @@ public class Block : MonoBehaviour
         rigid.linearVelocity = Vector2.down * _moveSpeed;
     }
 
+    /// <summary>
+    /// 현재 블록 타입
+    /// </summary>
+    /// <returns></returns>
+    public Type BlockType()
+    {
+        return currentType;
+    }
+
     private void SetBlokcDirection()
     {
         if (type.ContainsKey(currentType)) type[currentType].SetActive(false);
 
-        currentType = (DirectionType)Random.Range((int)DirectionType.None, (int)DirectionType.Right + 1);
+        currentType = (Type)Random.Range((int)Type.None, (int)Type.Right + 1);
         if (type.ContainsKey(currentType)) type[currentType].SetActive(true);
     }
 
