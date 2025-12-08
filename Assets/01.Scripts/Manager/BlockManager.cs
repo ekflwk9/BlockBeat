@@ -32,6 +32,12 @@ public class BlockManager : MonoBehaviour
     }
 #endif
 
+    [Button]
+    private void Test()
+    {
+        GlobalVolumeManager.SetVignette(1f);
+    }
+
     private void Awake()
     {
         Instance = this;

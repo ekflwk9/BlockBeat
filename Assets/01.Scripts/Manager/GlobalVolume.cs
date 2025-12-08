@@ -4,22 +4,30 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class GlobalVolume : MonoBehaviour
+public static class GlobalVolumeManager
 {
-    [SerializeField] private Volume globalVolume;
+    private static Volume globalVolume = Init();
 
-    private Vignette vignette;
-    private ChromaticAberration chromaticAberration;
+    private static Vignette vignette;
+    private static ChromaticAberration chromaticAberration;
 
-#if UNITY_EDITOR
-    private void Reset()
+    private static Volume Init()
     {
-        globalVolume = this.TryGetComponent<Volume>();
-        this.name = typeof(GlobalVolumeManager).Name;
-    }
-#endif
+        var name = typeof(GlobalVolumeManager).Name;
+        var path = Path.Combine("Prefabs", $"{name}");
+        var load = Resources.Load<Volume>(path);
+        var spawn = MonoBehaviour.Instantiate(load);
 
-    private void Awake()
+        spawn.name = $"[{name}]";
+        MonoBehaviour.DontDestroyOnLoad(spawn);
+
+        globalVolume = spawn;
+        VolumeInit();
+
+        return spawn;
+    }
+
+    public static void VolumeInit()
     {
         chromaticAberration = TryGet<ChromaticAberration>();
         chromaticAberration.active = true;
@@ -30,7 +38,7 @@ public class GlobalVolume : MonoBehaviour
         vignette.intensity.overrideState = true;
     }
 
-    private T TryGet<T>() where T : VolumeComponent
+    private static T TryGet<T>() where T : VolumeComponent
     {
         if (globalVolume.profile.TryGet<T>(out var _component))
         {
@@ -44,38 +52,21 @@ public class GlobalVolume : MonoBehaviour
         }
     }
 
-    public void SetChromatic(float intensity, float duration = 1f, bool fade = true)
+    public static void SetChromatic(float intensity, float duration = 1f, bool fade = true)
     {
         if (fade) DOTween.To(GetChromaticValue, SetChromaticValue, intensity, duration);
         else chromaticAberration.intensity.value = intensity;
     }
 
-    private float GetChromaticValue() => chromaticAberration.intensity.value;
-    private void SetChromaticValue(float _value) => chromaticAberration.intensity.value = _value;
+    private static float GetChromaticValue() => chromaticAberration.intensity.value;
+    private static void SetChromaticValue(float _value) => chromaticAberration.intensity.value = _value;
 
-    public void SetVignette(float intensity, float duration = 1f, bool fade = true)
+    public static void SetVignette(float intensity, float duration = 1f, bool fade = true)
     {
         if (fade) DOTween.To(GetVignetteValue, SetVignetteValue, intensity, 1.0f);
         else vignette.intensity.value = intensity;
     }
 
-    private float GetVignetteValue() => vignette.intensity.value;
-    private void SetVignetteValue(float _value) => vignette.intensity.value = _value;
-}
-
-public static class GlobalVolumeManager
-{
-    public static GlobalVolume Instance { get; private set; } = Init();
-
-    private static GlobalVolume Init()
-    {
-        var name = typeof(GlobalVolumeManager).Name;
-        var path = Path.Combine("Prefabs", $"{name}");
-        var load = Resources.Load<GlobalVolume>(path);
-        var spawn = MonoBehaviour.Instantiate(load);
-        spawn.name = $"[{name}]";
-
-        MonoBehaviour.DontDestroyOnLoad(spawn.gameObject);
-        return spawn;
-    }
+    private static float GetVignetteValue() => vignette.intensity.value;
+    private static void SetVignetteValue(float _value) => vignette.intensity.value = _value;
 }
