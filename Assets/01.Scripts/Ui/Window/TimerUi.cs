@@ -8,6 +8,7 @@ public class TimerUi : UiBase
     [SerializeField] private Image slide;
     [SerializeField] private CanvasGroup group;
 
+    private Coroutine coroutine;
     private float score;
 
 #if UNITY_EDITOR
@@ -36,7 +37,9 @@ public class TimerUi : UiBase
     /// </summary>
     public void UpTimer()
     {
-        if (this.gameObject.activeSelf) StartCoroutine(Timer());
+        if (coroutine != null) StopCoroutine(coroutine);
+        else if (this.gameObject.activeSelf) coroutine = StartCoroutine(Timer());
+
         if (score < 0.7f) score += 0.01f;
     }
 

@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,6 +8,7 @@ using UnityEngine.Rendering.Universal;
 public static class GlobalVolumeManager
 {
     private static Volume globalVolume = Init();
+    private static Dictionary<VolumeComponent, Tween> tween = new();
 
     private static Vignette vignette;
     private static ChromaticAberration chromaticAberration;
@@ -52,19 +54,26 @@ public static class GlobalVolumeManager
         }
     }
 
-    public static void SetChromatic(float intensity, float duration = 1f, bool fade = true)
+    public static void SetChromatic(float intensity, float duration = 1f)
     {
-        if (fade) DOTween.To(GetChromaticValue, SetChromaticValue, intensity, duration);
+        if (tween.ContainsKey(chromaticAberration)) tween[chromaticAberration].Kill();
+        else tween.Add(chromaticAberration, null);
+
+        if (0f < duration) DOTween.To(GetChromaticValue, SetChromaticValue, intensity, duration);
         else chromaticAberration.intensity.value = intensity;
     }
 
     private static float GetChromaticValue() => chromaticAberration.intensity.value;
     private static void SetChromaticValue(float _value) => chromaticAberration.intensity.value = _value;
 
-    public static void SetVignette(float intensity, float duration = 1f, bool fade = true)
+    public static void SetVignette(float intensity, float duration = 1f)
     {
-        if (fade) DOTween.To(GetVignetteValue, SetVignetteValue, intensity, 1.0f);
+        if (tween.ContainsKey(vignette)) tween[vignette].Kill();
+        else tween.Add(vignette, null);
+
+        if (0f < duration) tween[vignette]= DOTween.To(GetVignetteValue, SetVignetteValue, intensity, 1.0f);
         else vignette.intensity.value = intensity;
+
     }
 
     private static float GetVignetteValue() => vignette.intensity.value;

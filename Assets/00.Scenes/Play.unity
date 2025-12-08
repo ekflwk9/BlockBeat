@@ -12520,7 +12520,7 @@ GameObject:
   - component: {fileID: 783113746}
   - component: {fileID: 783113747}
   m_Layer: 0
-  m_Name: BlockController
+  m_Name: BlockManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12581,6 +12581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832a747821c76e74fa8faabeb80f0111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dodgeColor: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0}
   lastIndex: 19
   blocks:
   - {fileID: 1809236491}

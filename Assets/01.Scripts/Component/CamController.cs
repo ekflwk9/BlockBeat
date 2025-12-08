@@ -1,16 +1,21 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class CamController : MonoBehaviour
 {
     public static CamController Instatnce { get; private set; }
     [field: SerializeField] public Camera cam { get; private set; }
+    [SerializeField] private Color originColor;
+
+    private Tween camColorTween;
     private Coroutine shakeCoroutine;
 
 #if UNITY_EDITOR
     private void Reset()
     {
         cam = this.TryGetChildComponent<Camera>();
+        if (cam) originColor = cam.backgroundColor;
         this.name = $"[Camera]";
     }
 #endif
@@ -49,4 +54,18 @@ public class CamController : MonoBehaviour
 
         cam.transform.position = this.transform.position;
     }
+
+    /// <summary>
+    /// 특정 Color로 변경 후 다시 원상복귀
+    /// </summary>
+    /// <param name="_color"></param>
+    public void CamBackGroundFade(Color _color, float _timer = 0.2f)
+    {
+        camColorTween?.Kill();
+        cam.backgroundColor = _color;
+        camColorTween = DOTween.To(GetCamColor, SetCamColor, originColor, 0.2f);
+    }
+
+    private Color GetCamColor() => cam.backgroundColor;
+    private void SetCamColor(Color _color) => cam.backgroundColor = _color;
 }

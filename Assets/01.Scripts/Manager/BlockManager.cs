@@ -1,5 +1,4 @@
-﻿using NaughtyAttributes;
-using System.Collections;
+﻿using System.Collections;
 using System.IO;
 using UnityEngine;
 
@@ -9,13 +8,17 @@ public class BlockManager : MonoBehaviour
     public int score { get; private set; }
     public bool gameOver { get; private set; }
 
-    private int currentIndex;
+    [Header("회피했을 경우 화면 색깔"), SerializeField] private Color dodgeColor;
+
+    [Space(20f)]
     [SerializeField] private int lastIndex;
     [SerializeField] private Block[] blocks;
     [SerializeField] private Effect[] effects;
 
     private int effectIndex;
+    private int currentIndex;
     private bool isDone = true;
+    private Block.Type previousBlockType;
     private PlayerBlock player;
 
 #if UNITY_EDITOR
@@ -123,6 +126,7 @@ public class BlockManager : MonoBehaviour
 
         else
         {
+            GlobalVolumeManager.SetChromatic(0f, 0.5f);
             GameOver();
         }
     }
@@ -162,16 +166,19 @@ public class BlockManager : MonoBehaviour
         lastBlockPos.y += blocks[lastIndex].transform.localScale.y;
 
         var currentBlockType = blocks[currentIndex].BlockType();
+
+        if ((previousBlockType == Block.Type.Left && currentBlockType == Block.Type.Right) ||
+            (previousBlockType == Block.Type.Right && currentBlockType == Block.Type.Left))
+        {
+            CamController.Instatnce.Shake(0.2f, 0.1f);
+            CamController.Instatnce.CamBackGroundFade(dodgeColor);
+        }
+
         blocks[currentIndex].BreakBlock(lastBlockPos);
+        previousBlockType = currentBlockType;
 
         lastIndex = SetIndex(lastIndex);
         currentIndex = SetIndex(currentIndex);
-
-        var nextBlock = blocks[currentIndex].BlockType();
-
-        if ((currentBlockType == Block.Type.Left && nextBlock == Block.Type.Right) ||
-            (currentBlockType == Block.Type.Right && nextBlock == Block.Type.Left))
-            CamController.Instatnce.Shake(0.2f, 0.1f);
 
         OnEffect();
         MoveBlock();
