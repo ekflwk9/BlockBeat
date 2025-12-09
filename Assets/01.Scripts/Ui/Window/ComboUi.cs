@@ -1,0 +1,54 @@
+﻿using DG.Tweening;
+using TMPro;
+using UnityEngine;
+
+public class ComboUi : UiBase
+{
+    [SerializeField] private TMP_Text combo;
+    private Vector3 startPos;
+
+    private string[] text =
+    {
+       "avoided it!",
+       "Great job!",
+       "That's crazy!",
+       "You can't avoid it now.",
+       "No way!",
+    };
+
+#if UNITY_EDITOR
+    private void Reset()
+    {
+        SetName<ComboUi>();
+        combo = this.TryGetChildComponent<TMP_Text>();
+    }
+#endif
+
+    private void Awake()
+    {
+        startPos = combo.transform.position;
+        combo.color = Color.clear;
+    }
+
+    public void Show(int _score)
+    {
+        if (text.Length <= _score) _score = text.Length - 1;
+        combo.text = text[_score];
+
+        combo.DOKill();
+        combo.transform.DOKill();
+        combo.color = Color.white;
+
+        var newPos = CamController.Instatnce.cam.ViewportToWorldPoint(Vector3.zero);
+        newPos.y = startPos.y;
+        combo.transform.position = newPos;
+
+        var tween = combo.transform.DOMoveX(startPos.x, 0.3f);
+        tween.OnComplete(EndMove);
+    }
+
+    private void EndMove()
+    {
+        combo.DOFade(0f, 0.5f);
+    }
+}

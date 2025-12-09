@@ -161,6 +161,8 @@ public class BlockManager : MonoBehaviour
         UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
+    private int testCombo;
+
     private void SetNextBlock()
     {
         var lastBlockPos = blocks[lastIndex].transform.position;
@@ -173,6 +175,14 @@ public class BlockManager : MonoBehaviour
         {
             CamController.Instatnce.Shake(0.2f, 0.1f);
             CamController.Instatnce.CamBackGroundFade(dodgeColor);
+
+            UiManager.Get<ComboUi>().Show(testCombo);
+            testCombo++;
+        }
+
+        else
+        {
+            testCombo = 0;
         }
 
         blocks[currentIndex].BreakBlock(lastBlockPos);
