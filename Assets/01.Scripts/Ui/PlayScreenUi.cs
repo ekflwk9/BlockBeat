@@ -36,6 +36,7 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
         UiManager.Off<ScoreUi>();
         UiManager.Off<TimerUi>();
         UiManager.On<ComboUi>();
+        UiManager.On<TutorialUi>();
     }
 
     private void OnScoreUi()
@@ -46,6 +47,7 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
 
             UiManager.On<ScoreUi>();
             UiManager.On<TimerUi>();
+            UiManager.Off<TutorialUi>();
         }
     }
 

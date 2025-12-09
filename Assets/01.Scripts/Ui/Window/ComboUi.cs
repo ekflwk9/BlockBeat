@@ -9,10 +9,11 @@ public class ComboUi : UiBase
 
     private string[] text =
     {
-       "avoided it!",
+       "Avoided it!",
        "Great job!",
        "That's crazy!",
        "You can't avoid it now.",
+       "Are you a pro gamer?",
        "No way!",
     };
 
@@ -39,8 +40,8 @@ public class ComboUi : UiBase
         combo.transform.DOKill();
         combo.color = Color.white;
 
-        var newPos = CamController.Instatnce.cam.ViewportToWorldPoint(Vector3.zero);
-        newPos.y = startPos.y;
+        var newPos = startPos;
+        newPos.x = Screen.width * 0.2f;
         combo.transform.position = newPos;
 
         var tween = combo.transform.DOMoveX(startPos.x, 0.3f);
