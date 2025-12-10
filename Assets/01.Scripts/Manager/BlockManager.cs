@@ -8,8 +8,6 @@ public class BlockManager : MonoBehaviour
     public int score { get; private set; }
     public bool gameOver { get; private set; }
 
-    [Header("회피했을 경우 화면 색깔"), SerializeField] private Color dodgeColor;
-
     [Space(20f)]
     [SerializeField] private int lastIndex;
     [SerializeField] private Block[] blocks;
@@ -19,7 +17,6 @@ public class BlockManager : MonoBehaviour
     private int currentIndex;
     private bool isDone = true;
     private Block.Type previousBlockType;
-    private PlayerBlock player;
 
 #if UNITY_EDITOR
     private void Reset()
@@ -79,15 +76,9 @@ public class BlockManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Json.PlayerScore(0);
+        Json.PlayScore(0);
         MoveBlock();
     }
-
-    /// <summary>
-    /// 플레이어 블록 추가
-    /// </summary>
-    /// <param name="_player"></param>
-    public void Add(PlayerBlock _player) => player = _player;
 
     /// <summary>
     /// 플레이어 블록 1칸 이동
@@ -95,30 +86,25 @@ public class BlockManager : MonoBehaviour
     /// <param name="_value"></param>
     public void MovePlayer(bool _isLeft)
     {
+        //var trasform = player.transform;
+        //var thisPosX = trasform.position.x;
+        //var nexPosX = 0f;
+
+        //if ((thisPosX < 0 && _isLeft) || (0 < thisPosX && !_isLeft)) nexPosX = thisPosX;
+        //else nexPosX = -thisPosX;
+
+        //player.transform.position = new Vector3(nexPosX, 0, 0);
+
         if (!isDone || gameOver) return;
         isDone = false;
 
-        var trasform = player.transform;
-        var thisPosX = trasform.position.x;
-        var nexPosX = 0f;
-
-        if ((thisPosX < 0 && _isLeft) || (0 < thisPosX && !_isLeft)) nexPosX = thisPosX;
-        else nexPosX = -thisPosX;
-
-        player.transform.position = new Vector3(nexPosX, 0, 0);
-        BreakBlock();
-    }
-
-    private void BreakBlock()
-    {
-        var isLeft = player.transform.position.x < 0f;
-        var direction = isLeft ? Block.Type.Left : Block.Type.Right;
+        var direction = _isLeft ? Block.Type.Left : Block.Type.Right;
         var isBreak = blocks[currentIndex].CanBreak(direction);
 
         if (isBreak)
         {
             score++;
-            Json.PlayerScore(score);
+            Json.PlayScore(score);
 
             UiManager.Get<ScoreUi>().UpScore();
             UiManager.Get<TimerUi>().UpTimer();
@@ -127,7 +113,6 @@ public class BlockManager : MonoBehaviour
 
         else
         {
-            GlobalVolumeManager.SetChromatic(0f, 0.5f);
             GameOver();
         }
     }
@@ -139,6 +124,8 @@ public class BlockManager : MonoBehaviour
     {
         if (gameOver) return;
         gameOver = true;
+
+        UiManager.Get<TimerUi>().StopTimer();
         StartCoroutine(GameOverTimer());
         //Json.Save();
     }
@@ -174,9 +161,9 @@ public class BlockManager : MonoBehaviour
             (previousBlockType == Block.Type.Right && currentBlockType == Block.Type.Left))
         {
             CamController.Instatnce.Shake(0.2f, 0.1f);
-            CamController.Instatnce.CamBackGroundFade(dodgeColor);
 
             UiManager.Get<ComboUi>().Show(testCombo);
+            UiManager.Get<ComboUi>().Fade();
             testCombo++;
         }
 

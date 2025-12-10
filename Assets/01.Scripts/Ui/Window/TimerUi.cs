@@ -10,6 +10,7 @@ public class TimerUi : UiBase
 
     private Coroutine coroutine;
     private float score;
+    private float startTime;
 
 #if UNITY_EDITOR
     private void Reset()
@@ -28,6 +29,7 @@ public class TimerUi : UiBase
     {
         base.On();
 
+        startTime = Time.time;
         group.alpha = 0f;
         group.DOFade(1f, 0.5f);
     }
@@ -39,7 +41,16 @@ public class TimerUi : UiBase
     {
         if (coroutine != null) StopCoroutine(coroutine);
         if (this.gameObject.activeSelf) coroutine = StartCoroutine(Timer());
+
         if (score < 13f) score += 0.05f;
+    }
+
+    /// <summary>
+    /// 게임 종료시 타이머 종료
+    /// </summary>
+    public void StopTimer()
+    {
+        Json.PlayTime(Time.time - startTime);
     }
 
     private void ResetSlide()

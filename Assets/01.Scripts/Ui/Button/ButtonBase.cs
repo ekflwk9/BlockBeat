@@ -3,16 +3,15 @@ using UnityEngine.EventSystems;
 
 public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] private GameObject touch;
+    [SerializeField] protected RectTransform touch;
 
 #if UNITY_EDITOR
     protected virtual void Reset()
     {
-        touch = this.TryFindChild("Touch");
+        touch = this.TryGetChildComponent<RectTransform>("Touch");
 
         if (touch)
         {
-            var rect = touch.GetComponent<RectTransform>();
             var thisRect = this.GetComponent<RectTransform>();
 
             touch.transform.position = this.transform.position;
@@ -20,15 +19,15 @@ public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler, IPointerU
             var size = thisRect.sizeDelta;
             size.x = size.x < 0 ? -size.x : size.x;
 
-            rect.sizeDelta = size;
-            touch.SetActive(false);
+            touch.sizeDelta = size;
+            touch.gameObject.SetActive(false);
         }
     }
 #endif
 
-    private void OnDisable() => touch?.SetActive(false);
+    private void OnDisable() => touch?.gameObject.SetActive(false);
 
-    public virtual void OnPointerDown(PointerEventData eventData) => touch?.SetActive(true);
+    public virtual void OnPointerDown(PointerEventData eventData) => touch?.gameObject.SetActive(true);
 
-    public void OnPointerUp(PointerEventData eventData) => touch?.SetActive(false);
+    public void OnPointerUp(PointerEventData eventData) => touch?.gameObject.SetActive(false);
 }

@@ -6,8 +6,10 @@ public class PlayerData
 {
     public bool musicSound = true;
     public bool effectSound = true;
-    public int currentScore;
+
     public int maxScore;
+    public int currentScore;
+    public float currentTime;
 }
 
 public class Data
@@ -53,13 +55,13 @@ public static class Json
     public static void SetEffectSound() => data.playerData.effectSound = !data.playerData.effectSound;
     public static bool GetMusicSound() => data.playerData.musicSound;
     public static bool GetEffectSound() => data.playerData.effectSound;
-    public static int GetPlayerScore() => data.playerData.currentScore;
-    public static int GetPlayerMaxScore() => data.playerData.maxScore;
 
-    public static void PlayerScore(int _score)
-    {
-        data.playerData.currentScore = _score;
-        if (data.playerData.maxScore < _score) data.playerData.maxScore = _score;
-    }
+    public static float GetPlayTime() => data.playerData.currentTime;
+    public static void PlayTime(float _time) => data.playerData.currentTime = _time;
 
+    public static int GetPlayScore() => data.playerData.currentScore;
+    public static int GetPlayMaxScore() => data.playerData.maxScore;
+
+    public static void PlayScore(int _score) => data.playerData.currentScore = _score;
+    public static void PlayMaxScore(int _score) => data.playerData.maxScore = _score;
 }

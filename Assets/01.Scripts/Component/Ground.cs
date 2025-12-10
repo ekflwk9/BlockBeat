@@ -24,7 +24,8 @@ public class Ground : MonoBehaviour
 
         worldPos.z = 0;
         worldPos.y += 0.5f;
+
         this.transform.position = worldPos;
-        this.transform.localScale = new Vector3(100f, 1, 1f);
+        this.transform.localScale = new Vector3(Screen.width, 1, 1f);
     }
 }
