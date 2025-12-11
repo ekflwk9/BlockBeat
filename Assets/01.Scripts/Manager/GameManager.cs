@@ -1,0 +1,239 @@
+﻿using System.Collections;
+using System.IO;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+    public int score { get; private set; }
+    public bool gameOver { get; private set; }
+
+    [Space(20f)]
+    [SerializeField] private int lastIndex;
+    [SerializeField] private Ground ground;
+    [SerializeField] private Block[] blocks;
+    [SerializeField] private Effect[] effects;
+
+    private int combo;
+    private int effectIndex;
+    private int currentIndex;
+    private bool isDone = true;
+    private Block.Type previousBlockType;
+
+#if UNITY_EDITOR
+    private void Reset()
+    {
+        ResetGround();
+        ResetBlocks();
+        ResetEffects();
+    }
+
+    private void ResetGround()
+    {
+        ground = this.TryGetChildComponent<Ground>();
+        if (ground) return;
+
+        var path = Path.Combine("Prefabs", "Ground");
+        var load = Resources.Load<Ground>(path);
+
+        ground = Instantiate(load);
+        ground.transform.SetParent(this.transform);
+        ground.name = $"{load.gameObject.name}";
+    }
+
+    private void ResetBlocks()
+    {
+        blocks = GetComponentsInChildren<Block>(true);
+
+        if (blocks.Length == 0)
+        {
+            var path = Path.Combine("Prefabs", "Block");
+            var load = Resources.Load<Block>(path);
+
+            var ground = FindAnyObjectByType<Ground>();
+            var nextPos = ground ? ground.transform.position + Vector3.up * 2f : Vector3.zero;
+
+            var spawnCount = 20;
+            blocks = new Block[spawnCount];
+
+            for (int i = 0; i < spawnCount; i++)
+            {
+                blocks[i] = Instantiate(load);
+                blocks[i].name = $"{load.gameObject.name} {i}";
+
+                blocks[i].transform.position = nextPos;
+                blocks[i].transform.SetParent(this.transform);
+                nextPos.y += blocks[i].transform.localScale.y;
+            }
+        }
+
+        lastIndex = blocks.Length - 1;
+    }
+
+    private void ResetEffects()
+    {
+        effects = GetComponentsInChildren<Effect>(true);
+        if (effects.Length != 0) return;
+
+        var effectCount = 8;
+        effects = new Effect[effectCount];
+
+        var path = Path.Combine("Prefabs", "BreakBlockEffect");
+        var load = Resources.Load<Effect>(path);
+
+        for (int i = 0; i < effectCount; i++)
+        {
+            effects[i] = Instantiate(load);
+            effects[i].name = $"{load.gameObject.name} {i}";
+
+            effects[i].transform.SetParent(this.transform);
+            effects[i].gameObject.SetActive(false);
+        }
+    }
+#endif
+
+    private void Awake()
+    {
+        Instance = this;
+        Json.PlayScore(0);
+        MoveBlock();
+    }
+
+    /// <summary>
+    /// 플레이어 블록 1칸 이동
+    /// </summary>
+    /// <param name="_value"></param>
+    public void MovePlayer(bool _isLeft)
+    {
+        if (!isDone || gameOver) return;
+        isDone = false;
+
+        var direction = _isLeft ? Block.Type.Left : Block.Type.Right;
+        var isBreak = blocks[currentIndex].CanBreak(direction);
+
+        if (isBreak)
+        {
+            score++;
+            Json.PlayScore(score);
+
+            UiManager.Get<ScoreUi>().UpScore();
+            UiManager.Get<TimerUi>().UpTimer();
+
+            ground.OnEffect();
+            SetNextBlock();
+        }
+
+        else
+        {
+            GameOver();
+        }
+    }
+
+    /// <summary>
+    /// 게임 종료
+    /// </summary>
+    public void GameOver()
+    {
+        if (gameOver) return;
+        gameOver = true;
+
+        UiManager.Get<TimerUi>().StopTimer();
+        StartCoroutine(GameOverTimer());
+        //Json.Save();
+    }
+
+    private IEnumerator GameOverTimer()
+    {
+        yield return CoroutineManager.Wait(1.5f);
+
+        SceneChangeManager.Add(EndLoad);
+        UiManager.Get<FadeUi>().FadeIn(0.5f, ChangeResultScene);
+    }
+
+    private void ChangeResultScene()
+    {
+        SceneChangeManager.Change(SceneChangeManager.SceneName.Result);
+    }
+
+    private void EndLoad()
+    {
+        UiManager.Get<FadeUi>().FadeOut(0.5f);
+    }
+
+    private void SetNextBlock()
+    {
+        var lastBlockPos = blocks[lastIndex].transform.position;
+        lastBlockPos.y += blocks[lastIndex].transform.localScale.y;
+
+        var currentBlockType = blocks[currentIndex].BlockType();
+
+        //회피 콤보
+        if ((previousBlockType == Block.Type.Left && currentBlockType == Block.Type.Right) ||
+            (previousBlockType == Block.Type.Right && currentBlockType == Block.Type.Left))
+        {
+            UiManager.Get<ComboUi>().Show(combo);
+            UiManager.Get<ComboUi>().Fade();
+
+            CamController.Instatnce.Shake(0.2f, 0.1f);
+            combo++;
+        }
+
+        else
+        {
+            combo = 0;
+        }
+
+        blocks[currentIndex].BreakBlock(lastBlockPos);
+        previousBlockType = currentBlockType;
+
+        lastIndex = SetIndex(lastIndex);
+        currentIndex = SetIndex(currentIndex);
+
+        OnEffect();
+        MoveBlock();
+    }
+
+    private void OnEffect()
+    {
+        effectIndex++;
+        if (effects.Length <= effectIndex) effectIndex = 0;
+
+        var block = blocks[currentIndex].transform;
+        var effectPos = block.position;
+        effectPos.y -= block.localScale.y;
+
+        effects[effectIndex].transform.position = effectPos;
+        effects[effectIndex].gameObject.SetActive(true);
+    }
+
+    private void MoveBlock()
+    {
+        var speed = 14f;
+
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            blocks[i].MoveBlock(speed);
+        }
+    }
+
+    /// <summary>
+    /// 블록이 땅에 닿았을 경우 모두 정지
+    /// </summary>
+    public void TouchGround()
+    {
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            blocks[i].MoveBlock(0f);
+        }
+
+        isDone = true;
+    }
+
+    private int SetIndex(int _index)
+    {
+        _index++;
+
+        if (blocks.Length <= _index) _index = 0;
+        return _index;
+    }
+}

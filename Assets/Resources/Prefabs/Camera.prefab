@@ -43,7 +43,7 @@ Camera:
   m_GameObject: {fileID: 5065679652184355434}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -183,4 +183,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <cam>k__BackingField: {fileID: 8703816725558970979}
-  originColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}

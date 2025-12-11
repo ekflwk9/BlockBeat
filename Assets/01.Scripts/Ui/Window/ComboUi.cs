@@ -18,6 +18,8 @@ public class ComboUi : UiBase
        "You can't avoid it now.",
        "Are you a pro gamer?",
        "No way!",
+       "You dodged that, too?",
+       "HaHaHaHa !!",
     };
 
 #if UNITY_EDITOR

@@ -34,6 +34,6 @@ public class ScoreUi : UiBase
     /// </summary>
     public void UpScore()
     {
-        text.text = BlockManager.Instance.score.ToString();
+        text.text = GameManager.Instance.score.ToString();
     }
 }

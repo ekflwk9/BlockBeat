@@ -92,6 +92,6 @@ public class Block : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Tag.Ground)) BlockManager.Instance.TouchGround();
+        if (collision.CompareTag(Tag.Ground)) GameManager.Instance.TouchGround();
     }
 }

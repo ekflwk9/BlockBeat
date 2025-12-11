@@ -13,6 +13,8 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
 
         var image = this.TryGetChildComponent<Image>();
         if (image) image.color = Color.clear;
+
+        //RenderSettings.skybox = newMaterial;
     }
 
     private void Update()
@@ -20,13 +22,13 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             OnScoreUi();
-            BlockManager.Instance?.MovePlayer(true);
+            GameManager.Instance?.MovePlayer(true);
         }
 
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             OnScoreUi();
-            BlockManager.Instance?.MovePlayer(false);
+            GameManager.Instance?.MovePlayer(false);
         }
     }
 #endif
@@ -55,7 +57,7 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
     {
         OnScoreUi();
 
-        if (eventData.position.x < this.transform.position.x) BlockManager.Instance?.MovePlayer(true);
-        else BlockManager.Instance?.MovePlayer(false);
+        if (eventData.position.x < this.transform.position.x) GameManager.Instance?.MovePlayer(true);
+        else GameManager.Instance?.MovePlayer(false);
     }
 }

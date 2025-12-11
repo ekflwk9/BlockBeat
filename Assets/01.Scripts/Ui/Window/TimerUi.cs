@@ -61,7 +61,7 @@ public class TimerUi : UiBase
 
     private IEnumerator Timer()
     {
-        var manager = BlockManager.Instance;
+        var manager = GameManager.Instance;
 
         if (!manager || manager.gameOver) yield return null;
         ResetSlide();
