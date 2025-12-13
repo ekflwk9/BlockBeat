@@ -18,7 +18,21 @@ public class CamController : MonoBehaviour
 
     private void Awake()
     {
-        if (this.Singleton(Instatnce)) Instatnce = this;
+        if (this.Singleton(Instatnce))
+        {
+            Instatnce = this;
+            LoopRotate();
+        }
+    }
+
+    private void LoopRotate()
+    {
+        var rotateSpeed = 100f;
+        var newRotate = new Vector3(0, 360f, 0f);
+
+        var tween = this.transform.DORotate(newRotate, rotateSpeed, RotateMode.FastBeyond360);
+        tween.SetEase(Ease.Linear);
+        tween.SetLoops(-1, LoopType.Restart);
     }
 
     /// <summary>

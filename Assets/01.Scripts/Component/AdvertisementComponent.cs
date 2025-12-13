@@ -3,6 +3,8 @@ using UnityEngine.Advertisements;
 
 public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
+    private const int maxPassCount = 3;
+
 #if UNITY_IOS
     private const string gameID = "6003730";
     private const string placementID = "Rewarded_iOS";
@@ -29,7 +31,6 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
 
     private void Start()
     {
-        var maxPassCount = 3;
         var passCount = Json.GetAdvertPass();
 
         if (maxPassCount <= passCount)

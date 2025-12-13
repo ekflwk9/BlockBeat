@@ -10,6 +10,7 @@ public class Block : MonoBehaviour
         Right,
     }
 
+    private const int maxLevel = 150; //해당 레벨 이후부터 None블록은 나오지 않음
     private Dictionary<Type, GameObject> type = new();
     private Type currentType;
 
@@ -86,7 +87,9 @@ public class Block : MonoBehaviour
     {
         if (type.ContainsKey(currentType)) type[currentType].SetActive(false);
 
-        currentType = (Type)Random.Range((int)Type.None, (int)Type.Right + 1);
+        var minRange = maxLevel < Json.GetPlayScore() ? (int)Type.Left : (int)Type.None;
+        currentType = (Type)Random.Range(minRange, (int)Type.Right + 1);
+
         if (type.ContainsKey(currentType)) type[currentType].SetActive(true);
     }
 

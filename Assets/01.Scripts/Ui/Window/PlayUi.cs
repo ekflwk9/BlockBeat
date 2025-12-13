@@ -13,8 +13,6 @@ public class PlayUi : UiBase, IPointerClickHandler
 
         var image = this.TryGetChildComponent<Image>();
         if (image) image.color = Color.clear;
-
-        //RenderSettings.skybox = newMaterial;
     }
 
     private void Update()

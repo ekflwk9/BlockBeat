@@ -76,5 +76,13 @@ public class ComboUi : UiBase
 
         fade.color = fadeOriginColor;
         fade.DOFade(0f, 0.5f);
+
+        var manager = GameManager.Instance.transform;
+
+        if (manager)
+        {
+            fade.transform.position = manager.position;
+            fade.transform.rotation = manager.rotation;
+        }
     }
 }

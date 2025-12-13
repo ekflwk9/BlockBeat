@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public int score { get; private set; }
     public bool gameOver { get; private set; }
 
     [Space(20f)]
@@ -106,6 +105,21 @@ public class GameManager : MonoBehaviour
         MoveBlock();
     }
 
+    private void Update()
+    {
+        var cam = CamController.Instatnce;
+
+        if (cam)
+        {
+            var camTransform = cam.transform;
+            this.transform.rotation = camTransform.rotation;
+
+            var camPos = camTransform.position;
+            var distance = camPos.magnitude;
+            this.transform.position = camPos + camTransform.forward * distance;
+        }
+    }
+
     /// <summary>
     /// 플레이어 블록 1칸 이동
     /// </summary>
@@ -120,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         if (isBreak)
         {
-            score++;
+            var score = Json.GetPlayScore() + 1;
             Json.PlayScore(score);
 
             UiManager.Get<ScoreUi>().UpScore();

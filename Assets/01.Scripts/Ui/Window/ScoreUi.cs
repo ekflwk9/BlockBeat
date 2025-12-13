@@ -34,6 +34,6 @@ public class ScoreUi : UiBase
     /// </summary>
     public void UpScore()
     {
-        text.text = GameManager.Instance.score.ToString();
+        text.text = Json.GetPlayScore().ToString();
     }
 }
