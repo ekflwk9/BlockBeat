@@ -3,75 +3,91 @@ using UnityEngine.Advertisements;
 
 public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    private string iOSID = "6003551";
-    private string androidID = "6003550";
-    private string gameID;
+#if UNITY_IOS
+    private const string gameID = "6003730";
+    private const string placementID = "Rewarded_iOS";
+#elif UNITY_ANDROID
+    private const string gameID = "6003731";
+    private const string placementID = "Rewarded_Android";
+#endif
+
+    public static int passCount { get; private set; }
 
     void Awake()
     {
-        var testMode = false;
-
-#if UNITY_IOS
-        gameID = iOSID;
-#elif UNITY_ANDROID
-        gameID = androidID;
-#elif UNITY_EDITOR
-        gameID = androidID;
-        testMode = true
-#endif
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Advertisement.Initialize(gameID, testMode, this);
+            Advertisement.Initialize(gameID, Application.isEditor, this);
         }
+    }
+
+    /// <summary>
+    /// 광고 보여주기
+    /// </summary>
+    public void Show()
+    {
+        passCount = 0;
+        Advertisement.Show(placementID, this);
+    }
+
+    /// <summary>
+    /// 광고 패스
+    /// </summary>
+    public void Pass()
+    {
+        passCount++;
     }
 
     #region Initialize
     public void OnInitializationComplete()
     {
-        Service.Log("Unity Ads initialization complete.");
+        //Service.Log("광고 초기화 완료");
+        Advertisement.Load(placementID, this);
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
-        Service.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+        //광고 초기화 실패
+        Service.Log($"{error}/{message}");
     }
     #endregion
 
     #region Load
     public void OnUnityAdsAdLoaded(string placementId)
     {
-        //광고 콘텐츠가 성공적으로 준비되어 표시할 준비가 완료되었음
-        Service.Log($"Ad Loaded: {gameID}");
         if (!placementId.Equals(gameID)) return;
-
+        Service.Log($"ID: {gameID} / 광고 준비 완료");
     }
 
     public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
     {
         //네트워크 문제, 콘텐츠 없음, 또는 기타
+        Service.Log($"{error}/{message}");
     }
     #endregion
 
     #region Show
     public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
     {
-        //로드된 광고를 표시하는 과정에서 오류가 발생했을 때 발생합니다.
+        //로드된 광고 표시 과정에서 오류 발생
+        Service.Log($"{error}/{message}");
     }
 
     public void OnUnityAdsShowStart(string placementId)
     {
-        //광고가 화면에 나타나기 시작했을 때 발생합니다.
+        Service.Log($"광고 출력 시작");
         //사운드 일시 정지
     }
 
     public void OnUnityAdsShowClick(string placementId)
     {
-        //사용자가 광고를 클릭하여 스토어로 이동했을 때 발생합니다.
+        Service.Log($"광고를 클릭하여 스토어로 이동 했음");
     }
 
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
-        //사용자가 광고를 끝까지 시청하거나 닫았을 때 발생합니다.
+        Service.Log($"광고 시청 후 광고를 닫았음");
+        UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
     #endregion
 }

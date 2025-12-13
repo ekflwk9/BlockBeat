@@ -23,9 +23,16 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
     private void Reset()
     {
+        ResetObject();
         ResetGround();
         ResetBlocks();
         ResetEffects();
+    }
+
+    private void ResetObject()
+    {
+        this.name = typeof(GameManager).Name;
+        this.transform.position = Vector3.zero;
     }
 
     private void ResetGround()
@@ -103,7 +110,7 @@ public class GameManager : MonoBehaviour
     /// 플레이어 블록 1칸 이동
     /// </summary>
     /// <param name="_value"></param>
-    public void MovePlayer(bool _isLeft)
+    public void Touch(bool _isLeft)
     {
         if (!isDone || gameOver) return;
         isDone = false;
@@ -145,8 +152,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameOverTimer()
     {
         yield return CoroutineManager.Wait(1.5f);
-
-        SceneChangeManager.Add(EndLoad);
         UiManager.Get<FadeUi>().FadeIn(0.5f, ChangeResultScene);
     }
 

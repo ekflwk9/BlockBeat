@@ -22,13 +22,13 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             OnScoreUi();
-            GameManager.Instance?.MovePlayer(true);
+            GameManager.Instance?.Touch(true);
         }
 
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             OnScoreUi();
-            GameManager.Instance?.MovePlayer(false);
+            GameManager.Instance?.Touch(false);
         }
     }
 #endif
@@ -57,7 +57,7 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
     {
         OnScoreUi();
 
-        if (eventData.position.x < this.transform.position.x) GameManager.Instance?.MovePlayer(true);
-        else GameManager.Instance?.MovePlayer(false);
+        if (eventData.position.x < this.transform.position.x) GameManager.Instance?.Touch(true);
+        else GameManager.Instance?.Touch(false);
     }
 }

@@ -1153,6 +1153,7 @@ GameObject:
   - component: {fileID: 90380788609106789}
   - component: {fileID: 2607160318495537458}
   - component: {fileID: 1830128541078364052}
+  - component: {fileID: 8846420286265804451}
   m_Layer: 5
   m_Name: ResultUi
   m_TagString: Untagged
@@ -1203,7 +1204,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!114 &90380788609106789
 MonoBehaviour:
@@ -1263,6 +1264,19 @@ MonoBehaviour:
   maxScore: {fileID: 1837238625968761737}
   timer: {fileID: 5306626129977405448}
   timerTitle: {fileID: 7248299278860391526}
+  advertisement: {fileID: 8846420286265804451}
+--- !u!114 &8846420286265804451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015216879181361557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c560772f9b245dc4f97ffdca9797c71f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6183192644401491813
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,10 +14,14 @@ public class ResultUi : UiBase
     [SerializeField] private TMP_Text timer;
     [SerializeField] private TMP_Text timerTitle;
 
+    [SerializeField] private AdvertisementComponent advertisement;
+
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<ResultUi>();
+
+        advertisement = this.RequireComponent<AdvertisementComponent>();
 
         var canvas = this.TryGetComponent<Canvas>();
         if (canvas) canvas.sortingOrder = 20;
@@ -33,11 +37,26 @@ public class ResultUi : UiBase
     }
 #endif
 
-    private void Awake()
+    private void Start()
     {
         SetResolution();
         SetUi();
         SetFont();
+        ShowResult();
+    }
+
+    private void ShowResult()
+    {
+        if (3 <= AdvertisementComponent.passCount)
+        {
+            advertisement.Show();
+        }
+
+        else
+        {
+            advertisement.Pass();
+            UiManager.Get<FadeUi>().FadeOut(0.5f);
+        }
     }
 
     private void SetResolution()
@@ -81,7 +100,7 @@ public class ResultUi : UiBase
 
         timerTitle.text = "Survival Time";
 
-        if(minutes < 1) timer.text = $"{playTime.ToString("F2")}s";
+        if (minutes < 1) timer.text = $"{playTime.ToString("F2")}s";
         else timer.text = $"{minutes}m {second.ToString("F2")}s";
     }
 }

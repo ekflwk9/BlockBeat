@@ -25,13 +25,13 @@ public static class UiManager
 
     private static void FindEventSystem()
     {
-        if (!MonoBehaviour.FindAnyObjectByType<EventSystem>())
-        {
-            var spawnObj = new GameObject("[EventSystem]");
-            spawnObj.AddComponent<EventSystem>();
-            spawnObj.AddComponent<InputSystemUIInputModule>();
-            MonoBehaviour.DontDestroyOnLoad(spawnObj);
-        }
+        var eventSystem = MonoBehaviour.FindAnyObjectByType<EventSystem>();
+        if (eventSystem) MonoBehaviour.Destroy(eventSystem.gameObject);
+
+        var spawn = new GameObject("[EventSystem]");
+        spawn.AddComponent<EventSystem>();
+        spawn.AddComponent<InputSystemUIInputModule>();
+        MonoBehaviour.DontDestroyOnLoad(spawn);
     }
 
     /// <summary>
