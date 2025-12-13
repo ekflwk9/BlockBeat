@@ -160,11 +160,6 @@ public class GameManager : MonoBehaviour
         SceneChangeManager.Change(SceneChangeManager.SceneName.Result);
     }
 
-    private void EndLoad()
-    {
-        UiManager.Get<FadeUi>().FadeOut(0.5f);
-    }
-
     private void SetNextBlock()
     {
         var lastBlockPos = blocks[lastIndex].transform.position;

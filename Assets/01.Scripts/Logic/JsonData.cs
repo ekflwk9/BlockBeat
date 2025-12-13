@@ -10,6 +10,8 @@ public class PlayerData
     public int maxScore;
     public int currentScore;
     public float currentTime;
+
+    public int advertPassCount;
 }
 
 public class Data
@@ -64,4 +66,7 @@ public static class Json
 
     public static void PlayScore(int _score) => data.playerData.currentScore = _score;
     public static void PlayMaxScore(int _score) => data.playerData.maxScore = _score;
+
+    public static void SetAdvertPass(int _passCount) => data.playerData.advertPassCount = _passCount;
+    public static int GetAdvertPass() => data.playerData.advertPassCount;
 }

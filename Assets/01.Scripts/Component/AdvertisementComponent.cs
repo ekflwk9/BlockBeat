@@ -11,7 +11,13 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
     private const string placementID = "Rewarded_Android";
 #endif
 
-    public static int passCount { get; private set; }
+#if UNITY_EDITOR
+    private void Reset()
+    {
+        this.transform.position = Vector3.zero;
+        this.name = $"Advertisement";
+    }
+#endif
 
     void Awake()
     {
@@ -21,21 +27,21 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
         }
     }
 
-    /// <summary>
-    /// 광고 보여주기
-    /// </summary>
-    public void Show()
+    private void Start()
     {
-        passCount = 0;
-        Advertisement.Show(placementID, this);
-    }
+        var maxPassCount = 3;
+        var passCount = Json.GetAdvertPass();
 
-    /// <summary>
-    /// 광고 패스
-    /// </summary>
-    public void Pass()
-    {
-        passCount++;
+        if (maxPassCount <= passCount)
+        {
+            Json.SetAdvertPass(0);
+            Advertisement.Show(placementID, this);
+        }
+
+        else
+        {
+            Json.SetAdvertPass(passCount + 1);
+        }
     }
 
     #region Initialize

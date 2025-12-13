@@ -2,14 +2,14 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PlayScreenUi : UiBase, IPointerClickHandler
+public class PlayUi : UiBase, IPointerClickHandler
 {
     private bool isStart;
 
 #if UNITY_EDITOR
     private void Reset()
     {
-        SetName<PlayScreenUi>();
+        SetName<PlayUi>();
 
         var image = this.TryGetChildComponent<Image>();
         if (image) image.color = Color.clear;
@@ -39,6 +39,8 @@ public class PlayScreenUi : UiBase, IPointerClickHandler
         UiManager.Off<TimerUi>();
         UiManager.On<ComboUi>();
         UiManager.On<TutorialUi>();
+
+        UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
     private void OnScoreUi()

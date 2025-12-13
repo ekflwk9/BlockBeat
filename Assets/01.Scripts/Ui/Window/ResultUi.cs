@@ -14,14 +14,10 @@ public class ResultUi : UiBase
     [SerializeField] private TMP_Text timer;
     [SerializeField] private TMP_Text timerTitle;
 
-    [SerializeField] private AdvertisementComponent advertisement;
-
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<ResultUi>();
-
-        advertisement = this.RequireComponent<AdvertisementComponent>();
 
         var canvas = this.TryGetComponent<Canvas>();
         if (canvas) canvas.sortingOrder = 20;
@@ -42,21 +38,12 @@ public class ResultUi : UiBase
         SetResolution();
         SetUi();
         SetFont();
-        ShowResult();
+        ShowFade();
     }
 
-    private void ShowResult()
+    private void ShowFade()
     {
-        if (3 <= AdvertisementComponent.passCount)
-        {
-            advertisement.Show();
-        }
-
-        else
-        {
-            advertisement.Pass();
-            UiManager.Get<FadeUi>().FadeOut(0.5f);
-        }
+        UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
     private void SetResolution()
