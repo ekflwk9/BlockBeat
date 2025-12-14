@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7615563686528756783}
   - component: {fileID: 5025971907785674973}
   m_Layer: 6
-  m_Name: BlockFade(Clone)
+  m_Name: BlockFade
   m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

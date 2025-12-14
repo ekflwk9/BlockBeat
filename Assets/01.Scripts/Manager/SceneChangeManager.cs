@@ -11,6 +11,7 @@ public static class SceneChangeManager
         Result,
     }
 
+    public static SceneName currentScene { get; private set; }
     private static Dictionary<SceneName, string> scene = Init();
     private static event Action endEvent;
 
@@ -40,6 +41,8 @@ public static class SceneChangeManager
     public static void Change(SceneName _sceneName)
     {
         if (!scene.ContainsKey(_sceneName)) scene.Add(_sceneName, _sceneName.ToString());
+        currentScene = _sceneName;
+
         SceneManager.LoadScene(scene[_sceneName]);
     }
 }

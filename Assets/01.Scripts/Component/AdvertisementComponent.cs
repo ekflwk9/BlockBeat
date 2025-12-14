@@ -31,6 +31,7 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
 
     private void Start()
     {
+        if (SceneChangeManager.currentScene != SceneChangeManager.SceneName.Result) return;
         var passCount = Json.GetAdvertPass();
 
         if (maxPassCount <= passCount)
@@ -62,8 +63,8 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
     #region Load
     public void OnUnityAdsAdLoaded(string placementId)
     {
-        if (!placementId.Equals(gameID)) return;
-        Service.Log($"ID: {gameID} / 광고 준비 완료");
+        if (!placementId.Equals(placementID)) return;
+        Service.Log($"{placementID} 광고 준비 완료");
     }
 
     public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
@@ -94,6 +95,8 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
         Service.Log($"광고 시청 후 광고를 닫았음");
+
+        Advertisement.Load(placementID, this);
         UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
     #endregion
