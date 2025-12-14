@@ -21,7 +21,7 @@ public class CamController : MonoBehaviour
         if (this.Singleton(Instatnce))
         {
             Instatnce = this;
-            //LoopRotate();
+            LoopRotate();
         }
     }
 

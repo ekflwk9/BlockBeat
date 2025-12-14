@@ -23,12 +23,9 @@ public class GameLevel : MonoBehaviour
     private void InitLevel()
     {
         //레벨 제한과 마테리얼 이름
-        sky.Add((-1, "ResultSky"));
-        sky.Add((100, "CloudyBrightDay"));
-        sky.Add((200, "WarmSunriseGlow"));
-        sky.Add((300, "CottonCandyMorning"));
-        sky.Add((400, "VHSSkybox"));
-        sky.Add((500, "OrangeSkybox"));
+        sky.Add((-1, "Overcast"));
+        sky.Add((500, "GloriousPink"));
+        sky.Add((1000, "Space"));
     }
 
     private void InitSky()

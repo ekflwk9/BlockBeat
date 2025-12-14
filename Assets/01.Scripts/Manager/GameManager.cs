@@ -105,20 +105,20 @@ public class GameManager : MonoBehaviour
         MoveBlock();
     }
 
-    //private void Update()
-    //{
-    //    var cam = CamController.Instatnce;
+    private void Update()
+    {
+        var cam = CamController.Instatnce;
 
-    //    if (cam)
-    //    {
-    //        var camTransform = cam.transform;
-    //        this.transform.rotation = camTransform.rotation;
+        if (cam)
+        {
+            var camTransform = cam.transform;
+            this.transform.rotation = camTransform.rotation;
 
-    //        var camPos = camTransform.position;
-    //        var distance = camPos.magnitude;
-    //        this.transform.position = camPos + camTransform.forward * distance;
-    //    }
-    //}
+            var camPos = camTransform.position;
+            var distance = camPos.magnitude;
+            this.transform.position = camPos + camTransform.forward * distance;
+        }
+    }
 
     /// <summary>
     /// 플레이어 블록 1칸 이동
