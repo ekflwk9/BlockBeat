@@ -25,6 +25,7 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
     {
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
+            Json.SetAdvertPass(0); //패스 횟수 초기화
             Advertisement.Initialize(gameID, Application.isEditor, this);
         }
     }

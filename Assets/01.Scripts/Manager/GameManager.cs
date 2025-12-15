@@ -134,8 +134,7 @@ public class GameManager : MonoBehaviour
 
         if (isBreak)
         {
-            var score = Json.GetPlayScore() + 1;
-            Json.PlayScore(score);
+            Json.PlayScore(Json.GetPlayScore() + 1);
 
             UiManager.Get<ScoreUi>().UpScore();
             UiManager.Get<TimerUi>().UpTimer();
@@ -159,8 +158,9 @@ public class GameManager : MonoBehaviour
         gameOver = true;
 
         UiManager.Get<TimerUi>().StopTimer();
-        StartCoroutine(GameOverTimer());
         //Json.Save();
+
+        StartCoroutine(GameOverTimer());
     }
 
     private IEnumerator GameOverTimer()
@@ -190,6 +190,8 @@ public class GameManager : MonoBehaviour
 
             CamController.Instatnce.Shake(0.2f, 0.1f);
             combo++;
+
+            if (Json.GetCombo() < combo) Json.SetCombo(combo);
         }
 
         else

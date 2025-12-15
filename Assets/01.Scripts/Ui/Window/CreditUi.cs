@@ -19,7 +19,10 @@ public class CreditUi : UiBase
     {
         var sound = "https://pixabay.com/";
         var font = "PFStarders";
+        var titleFont = "Stacked Pixel";
 
-        info.text = $"Sound : {sound}\nFont : {font}";
+        info.text = 
+            $"Sound - {sound}\n" +
+            $"Font - {font}, {titleFont}(Monkopus)\n";
     }
 }

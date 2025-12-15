@@ -10,6 +10,7 @@ public class PlayerData
     public int maxScore;
     public int currentScore;
     public float currentTime;
+    public int combo;
 
     public int advertPassCount;
 }
@@ -64,9 +65,15 @@ public static class Json
     public static int GetPlayScore() => data.playerData.currentScore;
     public static int GetPlayMaxScore() => data.playerData.maxScore;
 
-    public static void PlayScore(int _score) => data.playerData.currentScore = _score;
-    public static void PlayMaxScore(int _score) => data.playerData.maxScore = _score;
-
     public static void SetAdvertPass(int _passCount) => data.playerData.advertPassCount = _passCount;
     public static int GetAdvertPass() => data.playerData.advertPassCount;
+
+    public static int GetCombo() => data.playerData.combo;
+    public static void SetCombo(int _combo) => data.playerData.combo = _combo;
+
+    public static void PlayScore(int _score)
+    {
+        data.playerData.currentScore = _score;
+        if (data.playerData.maxScore < _score) data.playerData.maxScore = _score;
+    }
 }

@@ -162,7 +162,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ui_0
+      name: Button
       rect:
         serializedVersion: 2
         x: 3
@@ -170,7 +170,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       customData: 
       outline: []
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_1
+      name: Window
       rect:
         serializedVersion: 2
         x: 16
@@ -192,7 +192,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       customData: 
       outline: []
@@ -206,29 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_2
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 87
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de613d3847f92e94584e5749298b6efc
-      internalID: 1393511358
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ui_3
+      name: Touch
       rect:
         serializedVersion: 2
         x: 3
@@ -236,7 +214,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 2, z: 2, w: 4}
       customData: 
       outline: []
@@ -250,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_4
+      name: Line
       rect:
         serializedVersion: 2
         x: 16
@@ -258,7 +236,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
@@ -272,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_5
+      name: CircleLine
       rect:
         serializedVersion: 2
         x: 29
@@ -280,7 +258,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
@@ -294,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_6
+      name: CircleWindow
       rect:
         serializedVersion: 2
         x: 29
@@ -302,7 +280,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -316,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_7
+      name: SoundOn
       rect:
         serializedVersion: 2
         x: 5
@@ -324,7 +302,7 @@ TextureImporter:
         width: 11
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -338,7 +316,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_8
+      name: SoundOff
       rect:
         serializedVersion: 2
         x: 19
@@ -346,7 +324,7 @@ TextureImporter:
         width: 12
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -360,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_9
+      name: BlockIdle
       rect:
         serializedVersion: 2
         x: 65
@@ -368,7 +346,7 @@ TextureImporter:
         width: 18
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -382,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_10
+      name: BlockLeft
       rect:
         serializedVersion: 2
         x: 51
@@ -390,7 +368,7 @@ TextureImporter:
         width: 32
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -404,7 +382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ui_11
+      name: BlockRight
       rect:
         serializedVersion: 2
         x: 65
@@ -412,7 +390,7 @@ TextureImporter:
         width: 32
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -439,18 +417,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ui_0: 1146132593
-      Ui_1: -2044742453
-      Ui_10: -1057966908
-      Ui_11: -485023770
-      Ui_2: 1393511358
-      Ui_3: 1267627289
-      Ui_4: -505739240
-      Ui_5: -867068868
-      Ui_6: -256287416
-      Ui_7: 860780298
-      Ui_8: 1156438573
-      Ui_9: 1260408902
+      BlockIdle: 1260408902
+      BlockLeft: -1057966908
+      BlockRight: -485023770
+      Button: 1146132593
+      CircleLine: -867068868
+      CircleWindow: -256287416
+      Line: -505739240
+      SoundOff: 1156438573
+      SoundOn: 860780298
+      Touch: 1267627289
+      Windo: 1393511358
+      Window: -2044742453
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

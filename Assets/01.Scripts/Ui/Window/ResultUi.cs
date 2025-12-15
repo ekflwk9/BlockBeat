@@ -1,11 +1,13 @@
-﻿using DG.Tweening;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResultUi : UiBase
 {
-    [SerializeField] private TMP_Text record;
+    [SerializeField] private TMP_Text commentTitle;
+    [SerializeField] private GameLevel level;
+
+    [SerializeField] private TMP_Text scoreTitle;
     [SerializeField] private TMP_Text score;
 
     [SerializeField] private TMP_Text maxScoreTitle;
@@ -13,6 +15,16 @@ public class ResultUi : UiBase
 
     [SerializeField] private TMP_Text timer;
     [SerializeField] private TMP_Text timerTitle;
+
+    [SerializeField] private TMP_Text combo;
+    [SerializeField] private TMP_Text comboTitle;
+
+    private string[] comment =
+    {
+        "You still have a long way to go.",
+        "You've got some skills",
+        "Are you a pro?",
+    };
 
 #if UNITY_EDITOR
     private void Reset()
@@ -22,22 +34,29 @@ public class ResultUi : UiBase
         var canvas = this.TryGetComponent<Canvas>();
         if (canvas) canvas.sortingOrder = 20;
 
-        record = this.TryGetChildComponent<TMP_Text>("Record");
+        commentTitle = this.TryGetChildComponent<TMP_Text>("CommentTitle");
+        level = this.RequireComponent<GameLevel>();
+
+        scoreTitle = this.TryGetChildComponent<TMP_Text>("ScoreTitle");
         score = this.TryGetChildComponent<TMP_Text>("Score");
 
-        timer = this.TryGetChildComponent<TMP_Text>("Timer");
         timerTitle = this.TryGetChildComponent<TMP_Text>("TimerTitle");
+        timer = this.TryGetChildComponent<TMP_Text>("Timer");
 
-        maxScore = this.TryGetChildComponent<TMP_Text>("MaxScore");
         maxScoreTitle = this.TryGetChildComponent<TMP_Text>("MaxScoreTitle");
+        maxScore = this.TryGetChildComponent<TMP_Text>("MaxScore");
+
+        comboTitle = this.TryGetChildComponent<TMP_Text>("ComboTitle");
+        combo = this.TryGetChildComponent<TMP_Text>("Combo");
     }
 #endif
 
     private void Start()
     {
-        SetResolution();
-        SetUi();
-        SetFont();
+        SetComment();
+        SetScore();
+        SetCombo();
+        SetTimer();
         ShowFade();
     }
 
@@ -46,41 +65,43 @@ public class ResultUi : UiBase
         UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
-    private void SetResolution()
+    private void SetComment()
     {
-        var cavans = this.TryGetComponent<CanvasScaler>();
-        cavans.referenceResolution = new Vector2(Screen.width, Screen.height);
+        var index = level.GetLevel();
+
+        if (index < 0) index = 0;
+        else if(comment.Length <= index) index = comment.Length - 1;
+
+        commentTitle.text = comment[index];
     }
 
-    private void SetUi()
-    {
-        var playScore = Json.GetPlayScore();
-
-        if (Json.GetPlayMaxScore() < playScore)
-        {
-            Json.PlayMaxScore(playScore);
-
-            record.gameObject.SetActive(true);
-            OnRecordAnimation();
-        }
-    }
-
-    private void OnRecordAnimation()
-    {
-        var tween = record.DOFade(0.25f, 0.3f);
-        tween.SetEase(Ease.OutSine);
-        tween.SetLoops(-1, LoopType.Yoyo);
-    }
-
-    private void SetFont()
+    private void SetScore()
     {
         //$"<size={지정할 폰트 사이즈}>{출력할 string}</size>";
-        var fontSzie = score.fontSize * 0.7f;
-        score.text = $"{Json.GetPlayScore()}\n<size={fontSzie}>Blocks Broken</size>";
+        //"<color=#FF0000>{출력할 string}</color>";
+
+        var playScore = Json.GetPlayScore();
+        var playMaxScore = Json.GetPlayMaxScore();
+
+        var fontSize = maxScore.fontSize * 0.6f;
+        var newText = $"<size={fontSize}>New !</size>";
+        var newRecord = playMaxScore == playScore ? $"<color=#00FF00>{newText}</color>" : string.Empty;
+
+        scoreTitle.text = "Blocks Broken";
+        score.text = playScore.ToString();
 
         maxScoreTitle.text = "Most Blocks Broken";
-        maxScore.text = $"{Json.GetPlayMaxScore()}";
+        maxScore.text = $"{newRecord}    {playMaxScore}";
+    }
 
+    private void SetCombo()
+    {
+        comboTitle.text = "Most Combo";
+        combo.text = Json.GetCombo().ToString();
+    }
+
+    private void SetTimer()
+    {
         var playTime = Json.GetPlayTime();
         var minutes = (int)(playTime / 60);
         var second = minutes < 1 ? playTime : playTime % 60;

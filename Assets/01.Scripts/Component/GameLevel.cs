@@ -9,8 +9,11 @@ public class GameLevel : MonoBehaviour
 #if UNITY_EDITOR
     private void Reset()
     {
-        this.transform.position = Vector3.zero;
-        this.name = typeof(GameLevel).Name;
+        if (string.Equals("GameObject", this.name))
+        {
+            this.transform.position = Vector3.zero;
+            this.name = typeof(GameLevel).Name;
+        }
     }
 #endif
 
@@ -46,5 +49,23 @@ public class GameLevel : MonoBehaviour
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// 현재 레벨 반환
+    /// </summary>
+    /// <returns></returns>
+    public int GetLevel()
+    {
+        var playerLevel = Json.GetPlayMaxScore();
+
+        for (int i = sky.Count - 1; -1 < i; i--)
+        {
+            var (level, skyName) = sky[i];
+
+            if (level < playerLevel) return i;
+        }
+
+        return sky.Count - 1;
     }
 }
