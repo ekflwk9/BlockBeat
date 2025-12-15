@@ -1,37 +1,35 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+﻿using System.Collections;
+using UnityEngine;
 
-public class PlayUi : UiBase, IPointerClickHandler
+public class PlayUi : UiBase
 {
-    private bool isStart;
-
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<PlayUi>();
-
-        var image = this.TryGetChildComponent<Image>();
-        if (image) image.color = Color.clear;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            OnScoreUi();
             GameManager.Instance?.Touch(true);
         }
 
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            OnScoreUi();
             GameManager.Instance?.Touch(false);
         }
     }
 #endif
 
     private void Start()
+    {
+        InitUi();
+        StartCoroutine(StartGame());
+    }
+
+    private void InitUi()
     {
         UiManager.Off<ScoreUi>();
         UiManager.Off<TimerUi>();
@@ -41,23 +39,24 @@ public class PlayUi : UiBase, IPointerClickHandler
         UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
-    private void OnScoreUi()
+    /// <summary>
+    /// 게임을 플레이하는데 필요한 UI 활성화
+    /// </summary>
+    public IEnumerator StartGame()
     {
-        if (!isStart)
+        var manager = GameManager.Instance;
+
+        while (true)
         {
-            isStart = true;
+            if (!manager.canTouch)
+            {
+                UiManager.On<ScoreUi>();
+                UiManager.On<TimerUi>();
+                UiManager.Off<TutorialUi>();
+                break;
+            }
 
-            UiManager.On<ScoreUi>();
-            UiManager.On<TimerUi>();
-            UiManager.Off<TutorialUi>();
+            yield return null;
         }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        OnScoreUi();
-
-        if (eventData.position.x < this.transform.position.x) GameManager.Instance?.Touch(true);
-        else GameManager.Instance?.Touch(false);
     }
 }

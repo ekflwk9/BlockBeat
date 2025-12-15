@@ -4,47 +4,35 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private const int effectCount = 15;     //엠펙트 스폰 갯수
+    private const int blockSpawnCount = 20; //블럭 스폰 갯수
+    private const float maxBottom = -1f;    //블럭 시작 위치
+
     public static GameManager Instance { get; private set; }
     public bool gameOver { get; private set; }
+    public bool canTouch { get; private set; } = true;
 
-    [Space(20f)]
-    [SerializeField] private int lastIndex;
-    [SerializeField] private Ground ground;
     [SerializeField] private Block[] blocks;
-    [SerializeField] private Effect[] effects;
+    [SerializeField] private BlockEffect[] effects;
+    [SerializeField] private SpriteRenderer crosshair;
 
-    private int combo;
+    private int comboCount;
     private int effectIndex;
-    private int currentIndex;
-    private bool isDone = true;
     private Block.Type previousBlockType;
 
 #if UNITY_EDITOR
     private void Reset()
     {
         ResetObject();
-        ResetGround();
         ResetBlocks();
         ResetEffects();
+        ResetCrossHair();
     }
 
     private void ResetObject()
     {
         this.name = typeof(GameManager).Name;
         this.transform.position = Vector3.zero;
-    }
-
-    private void ResetGround()
-    {
-        ground = this.TryGetChildComponent<Ground>();
-        if (ground) return;
-
-        var path = Path.Combine("Prefabs", "Ground");
-        var load = Resources.Load<Ground>(path);
-
-        ground = Instantiate(load);
-        ground.transform.SetParent(this.transform);
-        ground.name = $"{load.gameObject.name}";
     }
 
     private void ResetBlocks()
@@ -56,36 +44,34 @@ public class GameManager : MonoBehaviour
             var path = Path.Combine("Prefabs", "Block");
             var load = Resources.Load<Block>(path);
 
-            var ground = FindAnyObjectByType<Ground>();
-            var nextPos = ground ? ground.transform.position + Vector3.up * 2f : Vector3.zero;
+            blocks = new Block[blockSpawnCount];
 
-            var spawnCount = 20;
-            blocks = new Block[spawnCount];
+            var nextPos = Vector3.zero;
+            nextPos.y = maxBottom;
 
-            for (int i = 0; i < spawnCount; i++)
+            for (int i = 0; i < blockSpawnCount; i++)
             {
-                blocks[i] = Instantiate(load);
-                blocks[i].name = $"{load.gameObject.name} {i}";
+                var block = Instantiate(load);
+                block.name = $"{load.gameObject.name} {i}";
 
-                blocks[i].transform.position = nextPos;
-                blocks[i].transform.SetParent(this.transform);
-                nextPos.y += blocks[i].transform.localScale.y;
+                block.transform.position = nextPos;
+                block.transform.SetParent(this.transform);
+                nextPos.y += block.transform.localScale.y;
+
+                blocks[i] = block;
             }
         }
-
-        lastIndex = blocks.Length - 1;
     }
 
     private void ResetEffects()
     {
-        effects = GetComponentsInChildren<Effect>(true);
+        effects = this.GetComponentsInChildren<BlockEffect>(true);
         if (effects.Length != 0) return;
 
-        var effectCount = 8;
-        effects = new Effect[effectCount];
+        effects = new BlockEffect[effectCount];
 
         var path = Path.Combine("Prefabs", "BreakBlockEffect");
-        var load = Resources.Load<Effect>(path);
+        var load = Resources.Load<BlockEffect>(path);
 
         for (int i = 0; i < effectCount; i++)
         {
@@ -96,28 +82,33 @@ public class GameManager : MonoBehaviour
             effects[i].gameObject.SetActive(false);
         }
     }
+
+    private void ResetCrossHair()
+    {
+        crosshair = this.TryGetChildComponent<SpriteRenderer>("CrossHairLine");
+        if (crosshair) return;
+
+        var path = Path.Combine("Prefabs", "CrossHairLine");
+        var load = Resources.Load<SpriteRenderer>(path);
+
+        crosshair = Instantiate(load);
+
+        crosshair.transform.position = Vector3.up * maxBottom;
+        crosshair.name = load.gameObject.name;
+        crosshair.transform.SetParent(this.transform);
+    }
 #endif
 
     private void Awake()
     {
         Instance = this;
-        Json.PlayScore(0);
-        MoveBlock();
+        InitDate();
     }
 
-    private void Update()
+    private void InitDate()
     {
-        var cam = CamController.Instatnce;
-
-        if (cam)
-        {
-            var camTransform = cam.transform;
-            this.transform.rotation = camTransform.rotation;
-
-            var camPos = camTransform.position;
-            var distance = camPos.magnitude;
-            this.transform.position = camPos + camTransform.forward * distance;
-        }
+        Json.SetCombo(0);
+        Json.PlayScore(0);
     }
 
     /// <summary>
@@ -126,11 +117,11 @@ public class GameManager : MonoBehaviour
     /// <param name="_value"></param>
     public void Touch(bool _isLeft)
     {
-        if (!isDone || gameOver) return;
-        isDone = false;
+        if (!canTouch || gameOver) return;
+        canTouch = false;
 
         var direction = _isLeft ? Block.Type.Left : Block.Type.Right;
-        var isBreak = blocks[currentIndex].CanBreak(direction);
+        var isBreak = blocks[0].CanBreak(direction);
 
         if (isBreak)
         {
@@ -139,7 +130,7 @@ public class GameManager : MonoBehaviour
             UiManager.Get<ScoreUi>().UpScore();
             UiManager.Get<TimerUi>().UpTimer();
 
-            ground.OnEffect();
+            //OnEffect(_isLeft);
             SetNextBlock();
         }
 
@@ -156,6 +147,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver) return;
         gameOver = true;
+        crosshair.color = Color.red;
 
         UiManager.Get<TimerUi>().StopTimer();
         //Json.Save();
@@ -176,80 +168,102 @@ public class GameManager : MonoBehaviour
 
     private void SetNextBlock()
     {
+        var lastIndex = blocks.Length - 1;
         var lastBlockPos = blocks[lastIndex].transform.position;
         lastBlockPos.y += blocks[lastIndex].transform.localScale.y;
 
-        var currentBlockType = blocks[currentIndex].BlockType();
+        var currentBlockType = blocks[0].BlockType();
 
         //회피 콤보
         if ((previousBlockType == Block.Type.Left && currentBlockType == Block.Type.Right) ||
             (previousBlockType == Block.Type.Right && currentBlockType == Block.Type.Left))
         {
-            UiManager.Get<ComboUi>().Show(combo);
+            UiManager.Get<ComboUi>().Show(comboCount);
             UiManager.Get<ComboUi>().Fade();
 
             CamController.Instatnce.Shake(0.2f, 0.1f);
-            combo++;
+            comboCount++;
 
-            if (Json.GetCombo() < combo) Json.SetCombo(combo);
+            if (Json.GetCombo() < comboCount) Json.SetCombo(comboCount);
         }
 
         else
         {
-            combo = 0;
+            comboCount = 0;
         }
 
-        blocks[currentIndex].BreakBlock(lastBlockPos);
+        blocks[0].BreakBlock(lastBlockPos);
         previousBlockType = currentBlockType;
 
-        lastIndex = SetIndex(lastIndex);
-        currentIndex = SetIndex(currentIndex);
-
-        OnEffect();
+        BlockSum();
         MoveBlock();
     }
 
-    private void OnEffect()
+    private void BlockSum()
+    {
+        var tempBlock = blocks[0];
+        var length = blocks.Length - 1;
+
+        for (int i = 0; i < length; i++)
+        {
+            blocks[i] = blocks[i + 1];
+        }
+
+        blocks[length] = tempBlock;
+    }
+
+    private void OnEffect(bool _isLeft)
     {
         effectIndex++;
         if (effects.Length <= effectIndex) effectIndex = 0;
 
-        var block = blocks[currentIndex].transform;
-        var effectPos = block.position;
-        effectPos.y -= block.localScale.y;
-
-        effects[effectIndex].transform.position = effectPos;
-        effects[effectIndex].gameObject.SetActive(true);
+        effects[effectIndex].OnEffect(blocks[0], _isLeft);
     }
 
     private void MoveBlock()
     {
         var speed = 14f;
 
-        for (int i = 0; i < blocks.Length; i++)
+        BlockSpeed(speed);
+        StartCoroutine(Move());
+    }
+
+    private IEnumerator Move()
+    {
+        var currentBlock = blocks[0].transform;
+
+        while (!canTouch && !gameOver)
         {
-            blocks[i].MoveBlock(speed);
+            var blockPos = currentBlock.position;
+
+            if (blockPos.y < maxBottom)
+            {
+                BlockStop();
+                canTouch = true;
+            }
+
+            yield return null;
         }
     }
 
-    /// <summary>
-    /// 블록이 땅에 닿았을 경우 모두 정지
-    /// </summary>
-    public void TouchGround()
+    private void BlockSpeed(float _speed)
     {
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            blocks[i].MoveBlock(_speed);
+        }
+    }
+
+    private void BlockStop()
+    {
+        var nextPos = this.transform.position;
+        nextPos.y = maxBottom;
+
         for (int i = 0; i < blocks.Length; i++)
         {
             blocks[i].MoveBlock(0f);
+            blocks[i].transform.position = nextPos;
+            nextPos.y += blocks[i].transform.localScale.y;
         }
-
-        isDone = true;
-    }
-
-    private int SetIndex(int _index)
-    {
-        _index++;
-
-        if (blocks.Length <= _index) _index = 0;
-        return _index;
     }
 }

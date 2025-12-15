@@ -2,23 +2,32 @@
 using System.IO;
 using UnityEngine;
 
+public class InventoryData
+{
+    public string block = "BasicBlock";
+}
+
 public class PlayerData
 {
-    public bool musicSound = true;
-    public bool effectSound = true;
-
     public int maxScore;
     public int currentScore;
     public float currentTime;
     public int combo;
-
     public int advertPassCount;
+}
+
+public class SettingData
+{
+    public bool musicSound = true;
+    public bool effectSound = true;
 }
 
 public class Data
 {
     private const string fileName = "S2c.Json";
     [JsonProperty] public PlayerData playerData { get; private set; } = new();
+    [JsonProperty] public SettingData settingData { get; private set; } = new();
+    [JsonProperty] public InventoryData inventoryData { get; private set; } = new();
 
     public void Save()
     {
@@ -54,10 +63,12 @@ public static class Json
     /// </summary>
     public static void Save() => data.Save();
 
-    public static void SetMusicSound() => data.playerData.musicSound = !data.playerData.musicSound;
-    public static void SetEffectSound() => data.playerData.effectSound = !data.playerData.effectSound;
-    public static bool GetMusicSound() => data.playerData.musicSound;
-    public static bool GetEffectSound() => data.playerData.effectSound;
+    public static string GetBlock() => data.inventoryData.block;
+
+    public static void SetMusicSound() => data.settingData.musicSound = !data.settingData.musicSound;
+    public static void SetEffectSound() => data.settingData.effectSound = !data.settingData.effectSound;
+    public static bool GetMusicSound() => data.settingData.musicSound;
+    public static bool GetEffectSound() => data.settingData.effectSound;
 
     public static float GetPlayTime() => data.playerData.currentTime;
     public static void PlayTime(float _time) => data.playerData.currentTime = _time;

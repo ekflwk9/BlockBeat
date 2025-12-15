@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ResultUi : UiBase
 {
@@ -70,7 +69,7 @@ public class ResultUi : UiBase
         var index = level.GetLevel();
 
         if (index < 0) index = 0;
-        else if(comment.Length <= index) index = comment.Length - 1;
+        else if (comment.Length <= index) index = comment.Length - 1;
 
         commentTitle.text = comment[index];
     }
@@ -85,7 +84,7 @@ public class ResultUi : UiBase
 
         var fontSize = maxScore.fontSize * 0.6f;
         var newText = $"<size={fontSize}>New !</size>";
-        var newRecord = playMaxScore == playScore ? $"<color=#00FF00>{newText}</color>" : string.Empty;
+        var newRecord = (playMaxScore != 0 && playMaxScore == playScore) ? $"<color=#00FF00>{newText}</color>" : string.Empty;
 
         scoreTitle.text = "Blocks Broken";
         score.text = playScore.ToString();

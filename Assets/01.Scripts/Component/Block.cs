@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.IO;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -11,37 +11,46 @@ public class Block : MonoBehaviour
     }
 
     private const int maxLevel = 150; //해당 레벨 이후부터 None블록은 나오지 않음
-    private Dictionary<Type, GameObject> type = new();
-    private Type currentType;
 
-    [SerializeField] private GameObject left;
-    [SerializeField] private GameObject right;
+    [field: SerializeField] public SpriteRenderer render { get; private set; }
     [SerializeField] private Rigidbody2D rigid;
+
+    private Type currentType;
+    private Sprite[] image = new Sprite[3];
 
 #if UNITY_EDITOR
     private void Reset()
     {
-        var box = this.RequireComponent<BoxCollider2D>();
-        box.isTrigger = true;
+        render = this.RequireComponent<SpriteRenderer>();
 
         rigid = this.RequireComponent<Rigidbody2D>();
         rigid.bodyType = RigidbodyType2D.Kinematic;
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
-
-        left = this.TryFindChild("Left");
-        right = this.TryFindChild("Right");
-
-        left?.SetActive(false);
-        right?.SetActive(false);
     }
 #endif
 
     private void Awake()
     {
-        type.Add(Type.Left, left);
-        type.Add(Type.Right, right);
-
+        InitBlock();
         BreakBlock(this.transform.position);
+    }
+
+    private void InitBlock()
+    {
+        var data = Json.GetBlock();
+
+        image[0] = LoadSprite(data, "Block");
+        image[1] = LoadSprite(data, "LeftSpike");
+        image[2] = LoadSprite(data, "RightSpike");
+    }
+
+    private Sprite LoadSprite(string _fileName, string _typeName)
+    {
+        var path = Path.Combine("Blocks", _fileName, _typeName);
+        var load = Resources.Load<Sprite>(path);
+        if (!load) Service.Log($"{_fileName}에 {_typeName}이 로드되지 않음");
+
+        return Instantiate(load);
     }
 
     /// <summary>
@@ -51,8 +60,7 @@ public class Block : MonoBehaviour
     /// <returns></returns>
     public bool CanBreak(Type _type)
     {
-        if (!type.ContainsKey(_type)) return true;
-        return !type[_type].activeSelf;
+        return currentType != _type;
     }
 
     /// <summary>
@@ -85,16 +93,10 @@ public class Block : MonoBehaviour
 
     private void SetBlokcDirection()
     {
-        if (type.ContainsKey(currentType)) type[currentType].SetActive(false);
-
         var minRange = maxLevel < Json.GetPlayScore() ? (int)Type.Left : (int)Type.None;
-        currentType = (Type)Random.Range(minRange, (int)Type.Right + 1);
+        var ranType = Random.Range(minRange, (int)Type.Right + 1);
 
-        if (type.ContainsKey(currentType)) type[currentType].SetActive(true);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag(Tag.Ground)) GameManager.Instance.TouchGround();
+        currentType = (Type)ranType;
+        render.sprite = image[ranType];
     }
 }
