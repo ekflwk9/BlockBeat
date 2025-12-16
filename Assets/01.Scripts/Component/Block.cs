@@ -22,6 +22,7 @@ public class Block : MonoBehaviour
     private void Reset()
     {
         render = this.RequireComponent<SpriteRenderer>();
+        render.sortingOrder = 5;
 
         rigid = this.RequireComponent<Rigidbody2D>();
         rigid.bodyType = RigidbodyType2D.Kinematic;

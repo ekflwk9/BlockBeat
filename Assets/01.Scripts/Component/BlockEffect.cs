@@ -1,50 +1,38 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BlockEffect : Effect
 {
-    [SerializeField] private SpriteRenderer render;
+    private const float power = 17f;
 
-    private const float moveSpeed = 12f; //이동 속도
-    private float direction;
+    [SerializeField] private SpriteRenderer render;
+    [SerializeField] private Rigidbody2D rigid;
 
 #if UNITY_EDITOR
     private void Reset()
     {
-        render = this.TryGetComponent<SpriteRenderer>();
-        if (render) render.sortingOrder = 5;
+        render = this.RequireComponent<SpriteRenderer>();
+        render.sortingOrder = 4;
+
+        rigid = this.RequireComponent<Rigidbody2D>();
+        rigid.mass = 3f;
+        rigid.gravityScale = 5f;
     }
 #endif
 
-    private void OnDestroy()
-    {
-        render.DOKill();
-    }
-
-    private void FixedUpdate()
-    {
-        var movePos = this.transform.position;
-        movePos.x += (direction * Time.smoothDeltaTime) * moveSpeed;
-        movePos.z = 0f;
-
-        this.transform.position = movePos;
-    }
-
     public void OnEffect(Block _block, bool _isLeft)
     {
-        this.gameObject.SetActive(true);
-        this.transform.position = _block.transform.position;
-        direction = _isLeft ? 1f : -1f;
-
         render.sprite = _block.render.sprite;
-        Fade();
-    }
+        this.transform.position = _block.transform.position;
 
-    private void Fade()
-    {
-        render.DOKill();
-        render.color = Color.white;
+        if (!this.gameObject.activeSelf) this.gameObject.SetActive(true);
+        else StartTimer();
 
-        render.DOFade(0f, timer * 0.7f);
+        var direction = Vector2.zero;
+        direction.x = _isLeft ? power : -power;
+
+        var verticalPower = power * 0.5f;
+        direction.y = Random.Range(-verticalPower, verticalPower);
+
+        rigid.linearVelocity = direction;
     }
 }

@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
             UiManager.Get<ScoreUi>().UpScore();
             UiManager.Get<TimerUi>().UpTimer();
 
-            //OnEffect(_isLeft);
+            OnEffect(_isLeft);
             SetNextBlock();
         }
 
@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
             UiManager.Get<ComboUi>().Show(comboCount);
             UiManager.Get<ComboUi>().Fade();
 
-            CamController.Instatnce.Shake(0.2f, 0.1f);
+            CamController.Instatnce.Shake(0.15f, 0.1f);
             comboCount++;
 
             if (Json.GetCombo() < comboCount) Json.SetCombo(comboCount);

@@ -8,6 +8,11 @@ public class Effect : MonoBehaviour
 
     protected virtual void OnEnable()
     {
+        StartTimer();
+    }
+
+    protected void StartTimer()
+    {
         if (coroutine != null) StopCoroutine(coroutine);
         coroutine = StartCoroutine(Timer());
     }
