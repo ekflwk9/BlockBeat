@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -16,7 +18,7 @@ public class Block : MonoBehaviour
     [SerializeField] private Rigidbody2D rigid;
 
     private Type currentType;
-    private Sprite[] image = new Sprite[3];
+    private Dictionary<Type, Sprite> image = new(capacity: Enum.GetValues(typeof(Type)).Length);
 
 #if UNITY_EDITOR
     private void Reset()
@@ -38,19 +40,18 @@ public class Block : MonoBehaviour
 
     private void InitBlock()
     {
-        var data = Json.GetBlock();
-
-        image[0] = LoadSprite(data, "Block");
-        image[1] = LoadSprite(data, "LeftSpike");
-        image[2] = LoadSprite(data, "RightSpike");
+        image.Add(Type.None, LoadSprite("Block"));
+        image.Add(Type.Left, LoadSprite("LeftSpike"));
+        image.Add(Type.Right, LoadSprite("RightSpike"));
     }
 
-    private Sprite LoadSprite(string _fileName, string _typeName)
+    private Sprite LoadSprite(string _typeName)
     {
-        var path = Path.Combine("Blocks", _fileName, _typeName);
+        var data = Json.GetBlock();
+        var path = Path.Combine("Blocks", data, _typeName);
         var load = Resources.Load<Sprite>(path);
-        if (!load) Service.Log($"{_fileName}에 {_typeName}이 로드되지 않음");
 
+        if (!load) Service.Log($"{data}에 {_typeName}이 로드되지 않음");
         return Instantiate(load);
     }
 
@@ -95,9 +96,8 @@ public class Block : MonoBehaviour
     private void SetBlokcDirection()
     {
         var minRange = maxLevel < Json.GetPlayScore() ? (int)Type.Left : (int)Type.None;
-        var ranType = Random.Range(minRange, (int)Type.Right + 1);
 
-        currentType = (Type)ranType;
-        render.sprite = image[ranType];
+        currentType = (Type)UnityEngine.Random.Range(minRange, image.Values.Count);
+        render.sprite = image[currentType];
     }
 }
