@@ -9,11 +9,14 @@ public class InventoryData
 
 public class PlayerData
 {
-    public int maxScore;
+    public string nickName = "TestUser";
+    public int advertPassCount;
+
     public int currentScore;
+    public int maxScore;
+
     public float currentTime;
     public int combo;
-    public int advertPassCount;
 }
 
 public class SettingData
@@ -81,6 +84,9 @@ public static class Json
 
     public static int GetCombo() => data.playerData.combo;
     public static void SetCombo(int _combo) => data.playerData.combo = _combo;
+
+    public static void SetName(string _name) => data.playerData.nickName = _name;
+    public static string GetName() => data.playerData.nickName;
 
     public static void PlayScore(int _score)
     {
