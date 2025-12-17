@@ -104,3 +104,10 @@ InitTestScene*.unity*
 # Firebase native binaries (editor generated)
 Assets/Firebase/Plugins/x86_64/
 Assets/Firebase/Plugins/x86/
+
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
