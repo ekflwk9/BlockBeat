@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 966541814513218654}
   - component: {fileID: 1512050468918020101}
   m_Layer: 5
-  m_Name: ScoreTitle
+  m_Name: PointTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touch: {fileID: 4492616898965990172}
-  sceneName: 1
+  sceneName: 3
 --- !u!1 &1749164751741842220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1148,7 @@ GameObject:
   - component: {fileID: 7751329449622707245}
   - component: {fileID: 6407762905962015365}
   m_Layer: 5
-  m_Name: Score
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1284,7 +1284,7 @@ GameObject:
   - component: {fileID: 541069287897472589}
   - component: {fileID: 5165207881215960905}
   m_Layer: 5
-  m_Name: MaxScoreLine
+  m_Name: MaxPointLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1513,7 +1513,7 @@ GameObject:
   - component: {fileID: 8156453222414299191}
   - component: {fileID: 6611537992099782360}
   m_Layer: 5
-  m_Name: MaxScoreTitle
+  m_Name: MaxPointTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1649,7 +1649,7 @@ GameObject:
   - component: {fileID: 5684559265074894483}
   - component: {fileID: 4860303847792716467}
   m_Layer: 5
-  m_Name: MaxScore
+  m_Name: MaxPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2035,10 +2035,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commentTitle: {fileID: 2938933514147544389}
   level: {fileID: 359398606986569559}
-  scoreTitle: {fileID: 1512050468918020101}
-  score: {fileID: 6407762905962015365}
-  maxScoreTitle: {fileID: 6611537992099782360}
-  maxScore: {fileID: 4860303847792716467}
+  pointTitle: {fileID: 1512050468918020101}
+  point: {fileID: 6407762905962015365}
+  maxPointTitle: {fileID: 6611537992099782360}
+  maxPoint: {fileID: 4860303847792716467}
   timer: {fileID: 2610907786516451487}
   timerTitle: {fileID: 7760414859808117957}
   combo: {fileID: 1824500900957275462}
@@ -2431,7 +2431,7 @@ GameObject:
   - component: {fileID: 9050426889194664074}
   - component: {fileID: 7548446023392143677}
   m_Layer: 5
-  m_Name: ScoreLine
+  m_Name: PointLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

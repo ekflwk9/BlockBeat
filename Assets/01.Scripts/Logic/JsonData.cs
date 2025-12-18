@@ -12,8 +12,8 @@ public class PlayerData
     public string nickName = "TestUser";
     public int advertPassCount;
 
-    public int currentScore;
-    public int maxScore;
+    public int currentPoint;
+    public int maxPoint;
 
     public float currentTime;
     public int combo;
@@ -76,8 +76,8 @@ public static class Json
     public static float GetPlayTime() => data.playerData.currentTime;
     public static void PlayTime(float _time) => data.playerData.currentTime = _time;
 
-    public static int GetPlayScore() => data.playerData.currentScore;
-    public static int GetPlayMaxScore() => data.playerData.maxScore;
+    public static int GetPlayPoint() => data.playerData.currentPoint;
+    public static int GetPlayMaxPoint() => data.playerData.maxPoint;
 
     public static void SetAdvertPass(int _passCount) => data.playerData.advertPassCount = _passCount;
     public static int GetAdvertPass() => data.playerData.advertPassCount;
@@ -88,9 +88,9 @@ public static class Json
     public static void SetName(string _name) => data.playerData.nickName = _name;
     public static string GetName() => data.playerData.nickName;
 
-    public static void PlayScore(int _score)
+    public static void PlayPoint(int _point)
     {
-        data.playerData.currentScore = _score;
-        if (data.playerData.maxScore < _score) data.playerData.maxScore = _score;
+        data.playerData.currentPoint = _point;
+        if (data.playerData.maxPoint < _point) data.playerData.maxPoint = _point;
     }
 }

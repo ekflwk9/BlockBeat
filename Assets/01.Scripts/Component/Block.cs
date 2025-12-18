@@ -95,7 +95,7 @@ public class Block : MonoBehaviour
 
     private void SetBlokcDirection()
     {
-        var minRange = maxLevel < Json.GetPlayScore() ? (int)Type.Left : (int)Type.None;
+        var minRange = maxLevel < Json.GetPlayPoint() ? (int)Type.Left : (int)Type.None;
 
         currentType = (Type)UnityEngine.Random.Range(minRange, image.Values.Count);
         render.sprite = image[currentType];

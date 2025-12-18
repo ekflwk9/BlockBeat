@@ -7,8 +7,9 @@ public static class SceneChangeManager
     public enum SceneName
     {
         Start,
-        Play,
+        Rank,
         Result,
+        Play,
     }
 
     public static SceneName currentScene { get; private set; }

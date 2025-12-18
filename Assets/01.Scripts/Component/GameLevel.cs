@@ -33,7 +33,7 @@ public class GameLevel : MonoBehaviour
 
     private void InitSky()
     {
-        var playerLevel = Json.GetPlayMaxScore();
+        var playerLevel = Json.GetPlayMaxPoint();
 
         for (int i = sky.Count - 1; -1 < i; i--)
         {
@@ -57,7 +57,7 @@ public class GameLevel : MonoBehaviour
     /// <returns></returns>
     public int GetLevel()
     {
-        var playerLevel = Json.GetPlayMaxScore();
+        var playerLevel = Json.GetPlayMaxPoint();
 
         for (int i = sky.Count - 1; -1 < i; i--)
         {

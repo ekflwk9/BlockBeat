@@ -31,7 +31,7 @@ public class PlayUi : UiBase
 
     private void InitUi()
     {
-        UiManager.Off<ScoreUi>();
+        UiManager.Off<PointUi>();
         UiManager.Off<TimerUi>();
         UiManager.On<ComboUi>();
         UiManager.On<TutorialUi>();
@@ -50,7 +50,7 @@ public class PlayUi : UiBase
         {
             if (!manager.canTouch)
             {
-                UiManager.On<ScoreUi>();
+                UiManager.On<PointUi>();
                 UiManager.On<TimerUi>();
                 UiManager.Off<TutorialUi>();
                 break;

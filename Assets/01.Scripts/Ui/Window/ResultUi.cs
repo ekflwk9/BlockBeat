@@ -6,11 +6,11 @@ public class ResultUi : UiBase
     [SerializeField] private TMP_Text commentTitle;
     [SerializeField] private GameLevel level;
 
-    [SerializeField] private TMP_Text scoreTitle;
-    [SerializeField] private TMP_Text score;
+    [SerializeField] private TMP_Text pointTitle;
+    [SerializeField] private TMP_Text point;
 
-    [SerializeField] private TMP_Text maxScoreTitle;
-    [SerializeField] private TMP_Text maxScore;
+    [SerializeField] private TMP_Text maxPointTitle;
+    [SerializeField] private TMP_Text maxPoint;
 
     [SerializeField] private TMP_Text timer;
     [SerializeField] private TMP_Text timerTitle;
@@ -36,14 +36,14 @@ public class ResultUi : UiBase
         commentTitle = this.TryGetChildComponent<TMP_Text>("CommentTitle");
         level = this.RequireComponent<GameLevel>();
 
-        scoreTitle = this.TryGetChildComponent<TMP_Text>("ScoreTitle");
-        score = this.TryGetChildComponent<TMP_Text>("Score");
+        pointTitle = this.TryGetChildComponent<TMP_Text>("PointTitle");
+        point = this.TryGetChildComponent<TMP_Text>("Point");
 
         timerTitle = this.TryGetChildComponent<TMP_Text>("TimerTitle");
         timer = this.TryGetChildComponent<TMP_Text>("Timer");
 
-        maxScoreTitle = this.TryGetChildComponent<TMP_Text>("MaxScoreTitle");
-        maxScore = this.TryGetChildComponent<TMP_Text>("MaxScore");
+        maxPointTitle = this.TryGetChildComponent<TMP_Text>("MaxPointTitle");
+        maxPoint = this.TryGetChildComponent<TMP_Text>("MaxPoint");
 
         comboTitle = this.TryGetChildComponent<TMP_Text>("ComboTitle");
         combo = this.TryGetChildComponent<TMP_Text>("Combo");
@@ -79,18 +79,18 @@ public class ResultUi : UiBase
         //$"<size={지정할 폰트 사이즈}>{출력할 string}</size>";
         //"<color=#FF0000>{출력할 string}</color>";
 
-        var playScore = Json.GetPlayScore();
-        var playMaxScore = Json.GetPlayMaxScore();
+        var playPoint = Json.GetPlayPoint();
+        var playMaxPoint = Json.GetPlayMaxPoint();
 
-        var fontSize = maxScore.fontSize * 0.6f;
+        var fontSize = maxPoint.fontSize * 0.6f;
         var newText = $"<size={fontSize}>New !</size>";
-        var newRecord = (playMaxScore != 0 && playMaxScore == playScore) ? $"<color=#00FF00>{newText}</color>" : string.Empty;
+        var newRecord = (playMaxPoint != 0 && playMaxPoint == playPoint) ? $"<color=#00FF00>{newText}</color>" : string.Empty;
 
-        scoreTitle.text = "Blocks Broken";
-        score.text = playScore.ToString();
+        pointTitle.text = "Blocks Broken";
+        point.text = playPoint.ToString();
 
-        maxScoreTitle.text = "Most Blocks Broken";
-        maxScore.text = $"{newRecord}    {playMaxScore}";
+        maxPointTitle.text = "Most Blocks Broken";
+        maxPoint.text = $"{newRecord}    {playMaxPoint}";
     }
 
     private void SetCombo()
