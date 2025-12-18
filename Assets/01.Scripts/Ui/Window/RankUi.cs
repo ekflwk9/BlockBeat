@@ -6,8 +6,8 @@ using UnityEngine;
 public class RankUi : UiBase
 {
     [SerializeField] private TMP_Text title;
-    [SerializeField] private TMP_Text[] user = new TMP_Text[RankSystem.maxCount];
-    [SerializeField] private TMP_Text[] point = new TMP_Text[RankSystem.maxCount];
+    [SerializeField] private TMP_Text[] user = new TMP_Text[FirebaseManager.maxRankCount];
+    [SerializeField] private TMP_Text[] point = new TMP_Text[FirebaseManager.maxRankCount];
 
 #if UNITY_EDITOR
     private void Reset()
@@ -37,7 +37,7 @@ public class RankUi : UiBase
             scoreText.text = string.Empty;
             tempScore.Add(scoreText);
 
-            if (RankSystem.maxCount == tempUser.Count) break;
+            if (FirebaseManager.maxRankCount == tempUser.Count) break;
         }
 
         user = tempUser.ToArray();
@@ -53,12 +53,7 @@ public class RankUi : UiBase
 
     private void RankSort()
     {
-        var topPlayer = FirebaseManager.user;
-        var topPoint = FirebaseManager.point;
-
-        Array.Sort(topPoint, topPlayer);
-
-        for (int i = 0; i < RankSystem.maxCount; i++)
+        for (int i = 0; i < FirebaseManager.maxRankCount; i++)
         {
             user[i].text = FirebaseManager.user[i];
             point[i].text = $"{FirebaseManager.point[i]} pts";

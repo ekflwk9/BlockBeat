@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 489226176}
   - component: {fileID: 489226175}
   m_Layer: 0
-  m_Name: Advertisement
+  m_Name: AdvertisementSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,6 +443,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 410087041}
+  - {fileID: 489226176}
   - {fileID: 935719657}
   - {fileID: 700296309}
-  - {fileID: 489226176}

@@ -2,7 +2,7 @@
 using UnityEngine.Advertisements;
 
 #if UNITY_ANDROID || UNITY_IOS
-public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     private const int maxPassCount = 3;
 
@@ -17,8 +17,8 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
 #if UNITY_EDITOR
     private void Reset()
     {
+        this.name = typeof(AdvertisementSystem).Name;
         this.transform.position = Vector3.zero;
-        this.name = $"Advertisement";
     }
 #endif
 
