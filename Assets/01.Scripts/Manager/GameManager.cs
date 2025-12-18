@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
     private void InitDate()
     {
         Json.SetCombo(0);
-        Json.PlayPoint(0);
+        Json.SetPlayPoint(0);
     }
 
     /// <summary>
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
 
         if (isBreak)
         {
-            Json.PlayPoint(Json.GetPlayPoint() + 1);
+            Json.SetPlayPoint(Json.GetPlayPoint() + 1);
 
             UiManager.Get<PointUi>().UpPoint();
             UiManager.Get<TimerUi>().UpTimer();
@@ -146,28 +146,12 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (gameOver) return;
+
         gameOver = true;
         crosshair.color = Color.red;
 
         UiManager.Get<TimerUi>().StopTimer();
-        //Json.Save();
-
-        CheckRank();
         StartCoroutine(GameOverTimer());
-    }
-
-    private void CheckRank()
-    {
-        var playPoint = Json.GetPlayPoint();
-        var rankerPoint = FirebaseManager.point;
-
-        for (int i = 0; i < rankerPoint.Length; i++)
-        {
-            if (rankerPoint[i] < playPoint)
-            {
-                FirebaseManager.AddData();
-            }
-        }
     }
 
     private IEnumerator GameOverTimer()

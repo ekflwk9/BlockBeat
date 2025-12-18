@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class GoogleSheet : MonoBehaviour
 {
-    void Start()
+    private void Awake()
     {
         StartCoroutine(LoadSheet());
     }
@@ -25,7 +25,7 @@ public class GoogleSheet : MonoBehaviour
             }
 
             var csv = req.downloadHandler.text;
-            // 여기서 csv 파싱하면 됨
+            //Service.Log(csv);
         }
     }
 }

@@ -2,7 +2,6 @@
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ public static class FirebaseManager
     private static void Init()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(Login);
-        LoadLeaderboard();
+        Load();
     }
 
     private static async void Login(Task<DependencyStatus> _task)
@@ -34,7 +33,7 @@ public static class FirebaseManager
         data = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
-    private static async void LoadLeaderboard()
+    private static async void Load()
     {
         var root = FirebaseDatabase.DefaultInstance.GetReference(referenceName); //해당 이름 레퍼런스 반환
         var values = await root.GetValueAsync();  //해당 레퍼런스의 자식들만 모두 반환 (자식의 자식까지 X)
@@ -54,32 +53,12 @@ public static class FirebaseManager
 
             index++;
         }
-
-        RankSort();
-    }
-
-    private static void RankSort()
-    {
-        Array.Sort(point, user);
-        var length = user.Length < 7 ? user.Length : 7;
-
-        int[] topScore = new int[length];
-        string[] topPlayer = new string[length];
-
-        for (int i = 0; i < length; i++)
-        {
-            topPlayer[i] = user[i];
-            topScore[i] = point[i];
-        }
-
-        user = topPlayer;
-        point = topScore;
     }
 
     /// <summary>
     /// 본인의 닉네임과 점수를 파이어베이스 랭크에 등록
     /// </summary>
-    public static void AddData()
+    public static void Add()
     {
         var child = $"{referenceName}/{auth.CurrentUser.UserId}";
         var userPath = $"{child}/{userName}";

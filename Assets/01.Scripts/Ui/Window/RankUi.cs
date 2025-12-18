@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class RankUi : UiBase
 {
-    private const int rankMaxCount = 7;
-
     [SerializeField] private TMP_Text title;
-    [SerializeField] private TMP_Text[] user = new TMP_Text[rankMaxCount];
-    [SerializeField] private TMP_Text[] point = new TMP_Text[rankMaxCount];
+    [SerializeField] private TMP_Text[] user = new TMP_Text[RankSystem.maxCount];
+    [SerializeField] private TMP_Text[] point = new TMP_Text[RankSystem.maxCount];
 
 #if UNITY_EDITOR
     private void Reset()
@@ -38,7 +37,7 @@ public class RankUi : UiBase
             scoreText.text = string.Empty;
             tempScore.Add(scoreText);
 
-            if (rankMaxCount == tempUser.Count) break;
+            if (RankSystem.maxCount == tempUser.Count) break;
         }
 
         user = tempUser.ToArray();
@@ -48,26 +47,21 @@ public class RankUi : UiBase
 
     private void Awake()
     {
-        SetUser();
-        SetScore();
-
+        RankSort();
         UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
-    private void SetUser()
+    private void RankSort()
     {
-        for (int i = 0; i < FirebaseManager.user.Length; i++)
+        var topPlayer = FirebaseManager.user;
+        var topPoint = FirebaseManager.point;
+
+        Array.Sort(topPoint, topPlayer);
+
+        for (int i = 0; i < RankSystem.maxCount; i++)
         {
             user[i].text = FirebaseManager.user[i];
-        }
-    }
-
-    private void SetScore()
-    {
-        for (int i = 0; i < FirebaseManager.point.Length; i++)
-        {
-            var newText = $"{FirebaseManager.point[i]} pts";
-            point[i].text = newText;
+            point[i].text = $"{FirebaseManager.point[i]} pts";
         }
     }
 }

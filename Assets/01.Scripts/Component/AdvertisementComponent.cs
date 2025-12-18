@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Advertisements;
 
+#if UNITY_ANDROID || UNITY_IOS
 public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     private const int maxPassCount = 3;
@@ -102,3 +103,9 @@ public class AdvertisementComponent : MonoBehaviour, IUnityAdsInitializationList
     }
     #endregion
 }
+
+#else
+public class AdvertisementComponent : MonoBehaviour
+{
+}
+#endif
