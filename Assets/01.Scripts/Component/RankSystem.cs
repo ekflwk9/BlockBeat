@@ -12,39 +12,53 @@ public class RankSystem : MonoBehaviour
 
     private void Awake()
     {
-        Json.Save();
-
-        if (FirebaseManager.user != null) Rank();
+        if (FirebaseManager.connect) Rank();
         else Service.Log("FirebaseManager 로드 안됨");
     }
 
     private void Rank()
     {
-        var maxRank = FirebaseManager.maxRankCount - 1;
-        var user = FirebaseManager.user;
-        var point = FirebaseManager.point;
+        var user = FirebaseManager.nickName;
 
-        for (int i = maxRank; 0 <= i; i--)
+        for (int i = 0; i < user.Length; i++)
         {
+            //본인과 이름이 같은가
             if (string.Equals(user[i], Json.GetName()))
             {
-                if (point[i] < Json.GetPlayPoint())
-                {
-                    FirebaseManager.Add();
-                    FirebaseManager.Sort(i);
-                }
+                //같을 경우 본인을 추월했나?
+                NewRecord(i);
+                return;
+            }
 
+            else if (NewRecord(i))
+            {
                 return;
             }
         }
+    }
 
-        for (int i = maxRank; 0 <= i; i--)
+    private bool NewRecord(int _targetIndex)
+    {
+        var myPoint = Json.GetPlayPoint();
+        var point = FirebaseManager.point;
+
+        var length = point.Length - 1;
+        var nextRankerIndex = _targetIndex - 1;
+        var nextRankerPoint = nextRankerIndex < 0 ? myPoint + 1 : point[nextRankerIndex];
+
+        //현재 랭커보다 점수가 높은지
+        if (point[_targetIndex] < myPoint)
         {
-            if (point[i] < Json.GetPlayPoint())
+            //내 바로 위 랭커보다는 점수가 낮을 경우에만 (중복 점수 등록 방지)
+            if (myPoint < nextRankerPoint)
             {
                 FirebaseManager.Add();
-                FirebaseManager.Sort(i);
+                FirebaseManager.Sort(_targetIndex);
             }
+
+            return true;
         }
+
+        return false;
     }
 }

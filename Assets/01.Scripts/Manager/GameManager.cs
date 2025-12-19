@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         crosshair.color = Color.red;
 
+        Json.Save();
         UiManager.Get<TimerUi>().StopTimer();
         StartCoroutine(GameOverTimer());
     }

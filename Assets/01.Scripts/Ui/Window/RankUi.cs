@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -45,17 +44,24 @@ public class RankUi : UiBase
     }
 #endif
 
-    private void Awake()
+    private void Start()
     {
-        RankSort();
+        if (FirebaseManager.connect) RankSort();
+        else NotConnected();
+
         UiManager.Get<FadeUi>().FadeOut(0.5f);
+    }
+
+    private void NotConnected()
+    {
+
     }
 
     private void RankSort()
     {
-        for (int i = 0; i < FirebaseManager.maxRankCount; i++)
+        for (int i = 0; i < FirebaseManager.nickName.Length; i++)
         {
-            user[i].text = FirebaseManager.user[i];
+            user[i].text = FirebaseManager.nickName[i];
             point[i].text = $"{FirebaseManager.point[i]} pts";
         }
     }

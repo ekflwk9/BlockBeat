@@ -25,7 +25,7 @@ public class SettingData
     public bool effectSound = true;
 }
 
-public class Data
+public class JsonData
 {
     private const string fileName = "S2c.Json";
     [JsonProperty] public PlayerData playerData { get; private set; } = new();
@@ -39,7 +39,7 @@ public class Data
         File.WriteAllText(path, saveFile);
     }
 
-    public static Data Load()
+    public static JsonData Load()
     {
         var file = Path.Combine(Application.dataPath, fileName);
 
@@ -49,7 +49,7 @@ public class Data
 
             if (!string.IsNullOrEmpty(loadFile))
             {
-                return JsonConvert.DeserializeObject<Data>(loadFile);
+                return JsonConvert.DeserializeObject<JsonData>(loadFile);
             }
         }
 
@@ -59,7 +59,7 @@ public class Data
 
 public static class Json
 {
-    private static readonly Data data = Data.Load();
+    private static readonly JsonData data = JsonData.Load();
 
     /// <summary>
     /// 파일 세이브

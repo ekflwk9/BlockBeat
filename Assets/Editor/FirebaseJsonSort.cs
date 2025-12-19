@@ -28,8 +28,9 @@ public class FirebaseJsonSort
         }
 
         var json = snap.GetRawJsonValue();
+        json = JsonConvert.SerializeObject(json, Formatting.None);
 
-        //Sort(json);
+        Sort(json);
         Save(json);
 
         AssetDatabase.Refresh();
