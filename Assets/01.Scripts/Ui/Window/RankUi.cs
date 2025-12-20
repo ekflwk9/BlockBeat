@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class RankUi : UiBase
 {
+    [SerializeField] private RankSystem rankSystem;
+
     [SerializeField] private TMP_Text title;
-    [SerializeField] private TMP_Text[] user = new TMP_Text[FirebaseManager.maxRankCount];
-    [SerializeField] private TMP_Text[] point = new TMP_Text[FirebaseManager.maxRankCount];
+    [SerializeField] private GameObject connectionWindow;
+
+    [SerializeField] private TMP_Text[] user;
+    [SerializeField] private TMP_Text[] point;
 
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<RankUi>();
+        GetRankSystem();
+        FindWindow();
+        SetTitle();
+        FindText();
+    }
 
+    private void GetRankSystem()
+    {
+        rankSystem = this.RequireComponent<RankSystem>();
+    }
+
+    private void FindWindow()
+    {
+        connectionWindow = this.TryFindChild("ConnectionWindow");
+        connectionWindow?.SetActive(false);
+    }
+
+    private void SetTitle()
+    {
         title = this.TryGetChildComponent<TMP_Text>("Title");
         title.text = "Top 7 Players";
-
-        FindText();
     }
 
     private void FindText()
@@ -36,7 +56,7 @@ public class RankUi : UiBase
             scoreText.text = string.Empty;
             tempScore.Add(scoreText);
 
-            if (FirebaseManager.maxRankCount == tempUser.Count) break;
+            if (RankSystem.maxCount == tempUser.Count) break;
         }
 
         user = tempUser.ToArray();
@@ -47,22 +67,19 @@ public class RankUi : UiBase
     private void Start()
     {
         if (FirebaseManager.connect) RankSort();
-        else NotConnected();
+        else connectionWindow.SetActive(true);
 
         UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
-    private void NotConnected()
-    {
-
-    }
-
     private void RankSort()
     {
-        for (int i = 0; i < FirebaseManager.nickName.Length; i++)
+        var ranker = rankSystem.ranker;
+
+        for (int i = 0; i < RankSystem.maxCount; i++)
         {
-            user[i].text = FirebaseManager.nickName[i];
-            point[i].text = $"{FirebaseManager.point[i]} pts";
+            user[i].text = ranker[i].Key;
+            point[i].text = $"{ranker[i].Value} pts";
         }
     }
 }

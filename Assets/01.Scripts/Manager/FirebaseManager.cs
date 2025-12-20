@@ -2,7 +2,6 @@
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,17 +9,12 @@ using UnityEngine;
 public static class FirebaseManager
 {
     public const string referenceName = "leaderboard";
-
-    public static bool connect { get; private set; }
-    private static FirebaseAuth auth;
-    private static DatabaseReference userReference;
-
-    //
+    //데이터 항목
     public const string pointName = "point";
     public const string userName = "nickname";
-    public const int maxRankCount = 7; //랭킹 표시 제한
-    public static int[] point { get; private set; }
-    public static string[] nickName { get; private set; }
+
+    public static bool connect { get; private set; }
+    public static Dictionary<string, int> value { get; private set; } = new();
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Start()
@@ -30,13 +24,19 @@ public static class FirebaseManager
 
     private static async void Login(Task<DependencyStatus> _task)
     {
-        if (_task.Result != DependencyStatus.Available) return;
-        auth = FirebaseAuth.DefaultInstance;
+        try
+        {
+            if (_task.Result != DependencyStatus.Available) return;
+            var auth = FirebaseAuth.DefaultInstance;
 
-        if (auth.CurrentUser == null) await auth.SignInAnonymouslyAsync();
-        userReference = FirebaseDatabase.DefaultInstance.RootReference;
+            if (auth == null) await auth.SignInAnonymouslyAsync();
+            Load();
+        }
 
-        Load();
+        catch
+        {
+            connect = false;
+        }
     }
 
     private static async void Load()
@@ -48,9 +48,6 @@ public static class FirebaseManager
 
             connect = true;
             InitData(values);
-
-            //추가
-            DataSort();
         }
 
         catch
@@ -59,79 +56,44 @@ public static class FirebaseManager
         }
     }
 
-    /// <summary>
-    /// 본인의 닉네임과 점수를 파이어베이스 랭크에 등록
-    /// </summary>
-    public static void Add()
-    {
-        if (!connect) return;
-
-        var child = $"{referenceName}/{auth.CurrentUser.UserId}";
-        var userPath = $"{child}/{userName}";
-        var scorePath = $"{child}/{pointName}";
-
-        userReference.Child(userPath).SetValueAsync(Json.GetName());          //플레이어 이름을 파이어 베이스에 올림
-        userReference.Child(scorePath).SetValueAsync(Json.GetPlayMaxPoint()); //최고 점수 파이어 베이스에 올림
-    }
-
     private static void InitData(DataSnapshot _snap)
     {
-        nickName = new string[_snap.ChildrenCount];
-        point = new int[_snap.ChildrenCount];
-
-        var index = 0;
         var enumerator = _snap.Children.GetEnumerator();
 
         while (enumerator.MoveNext())
         {
             var currentUser = enumerator.Current; //현재 유저 레퍼런스
 
-            nickName[index] = currentUser.Child(userName).Value.ToString();
-            point[index] = System.Convert.ToInt32(currentUser.Child(pointName).Value);
+            var _nickName = currentUser.Child(userName).Value.ToString();
+            var _point = System.Convert.ToInt32(currentUser.Child(pointName).Value);
 
-            index++;
+            value.Add(_nickName, _point);
         }
-    }
-
-    private static void DataSort()
-    {
-        Array.Sort(point, nickName);
-        Array.Reverse(nickName);
-        Array.Reverse(point);
-
-        var maxLength = point.Length < maxRankCount ? point.Length : maxRankCount;
-        var tempPoint = new int[maxLength];
-        var tempUser = new string[maxLength];
-
-        Array.Copy(nickName, tempUser, maxLength);
-        Array.Copy(point, tempPoint, maxLength);
-
-        nickName = tempUser;
-        point = tempPoint;
     }
 
     /// <summary>
-    /// 데이터 정렬
+    /// 파이어 베이스 랭커 등록
     /// </summary>
-    /// <param name="_targetIndex"></param>
-    public static void Sort(int _targetIndex)
+    public static void AddRank()
     {
-        for (int i = nickName.Length - 1; 0 <= i; i--)
-        {
-            if (_targetIndex == i)
-            {
-                //로컬에 등록
-                nickName[i] = Json.GetName();
-                point[i] = Json.GetPlayPoint();
-                break;
-            }
+        if (!connect) return;
 
-            else
-            {
-                //한칸씩 아래로 밀기
-                nickName[i] = nickName[i - 1];
-                point[i] = point[i - 1];
-            }
-        }
+        //내 데이터 경로
+        var userID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        var myData = $"{referenceName}/{userID}";
+        var userPath = $"{myData}/{userName}";
+        var scorePath = $"{myData}/{pointName}";
+
+        var playerNickName = Json.GetName();
+        var playerPoint = Json.GetPlayMaxPoint();
+        var defaultReference = FirebaseDatabase.DefaultInstance.RootReference;
+
+        //해당 경로 파이어 베이스 데이터에 올림
+        defaultReference.Child(userPath).SetValueAsync(playerNickName);
+        defaultReference.Child(scorePath).SetValueAsync(playerPoint);
+
+        //로컬 데이터 변경
+        if (value.ContainsKey(playerNickName)) value[playerNickName] = playerPoint;
+        else value.Add(playerNickName, playerPoint);
     }
 }

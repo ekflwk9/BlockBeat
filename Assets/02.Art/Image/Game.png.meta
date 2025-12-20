@@ -45,10 +45,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 28
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -107,7 +107,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Linux64
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -158,19 +158,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -190,8 +177,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7caf96b577d49a46a8cd943021a32fa
-      internalID: -626332611
+      spriteID: 74ccf4f0609b1f14ba054898cae385c1
+      internalID: -86275962
       vertices: []
       indices: 
       edges: []
@@ -212,14 +199,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a51240f48bacc1489d84d95467a52b7
-      internalID: -1195596405
+      spriteID: dd74505d5b525c6479decb051c551e18
+      internalID: -1799076402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Box
+      name: BackGround
       rect:
         serializedVersion: 2
         x: 29
@@ -234,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f9b14a893fb3bb449074fef147750f3
-      internalID: 1998453512
+      spriteID: f8484f3d6166d2c4e843dae458ef8a2c
+      internalID: -741590954
       vertices: []
       indices: 
       edges: []
@@ -250,14 +237,14 @@ TextureImporter:
         height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 2, z: 2, w: 4}
+      border: {x: 2, y: 6, z: 2, w: 2}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 374f12309e7857046a5912658e4ecc23
-      internalID: -1281983768
+      spriteID: 3d136d26df1fa2840a7ffdcb7ba42802
+      internalID: -816767539
       vertices: []
       indices: 
       edges: []
@@ -278,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cc9d05c91e53a44e8390e67845149bd
-      internalID: -1554334132
+      spriteID: e92debea2267b0b4ba9eabb291afa926
+      internalID: 129605610
       vertices: []
       indices: 
       edges: []
@@ -300,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e545f4793718b7a46b85ae0162828d58
-      internalID: -495642883
+      spriteID: 9a9c26e495074d84aa34ee8e7cdd7b2d
+      internalID: 5327929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circle
+      name: Rank
       rect:
         serializedVersion: 2
-        x: 29
-        y: 61
-        width: 10
-        height: 10
+        x: 18
+        y: 36
+        width: 13
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,8 +309,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0dcf42c2bc69b44f85711c7d8cb68c8
-      internalID: 13575709
+      spriteID: 8bd63f6bb73d66649b60927d16f4831b
+      internalID: 2097346951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 37
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52f6b782213336545b2ed2aba2061a8a
+      internalID: -115685040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Home
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 37
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aef19fa702a9f774b9c0b9181721349e
+      internalID: -685620804
       vertices: []
       indices: 
       edges: []
@@ -344,8 +375,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78ae488bfc27737478fe1824d8f43bd2
-      internalID: 498397738
+      spriteID: 22360b9749122d4428aa23e59d500e1f
+      internalID: -574432739
       vertices: []
       indices: 
       edges: []
@@ -366,8 +397,184 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3828319c32fca44681f982e5cfbfe1c
-      internalID: -1544515909
+      spriteID: 5dd1105983107cd4ca4ceaa2c1338219
+      internalID: 32219321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wifi
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 50
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1ed47a7078fe8a4da9f2402b2769a43
+      internalID: -273858532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Back
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 25
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96d43fdd871af514bb81b25a52650561
+      internalID: -593304721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Start
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4940c3244a70934468dcf90bdca4fa3d
+      internalID: 443491875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stop
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b1cbb5e5b65e624e96865f4d013f59c
+      internalID: 1869370090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unlock
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 62
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac15ababbb7ebc84aababc38552007ac
+      internalID: -397106282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lock
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 62
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22f2c6a39ee1e6e48adde1f2e3e21068
+      internalID: -800418259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CircleBackGround
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 61
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f51a15c2db933e949bbdc5f396f3d4ff
+      internalID: 1390069514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: X
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 51
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e25d710d4491cc4695efd91b7469977
+      internalID: -679243451
       vertices: []
       indices: 
       edges: []
@@ -376,7 +583,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 62c440b1c76604543ba8e5f2791c2668
+    spriteID: b6d084ab49a15b44c974cfe29650f0e8
     internalID: 0
     vertices: []
     indices: 
@@ -386,15 +593,25 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Box: 1998453512
-      Button: -626332611
-      Circle: 13575709
-      CircleLine: -495642883
-      Line: -1554334132
-      SoundOff: -1544515909
-      SoundOn: 498397738
-      Touch: -1281983768
-      Window: -1195596405
+      Back: -593304721
+      BackGround: -741590954
+      Button: -86275962
+      CircleBackGround: 1390069514
+      CircleLine: 5327929
+      Home: -685620804
+      Line: 129605610
+      Lock: -800418259
+      Rank: 2097346951
+      Shop: -115685040
+      SoundOff: 32219321
+      SoundOn: -574432739
+      Start: 443491875
+      Stop: 1869370090
+      Touch: -816767539
+      Unlock: -397106282
+      Wifi: -273858532
+      Window: -1799076402
+      X: -679243451
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

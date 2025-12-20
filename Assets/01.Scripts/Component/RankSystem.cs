@@ -1,14 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class RankSystem : MonoBehaviour
 {
-#if UNITY_EDITOR
-    private void Reset()
+    public const int maxCount = 7; //랭크 최대 표시 카운트
+
+    private class ValueComparer : IComparer<KeyValuePair<string, int>>
     {
-        this.name = typeof(RankSystem).Name;
-        this.transform.position = Vector3.zero;
+        public int Compare(KeyValuePair<string, int> x, KeyValuePair<string, int> y)
+        {
+            //높은 순으로 정렬
+            if (x.Value < y.Value) return 1;
+            else if (x.Value > y.Value) return -1;
+            else return 0;
+        }
     }
-#endif
+
+    public List<KeyValuePair<string, int>> ranker { get; private set; }
+    private ValueComparer comparer = new();
 
     private void Awake()
     {
@@ -16,16 +25,22 @@ public class RankSystem : MonoBehaviour
         else Service.Log("FirebaseManager 로드 안됨");
     }
 
+    private void Sort()
+    {
+        ranker = new(FirebaseManager.value);
+        ranker.Sort(comparer);
+    }
+
     private void Rank()
     {
-        var user = FirebaseManager.nickName;
+        Sort();
+        var length = ranker.Count < maxCount ? ranker.Count : maxCount;
 
-        for (int i = 0; i < user.Length; i++)
+        for (int i = 0; i < length; i++)
         {
             //본인과 이름이 같은가
-            if (string.Equals(user[i], Json.GetName()))
+            if (string.Equals(ranker[i].Key, Json.GetName()))
             {
-                //같을 경우 본인을 추월했나?
                 NewRecord(i);
                 return;
             }
@@ -40,20 +55,18 @@ public class RankSystem : MonoBehaviour
     private bool NewRecord(int _targetIndex)
     {
         var myPoint = Json.GetPlayPoint();
-        var point = FirebaseManager.point;
-
-        var length = point.Length - 1;
-        var nextRankerIndex = _targetIndex - 1;
-        var nextRankerPoint = nextRankerIndex < 0 ? myPoint + 1 : point[nextRankerIndex];
 
         //현재 랭커보다 점수가 높은지
-        if (point[_targetIndex] < myPoint)
+        if (ranker[_targetIndex].Value < myPoint)
         {
+            var nextRankerIndex = _targetIndex - 1;
+            var nextRankerPoint = nextRankerIndex < 0 ? myPoint + 1 : ranker[nextRankerIndex].Value;
+
             //내 바로 위 랭커보다는 점수가 낮을 경우에만 (중복 점수 등록 방지)
             if (myPoint < nextRankerPoint)
             {
-                FirebaseManager.Add();
-                FirebaseManager.Sort(_targetIndex);
+                FirebaseManager.AddRank();
+                Sort();
             }
 
             return true;
