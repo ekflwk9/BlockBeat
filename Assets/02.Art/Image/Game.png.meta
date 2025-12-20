@@ -300,7 +300,7 @@ TextureImporter:
         x: 18
         y: 36
         width: 13
-        height: 11
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,32 +316,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shop
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 37
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52f6b782213336545b2ed2aba2061a8a
-      internalID: -115685040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Home
       rect:
         serializedVersion: 2
-        x: 5
+        x: 4
         y: 37
         width: 11
         height: 11
@@ -360,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SoundOn
+      name: Effect
       rect:
         serializedVersion: 2
         x: 5
@@ -382,57 +360,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SoundOff
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 51
-        width: 12
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5dd1105983107cd4ca4ceaa2c1338219
-      internalID: 32219321
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wifi
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 50
-        width: 9
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e1ed47a7078fe8a4da9f2402b2769a43
-      internalID: -273858532
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Back
       rect:
         serializedVersion: 2
-        x: 7
-        y: 25
+        x: 6
+        y: 24
         width: 7
-        height: 7
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,9 +386,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 22
-        y: 24
+        y: 23
         width: 6
-        height: 8
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,10 +407,10 @@ TextureImporter:
       name: Stop
       rect:
         serializedVersion: 2
-        x: 38
-        y: 24
-        width: 6
-        height: 8
+        x: 36
+        y: 23
+        width: 9
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -558,13 +492,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X
+      name: Option
       rect:
         serializedVersion: 2
-        x: 25
-        y: 51
-        width: 6
-        height: 6
+        x: 4
+        y: 8
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -573,8 +507,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e25d710d4491cc4695efd91b7469977
-      internalID: -679243451
+      spriteID: 4dbd3a708aaf16f4db28cacd5f449f9a
+      internalID: 2113249720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exit
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 8
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db31c24ba5e45a84c85c69f4f269b43c
+      internalID: 308805568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlphaLine
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 74
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb43989d62b21a54aaad073d9e267470
+      internalID: -710544511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Music
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 7
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3226b799221ade479ce8fbcf3931096
+      internalID: -53253494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wifi
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 51
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5018a9332db7d9045b6c175c0ba1e9cc
+      internalID: -273858532
       vertices: []
       indices: 
       edges: []
@@ -593,18 +615,22 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      AlphaLine: -710544511
       Back: -593304721
       BackGround: -741590954
       Button: -86275962
       CircleBackGround: 1390069514
       CircleLine: 5327929
+      Effect: -574432739
+      Exit: 308805568
       Home: -685620804
       Line: 129605610
       Lock: -800418259
+      Music: -53253494
+      Option: 2113249720
       Rank: 2097346951
       Shop: -115685040
       SoundOff: 32219321
-      SoundOn: -574432739
       Start: 443491875
       Stop: 1869370090
       Touch: -816767539

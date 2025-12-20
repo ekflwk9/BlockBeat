@@ -5,8 +5,6 @@ using UnityEngine;
 public class RankUi : UiBase
 {
     [SerializeField] private RankSystem rankSystem;
-
-    [SerializeField] private TMP_Text title;
     [SerializeField] private GameObject connectionWindow;
 
     [SerializeField] private TMP_Text[] user;
@@ -18,7 +16,6 @@ public class RankUi : UiBase
         SetName<RankUi>();
         GetRankSystem();
         FindWindow();
-        SetTitle();
         FindText();
     }
 
@@ -31,12 +28,9 @@ public class RankUi : UiBase
     {
         connectionWindow = this.TryFindChild("ConnectionWindow");
         connectionWindow?.SetActive(false);
-    }
 
-    private void SetTitle()
-    {
-        title = this.TryGetChildComponent<TMP_Text>("Title");
-        title.text = "Top 7 Players";
+        var connectText = connectionWindow.transform.TryGetChildComponent<TMP_Text>();
+        if (connectText) connectText.text = "No network connection.\nPlease connect to a network\nand restart the app.";
     }
 
     private void FindText()
@@ -66,13 +60,13 @@ public class RankUi : UiBase
 
     private void Start()
     {
-        if (FirebaseManager.connect) RankSort();
+        if (FirebaseManager.connect) GetRanker();
         else connectionWindow.SetActive(true);
 
         UiManager.Get<FadeUi>().FadeOut(0.5f);
     }
 
-    private void RankSort()
+    private void GetRanker()
     {
         var ranker = rankSystem.ranker;
 

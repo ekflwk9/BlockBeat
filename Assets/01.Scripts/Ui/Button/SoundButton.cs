@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SoundButton : ButtonBase
@@ -13,25 +12,27 @@ public class SoundButton : ButtonBase
     [Header("설정할 사운드 타입"), SerializeField] private SoundType type;
 
     [Space(10f)]
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private GameObject prohibition;
 
 #if UNITY_EDITOR
     protected override void Reset()
     {
         base.Reset();
-        text = this.TryGetChildComponent<TMP_Text>();
+
+        prohibition = this.TryFindChild("Prohibition");
+        if (prohibition) prohibition.SetActive(false);
     }
 #endif
 
-    private void Awake()
+    private void Start()
     {
-        SetText();
+        SetIcon();
     }
 
-    private void SetText()
+    private void SetIcon()
     {
-        if (type == SoundType.Music) text.text = Json.GetMusicSound() ? "On" : "Off";
-        else text.text = Json.GetEffectSound() ? "On" : "Off";
+        var isOn = type == SoundType.Effect ? Json.GetEffectSound() : Json.GetMusicSound();
+        prohibition.SetActive(!isOn);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -39,7 +40,7 @@ public class SoundButton : ButtonBase
         if (type == SoundType.Music) SoundManager.SetMusicVolume();
         else SoundManager.SetEffectVolume();
 
-        SetText();
+        SetIcon();
         base.OnPointerDown(eventData);
     }
 }

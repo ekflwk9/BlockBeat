@@ -1,8 +1,9 @@
 ﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TutorialUi : UiBase
+public class TutorialUi : UiBase, IPointerClickHandler
 {
     [SerializeField] private CanvasGroup group;
 
@@ -14,7 +15,7 @@ public class TutorialUi : UiBase
         group = this.RequireComponent<CanvasGroup>();
 
         var infoT = this.TryGetChildComponent<TMP_Text>("Info");
-        if (infoT) infoT.text = "Press the thornless direction to remove the block!";
+        if (infoT) infoT.text = "Press the thornless direction \nto remove the block!";
     }
 #endif
 
@@ -26,6 +27,18 @@ public class TutorialUi : UiBase
 
     public override void Off()
     {
+        OffAnimation();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OffAnimation();
+    }
+
+    private void OffAnimation()
+    {
+        if (group.alpha != 1) return;
+
         group.DOKill();
         GlobalVolumeManager.SetVignette(0f, 0.2f);
 

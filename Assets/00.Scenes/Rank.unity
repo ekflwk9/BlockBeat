@@ -296,6 +296,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: RankUi
       objectReference: {fileID: 0}
+    - target: {fileID: 4616883701480261498, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
+      propertyPath: m_margin.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616883701480261498, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
+      propertyPath: m_margin.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616883701480261498, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4956407688541664431, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -374,6 +386,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4956407688541664431, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899204050132740754, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -53,7 +53,8 @@ public class ResultUi : UiBase
     private void Start()
     {
         SetComment();
-        SetScore();
+        SetPlayPoint();
+        SetMaxPoint();
         SetCombo();
         SetTimer();
         ShowFade();
@@ -74,23 +75,42 @@ public class ResultUi : UiBase
         commentTitle.text = comment[index];
     }
 
-    private void SetScore()
+    private void SetPlayPoint()
+    {
+        pointTitle.text = "Blocks Broken";
+        point.text = Json.GetPlayPoint().ToString();
+    }
+
+    private void SetMaxPoint()
     {
         //$"<size={지정할 폰트 사이즈}>{출력할 string}</size>";
         //"<color=#FF0000>{출력할 string}</color>";
 
-        var playPoint = Json.GetPlayPoint();
-        var playMaxPoint = Json.GetPlayMaxPoint();
+        maxPoint.color = Color.white;
+        maxPointTitle.text = "Best";
 
         var fontSize = maxPoint.fontSize * 0.6f;
-        var newText = $"<size={fontSize}>New !</size>";
-        var newRecord = (playMaxPoint != 0 && playMaxPoint == playPoint) ? $"<color=#00FF00>{newText}</color>" : string.Empty;
 
-        pointTitle.text = "Blocks Broken";
-        point.text = playPoint.ToString();
+        if (FirebaseManager.connect)
+        {
+            var playPoint = Json.GetPlayPoint();
+            var playMaxPoint = Json.GetPlayMaxPoint();
 
-        maxPointTitle.text = "Most Blocks Broken";
-        maxPoint.text = $"{newRecord}    {playMaxPoint}";
+
+            var newText = $"<size={fontSize}>New !</size>";
+            var newRecord = (playMaxPoint != 0 && playMaxPoint == playPoint) ? $"<color=#00FF00>{newText}</color>" : string.Empty;
+
+            maxPoint.text = $"{newRecord}    {playMaxPoint}";
+        }
+
+        else
+        {
+            var newText = "No network connection.";
+            var newSize = $"<size={fontSize}>{newText}</size>";
+
+            maxPoint.color = Color.gray;
+            maxPoint.text = newSize;
+        }
     }
 
     private void SetCombo()
