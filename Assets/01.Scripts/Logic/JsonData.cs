@@ -34,18 +34,27 @@ public class JsonData
 
     public void Save()
     {
-        var saveFile = JsonConvert.SerializeObject(this, Formatting.Indented);
+#if UNITY_EDITOR
+        var path = Path.Combine(Application.dataPath, "Editor", fileName);
+#else
         var path = Path.Combine(Application.persistentDataPath, fileName);
+#endif
+
+        var saveFile = JsonConvert.SerializeObject(this, Formatting.Indented);
         File.WriteAllText(path, saveFile);
     }
 
     public static JsonData Load()
     {
-        var file = Path.Combine(Application.dataPath, fileName);
+#if UNITY_EDITOR
+        var path = Path.Combine(Application.dataPath, "Editor", fileName);
+#else
+        var path = Path.Combine(Application.persistentDataPath, fileName);
+#endif
 
-        if (File.Exists(file))
+        if (File.Exists(path))
         {
-            var loadFile = File.ReadAllText(file);
+            var loadFile = File.ReadAllText(path);
 
             if (!string.IsNullOrEmpty(loadFile))
             {

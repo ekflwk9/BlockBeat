@@ -16,7 +16,9 @@ public static class FirebaseManager
     public static bool connect { get; private set; }
     public static Dictionary<string, int> value { get; private set; } = new();
 
+#if !UNITY_EDITOR
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+#endif
     private static void Start()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(Login);

@@ -76,6 +76,7 @@ public static class SoundManager
     {
         var newVolume = Json.GetEffectSound() ? 1f : 0f;
         Json.SetEffectSound();
+        Json.Save();
 
         for (int i = 0; i < effect.Length; i++)
         {
@@ -91,5 +92,6 @@ public static class SoundManager
     {
         music.volume = Json.GetMusicSound() ? 1f : 0f;
         Json.SetMusicSound();
+        Json.Save();
     }
 }

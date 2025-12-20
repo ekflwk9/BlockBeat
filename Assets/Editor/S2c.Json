@@ -1,0 +1,17 @@
+{
+  "playerData": {
+    "nickName": "TestUser",
+    "advertPassCount": 2,
+    "currentPoint": 54,
+    "maxPoint": 54,
+    "currentTime": 7.045923,
+    "combo": 3
+  },
+  "settingData": {
+    "musicSound": true,
+    "effectSound": true
+  },
+  "inventoryData": {
+    "block": "BasicBlock"
+  }
+}
