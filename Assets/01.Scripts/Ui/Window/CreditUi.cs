@@ -10,19 +10,18 @@ public class CreditUi : UiBase
     {
         SetName<CreditUi>();
 
-        info = this.TryGetChildComponent<TMP_Text>();
-        this.Awake();
+        info = this.TryGetChildComponent<TMP_Text>("InfoText");
+        SetText();
+    }
+
+    private void SetText()
+    {
+        var enter = "\n\n";
+        var sound = "Sound - www.pixabay.com";
+        var font = "PFStarders Font";
+        var titleFont = "Stacked Font - Monkopus";
+
+        info.text = $"{sound}{enter}{font}{enter}{titleFont}";
     }
 #endif
-
-    private void Awake()
-    {
-        var sound = "https://pixabay.com/";
-        var font = "PFStarders";
-        var titleFont = "Stacked Pixel";
-
-        info.text = 
-            $"Sound - {sound}\n" +
-            $"Font - {font}, {titleFont}(Monkopus)\n";
-    }
 }
