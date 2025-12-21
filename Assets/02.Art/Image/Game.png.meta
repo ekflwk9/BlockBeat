@@ -561,7 +561,7 @@ TextureImporter:
       name: Music
       rect:
         serializedVersion: 2
-        x: 46
+        x: 48
         y: 7
         width: 22
         height: 24
@@ -588,7 +588,7 @@ TextureImporter:
         width: 9
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -597,6 +597,50 @@ TextureImporter:
       bones: []
       spriteID: 5018a9332db7d9045b6c175c0ba1e9cc
       internalID: -273858532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 47
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5528b3f25034ca34882b1c1a42bb40e3
+      internalID: -115685040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Credits
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 8
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22fa58b76fe122046bf2727dcd90786e
+      internalID: -1232065346
       vertices: []
       indices: 
       edges: []
@@ -621,6 +665,7 @@ TextureImporter:
       Button: -86275962
       CircleBackGround: 1390069514
       CircleLine: 5327929
+      Credits: -1232065346
       Effect: -574432739
       Exit: 308805568
       Home: -685620804

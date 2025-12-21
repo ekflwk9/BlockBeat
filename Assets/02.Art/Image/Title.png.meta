@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f0a93f0a9178ee34186001c099245d35
+guid: ea1331c564a452845aba8da92269a8ec
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -162,13 +162,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Game
+      name: GameOver
       rect:
         serializedVersion: 2
-        x: 8
-        y: 134
-        width: 57
-        height: 16
+        x: 1
+        y: 78
+        width: 96
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,140 +177,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61ca4cbb6ac44e34a856071ac1f71105
-      internalID: -260980554
+      spriteID: a441475900042964f9ebc0c3f4950969
+      internalID: -1785989554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Over
+      name: TopPlayers
       rect:
         serializedVersion: 2
-        x: 66
-        y: 134
-        width: 57
-        height: 16
+        x: 1
+        y: 32
+        width: 120
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc11488fe5cbe4d45a17aec5a5ce2487
-      internalID: -374956874
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Option
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 117
-        width: 78
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6dd8cc3d57291d0488354107e8d34003
-      internalID: 530918261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BlockBit
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 100
-        width: 103
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc9c6bc724f7ff14b822b7f61fafedd2
-      internalID: -800040744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Credits
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 83
-        width: 91
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac5766e0a9549e8458f52ebb46ab6146
-      internalID: -765317699
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Top
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 66
-        width: 42
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d9ff8f3c62b1c64ba7a4fa29d77a759
-      internalID: -1125832897
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player
-      rect:
-        serializedVersion: 2
-        x: 51
-        y: 66
-        width: 83
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b50170f8ba2f5254eb9a7a567644e429
-      internalID: -318479947
+      spriteID: d74139800eac6a546a96baddfd28248d
+      internalID: 1937177272
       vertices: []
       indices: 
       edges: []
@@ -319,7 +209,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1b99fb2c382a0f243a4146406fbf2dcf
+    spriteID: 0afe8342385daf9469a351064b98a836
     internalID: 0
     vertices: []
     indices: 
@@ -329,13 +219,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BlockBit: -800040744
-      Credits: -765317699
-      Game: -260980554
-      Option: 530918261
-      Over: -374956874
-      Player: -318479947
-      Top: -1125832897
+      GameOver: -1785989554
+      TopPlayers: 1937177272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

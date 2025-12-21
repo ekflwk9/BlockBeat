@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (gameOver) return;
-        if (FirebaseManager.connect) Json.Save();
+        if (FirebaseManager.connect) Json.SaveMaxPoint();
 
         gameOver = true;
         crosshair.color = Color.red;

@@ -97,9 +97,15 @@ public static class Json
     public static void SetName(string _name) => data.playerData.nickName = _name;
     public static string GetName() => data.playerData.nickName;
 
-    public static void SetPlayPoint(int _point)
+    public static void SetPlayPoint(int _point) => data.playerData.currentPoint = _point;
+
+    public static void SaveMaxPoint()
     {
-        data.playerData.currentPoint = _point;
-        if (data.playerData.maxPoint < _point) data.playerData.maxPoint = _point;
+        var playerData = data.playerData;
+
+        if (playerData.maxPoint < playerData.currentPoint)
+        {
+            data.playerData.maxPoint = playerData.currentPoint;
+        }
     }
 }

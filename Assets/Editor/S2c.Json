@@ -2,13 +2,13 @@
   "playerData": {
     "nickName": "TestUser",
     "advertPassCount": 2,
-    "currentPoint": 54,
-    "maxPoint": 54,
-    "currentTime": 7.045923,
-    "combo": 3
+    "currentPoint": 120,
+    "maxPoint": 176,
+    "currentTime": 16.1690979,
+    "combo": 4
   },
   "settingData": {
-    "musicSound": true,
+    "musicSound": false,
     "effectSound": true
   },
   "inventoryData": {
