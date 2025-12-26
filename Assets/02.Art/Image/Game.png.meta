@@ -645,6 +645,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Direction
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 35
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36636ef44fb93094ba7d5a755270746b
+      internalID: -214823703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Check
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 48
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12dc7a280cddbac46b16dbe6dc3369d2
+      internalID: 1720723838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -663,9 +707,11 @@ TextureImporter:
       Back: -593304721
       BackGround: -741590954
       Button: -86275962
+      Check: 1720723838
       CircleBackGround: 1390069514
       CircleLine: 5327929
       Credits: -1232065346
+      Direction: -214823703
       Effect: -574432739
       Exit: 308805568
       Home: -685620804

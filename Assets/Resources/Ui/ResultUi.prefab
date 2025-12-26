@@ -1951,7 +1951,7 @@ GameObject:
   - component: {fileID: 90380788609106789}
   - component: {fileID: 2607160318495537458}
   - component: {fileID: 1830128541078364052}
-  - component: {fileID: 359398606986569559}
+  - component: {fileID: 435865425946018433}
   m_Layer: 5
   m_Name: ResultUi
   m_TagString: Untagged
@@ -2063,7 +2063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentTitle: {fileID: 2938933514147544389}
-  level: {fileID: 359398606986569559}
+  level: {fileID: 435865425946018433}
   pointTitle: {fileID: 1512050468918020101}
   point: {fileID: 6407762905962015365}
   maxPointTitle: {fileID: 6611537992099782360}
@@ -2072,7 +2072,7 @@ MonoBehaviour:
   timerTitle: {fileID: 7760414859808117957}
   combo: {fileID: 1824500900957275462}
   comboTitle: {fileID: 5309370233536507186}
---- !u!114 &359398606986569559
+--- !u!114 &435865425946018433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6015216879181361557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f9d24cc301dc874bb62285e0c3e7d31, type: 3}
+  m_Script: {fileID: 11500000, guid: 40c8892135071c147b0b0a80df44c831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6183192644401491813
@@ -2175,7 +2175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touch: {fileID: 4871408516096440418}
-  sceneName: 3
+  sceneName: 4
 --- !u!1 &6476980045931012291
 GameObject:
   m_ObjectHideFlags: 0

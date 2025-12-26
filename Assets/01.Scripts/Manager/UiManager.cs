@@ -58,6 +58,19 @@ public static class UiManager
     }
 
     /// <summary>
+    /// 해당 UI 추가
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="_ui"></param>
+    public static void Add<T>(UiBase _ui) where T : UiBase
+    {
+        var key = typeof(T);
+
+        if (ui.ContainsKey(key)) ui.Remove(key);
+        ui.Add(key, _ui);
+    }
+
+    /// <summary>
     /// 해당 UI 반환
     /// </summary>
     /// <typeparam name="T"></typeparam>

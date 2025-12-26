@@ -3,6 +3,19 @@
 public static class Service
 {
     /// <summary>
+    /// 해당 컴포넌트가 붙어있다면 제거
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="_this"></param>
+    public static void Remove<T>(this Component _this) where T : Component
+    {
+        if(_this.TryGetComponent<T>(out var _component))
+        {
+            MonoBehaviour.DestroyImmediate(_component);
+        }
+    }
+
+    /// <summary>
     /// _instance가 없다면 DDO후 true / 이미 있다면 삭제 후 false
     /// </summary>
     /// <param name="_this"></param>

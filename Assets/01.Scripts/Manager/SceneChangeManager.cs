@@ -8,6 +8,7 @@ public static class SceneChangeManager
     {
         Start,
         Rank,
+        Shop,
         Result,
         Play,
     }

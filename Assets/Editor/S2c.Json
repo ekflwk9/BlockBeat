@@ -1,17 +1,20 @@
 {
   "playerData": {
-    "nickName": "TestUser",
-    "advertPassCount": 2,
-    "currentPoint": 120,
-    "maxPoint": 176,
-    "currentTime": 16.1690979,
-    "combo": 4
+    "nickName": "Unnamed",
+    "advertPassCount": 0,
+    "currentPoint": 94,
+    "maxPoint": 0,
+    "currentTime": 12.8657284,
+    "combo": 2
   },
   "settingData": {
     "musicSound": false,
     "effectSound": true
   },
   "inventoryData": {
-    "block": "BasicBlock"
+    "currentBlock": 0,
+    "blocks": [
+      0
+    ]
   }
 }

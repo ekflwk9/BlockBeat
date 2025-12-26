@@ -4,7 +4,7 @@ using UnityEngine;
 public class ResultUi : UiBase
 {
     [SerializeField] private TMP_Text commentTitle;
-    [SerializeField] private GameLevel level;
+    [SerializeField] private LevelSystem level;
 
     [SerializeField] private TMP_Text pointTitle;
     [SerializeField] private TMP_Text point;
@@ -34,7 +34,7 @@ public class ResultUi : UiBase
         if (canvas) canvas.sortingOrder = 20;
 
         commentTitle = this.TryGetChildComponent<TMP_Text>("CommentTitle");
-        level = this.RequireComponent<GameLevel>();
+        level = this.RequireComponent<LevelSystem>();
 
         pointTitle = this.TryGetChildComponent<TMP_Text>("PointTitle");
         point = this.TryGetChildComponent<TMP_Text>("Point");
@@ -52,12 +52,12 @@ public class ResultUi : UiBase
 
     private void Start()
     {
+        ShowFade(); 
         SetComment();
         SetPlayPoint();
         SetMaxPoint();
         SetCombo();
         SetTimer();
-        ShowFade();
     }
 
     private void ShowFade()

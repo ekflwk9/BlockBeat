@@ -9,19 +9,7 @@ public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler, IPointerU
     protected virtual void Reset()
     {
         touch = this.TryGetChildComponent<RectTransform>("Touch");
-
-        if (touch)
-        {
-            var thisRect = this.GetComponent<RectTransform>();
-
-            touch.transform.position = this.transform.position;
-
-            var size = thisRect.sizeDelta;
-            size.x = size.x < 0 ? -size.x : size.x;
-
-            touch.sizeDelta = size;
-            touch.gameObject.SetActive(false);
-        }
+        if (touch) touch.gameObject.SetActive(false);
     }
 #endif
 

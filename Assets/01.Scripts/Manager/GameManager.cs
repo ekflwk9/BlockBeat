@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private const int effectCount = 15;     //엠펙트 스폰 갯수
-    private const int blockSpawnCount = 20; //블럭 스폰 갯수
-    private const float maxBottom = -1.5f;    //블럭 시작 위치
+    public const int effectCount = 15;     //엠펙트 스폰 갯수
+    public const int blockSpawnCount = 20; //블럭 스폰 갯수
+    public const float maxBottom = -1.5f;    //블럭 시작 위치
 
     public static GameManager Instance { get; private set; }
     public bool gameOver { get; private set; }

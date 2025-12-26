@@ -1,15 +1,17 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class InventoryData
 {
-    public string block = "BasicBlock";
+    public Block.Name currentBlock = Block.Name.NormalBlock;
+    public HashSet<Block.Name> blocks = new() { { Block.Name.NormalBlock } };
 }
 
 public class PlayerData
 {
-    public string nickName = "TestUser";
+    public string nickName = "Unnamed";
     public int advertPassCount;
 
     public int currentPoint;
@@ -75,12 +77,17 @@ public static class Json
     /// </summary>
     public static void Save() => data.Save();
 
-    public static string GetBlock() => data.inventoryData.block;
+    public static bool GetBlockItem(Block.Name _blockName) => data.inventoryData.blocks.Contains(_blockName);
+    public static void AddBlockItem(Block.Name _blockName) => data.inventoryData.blocks.Add(_blockName);
 
-    public static void SetMusicSound() => data.settingData.musicSound = !data.settingData.musicSound;
-    public static void SetEffectSound() => data.settingData.effectSound = !data.settingData.effectSound;
+    public static Block.Name GetMainBlock() => data.inventoryData.currentBlock;
+    public static void SetMainBlock(Block.Name _blockName) => data.inventoryData.currentBlock = _blockName;
+
     public static bool GetMusicSound() => data.settingData.musicSound;
+    public static void SetMusicSound() => data.settingData.musicSound = !data.settingData.musicSound;
+
     public static bool GetEffectSound() => data.settingData.effectSound;
+    public static void SetEffectSound() => data.settingData.effectSound = !data.settingData.effectSound;
 
     public static float GetPlayTime() => data.playerData.currentTime;
     public static void PlayTime(float _time) => data.playerData.currentTime = _time;
@@ -98,7 +105,6 @@ public static class Json
     public static string GetName() => data.playerData.nickName;
 
     public static void SetPlayPoint(int _point) => data.playerData.currentPoint = _point;
-
     public static void SaveMaxPoint()
     {
         var playerData = data.playerData;
