@@ -20,6 +20,7 @@ public class Block : MonoBehaviour
     public enum Name
     {
         NormalBlock,
+        GraphicsBlock,
     }
 
     public enum Type

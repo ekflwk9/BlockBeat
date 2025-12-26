@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ShopSlotButton : MonoBehaviour, IPointerClickHandler
 {
-    private Block.Info info;
     private Block.Name blockName;
+    private Block.Info info;
 
     [SerializeField] private Image item;
     [SerializeField] private GameObject main;
@@ -38,11 +38,34 @@ public class ShopSlotButton : MonoBehaviour, IPointerClickHandler
         blockName = _blockName;
 
         main.SetActive(Json.GetMainBlock() == _blockName);
-        select.SetActive(Json.GetMainBlock() == _blockName);
-        lockSlot.SetActive(!Json.GetBlockItem(_blockName));
+        //lockSlot.SetActive(!Json.GetBlockItem(_blockName)); //test
 
         this.transform.localScale = Vector3.one;
         info = new Block.Info(idle, left, right);
+    }
+
+    /// <summary>
+    /// 선택 취소
+    /// </summary>
+    public void UnSelect()
+    {
+        select.SetActive(false);
+    }
+
+    /// <summary>
+    /// 현재 메인 블록으로 설정
+    /// </summary>
+    public void Main()
+    {
+        main.SetActive(true);
+    }
+
+    /// <summary>
+    /// 현재 메인 블록 취소
+    /// </summary>
+    public void UnMain()
+    {
+        main.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -51,7 +74,7 @@ public class ShopSlotButton : MonoBehaviour, IPointerClickHandler
         {
             select.SetActive(true);
 
-            UiManager.Get<ShopUi>().SetInfo(blockName);
+            UiManager.Get<ShopUi>().Select(blockName);
             UiManager.Get<ShopUi>().ChangeBlocks(info);
         }
     }

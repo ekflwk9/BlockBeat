@@ -9,8 +9,8 @@ public class ShopUi : UiBase
     [SerializeField] private TMP_Text infoText;
     [SerializeField] private BlockInventory inventory;
 
-    public Block.Name currentBlockName { get; private set; }
-    private Dictionary<Block.Name, string> info = new();
+    private Block.Name currentSelect = Json.GetMainBlock();
+    private Dictionary<Block.Name, ShopSlotButton> buttons = new();
     private static Block.Name[] blocks = (Block.Name[])Enum.GetValues(typeof(Block.Name));
 
 #if UNITY_EDITOR
@@ -27,7 +27,6 @@ public class ShopUi : UiBase
     private void Start()
     {
         SetContent();
-        SetInfoText();
 
         UiManager.Add<ShopUi>(this);
         UiManager.Get<FadeUi>().FadeOut(0.5f);
@@ -43,27 +42,30 @@ public class ShopUi : UiBase
         {
             var button = Instantiate(load);
             button.transform.SetParent(spawnPos);
-            button.InitButton(blocks[i]);
-        }
-    }
 
-    private void SetInfoText()
-    {
-        //var condition = "Condition";
-        info.Add(Block.Name.NormalBlock, "NormalBlock"); //test
+            button.InitButton(blocks[i]);
+            buttons.Add(blocks[i], button);
+        }
     }
 
     /// <summary>
-    /// 현재 정보창 글 설정
+    /// 현재 메인 블록 설정
+    /// </summary>
+    public void SetMainBlock()
+    {
+        buttons[Json.GetMainBlock()].UnMain();
+        buttons[currentSelect].Main();
+        Json.SetMainBlock(currentSelect);
+    }
+
+    /// <summary>
+    /// 현재 선택한 블록 설정
     /// </summary>
     /// <param name="_text"></param>
-    public void SetInfo(Block.Name _blockName)
+    public void Select(Block.Name _blockName)
     {
-        if (info.ContainsKey(_blockName))
-        {
-            currentBlockName = _blockName;
-            infoText.text = info[_blockName];
-        }
+        buttons[currentSelect].UnSelect();
+        currentSelect = _blockName;
     }
 
     /// <summary>
