@@ -38,9 +38,15 @@ public class RankUi : UiBase
         var tempUser = new List<TMP_Text>();
         var tempScore = new List<TMP_Text>();
 
-        for (int i = 0; i < this.transform.childCount; i++)
+        for (int i = 0; i < RankSystem.maxCount; i++)
         {
             var parent = this.TryFindChild($"User {i + 1}");
+
+            if (!parent)
+            {
+                Service.Log($"User {i + 1}는 없음");
+                continue;
+            }
 
             var userText = parent.transform.TryGetChildComponent<TMP_Text>("User");
             userText.text = string.Empty;
@@ -70,7 +76,7 @@ public class RankUi : UiBase
     {
         var ranker = rankSystem.ranker;
 
-        for (int i = 0; i < RankSystem.maxCount; i++)
+        for (int i = 0; i < user.Length; i++)
         {
             user[i].text = ranker[i].Key;
             point[i].text = $"{ranker[i].Value} pts";

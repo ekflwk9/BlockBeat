@@ -11,6 +11,8 @@ public class InventoryData
 
 public class PlayerData
 {
+    public int coin = 50;
+
     public string nickName = "Unnamed";
     public int advertPassCount;
 
@@ -100,6 +102,9 @@ public static class Json
 
     public static int GetCombo() => data.playerData.combo;
     public static void SetCombo(int _combo) => data.playerData.combo = _combo;
+
+    public static int GetCoin() => data.playerData.coin;
+    public static void SetCoin(int _coin) => data.playerData.coin = _coin;
 
     public static void SetName(string _name) => data.playerData.nickName = _name;
     public static string GetName() => data.playerData.nickName;

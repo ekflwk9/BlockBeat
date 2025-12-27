@@ -34,6 +34,7 @@ public class Block : MonoBehaviour
 
     [field: SerializeField] public SpriteRenderer render { get; private set; }
     [SerializeField] private Rigidbody2D rigid;
+    [SerializeField] private GameObject coin;
 
     private Type currentType;
     private Dictionary<Type, Sprite> image = new(capacity: Enum.GetValues(typeof(Type)).Length);
@@ -41,6 +42,9 @@ public class Block : MonoBehaviour
 #if UNITY_EDITOR
     private void Reset()
     {
+        coin = this.TryFindChild("Coin");
+        coin?.SetActive(false);
+
         render = this.RequireComponent<SpriteRenderer>();
         render.sortingOrder = 5;
 
@@ -104,6 +108,21 @@ public class Block : MonoBehaviour
     {
         this.transform.position = _newPosition;
         SetBlokcDirection();
+        SetCoin();
+    }
+
+    /// <summary>
+    /// 코인 먹기
+    /// </summary>
+    /// <param name="_type"></param>
+    public bool CanEatCoin(Type _type)
+    {
+        var isLeft = coin.transform.position.x < this.transform.position.x;
+
+        if (!coin.activeSelf) return false;
+        else if ((_type == Type.Left && isLeft) || (_type == Type.Right && !isLeft)) return true;
+
+        return false;
     }
 
     /// <summary>
@@ -130,5 +149,32 @@ public class Block : MonoBehaviour
 
         currentType = (Type)UnityEngine.Random.Range(minRange, image.Values.Count);
         render.sprite = image[currentType];
+    }
+
+    private void SetCoin()
+    {
+        if (!coin)
+        {
+            return;
+        }
+
+        if (UnityEngine.Random.Range(0, 4) == 1)
+        {
+            var newPos = this.transform.position;
+
+            if (currentType == Type.Left) newPos.x += this.transform.localScale.x;
+            else if (currentType == Type.Right) newPos.x -= this.transform.localScale.x;
+
+            else if (UnityEngine.Random.Range(0, 2) == 0) newPos.x += this.transform.localScale.x;
+            else newPos.x -= this.transform.localScale.x;
+
+            coin.transform.position = newPos;
+            coin.SetActive(true);
+        }
+
+        else
+        {
+            coin.SetActive(false);
+        }
     }
 }

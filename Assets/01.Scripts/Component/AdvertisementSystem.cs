@@ -5,6 +5,7 @@ using UnityEngine.Advertisements;
 public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     private const int maxPassCount = 3;
+    private static bool isBanner;
 
 #if UNITY_IOS
     private const string gameID = "6003730";
@@ -33,6 +34,33 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
 
     private void Start()
     {
+        ShowBanner();
+        ShowVideo();
+    }
+
+    private void ShowBanner()
+    {
+        if ((Json.GetAdvertPass() < maxPassCount) &&
+            (SceneChangeManager.currentScene == SceneChangeManager.SceneName.Result ||
+             SceneChangeManager.currentScene == SceneChangeManager.SceneName.Rank))
+        {
+            isBanner = true;
+
+            Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
+            Advertisement.Banner.Show(placementID);
+        }
+
+        else if (isBanner)
+        {
+            isBanner = false;
+
+            Advertisement.Banner.Hide();
+            Advertisement.Banner.Load(placementID);
+        }
+    }
+
+    private void ShowVideo()
+    {
         if (SceneChangeManager.currentScene != SceneChangeManager.SceneName.Result) return;
         var passCount = Json.GetAdvertPass();
 
@@ -53,6 +81,7 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
     {
         //Service.Log("광고 초기화 완료");
         Advertisement.Load(placementID, this);
+        Advertisement.Banner.Load(placementID);
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

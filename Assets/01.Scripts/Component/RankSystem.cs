@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RankSystem : MonoBehaviour
 {
-    public const int maxCount = 7; //랭크 최대 표시 카운트
+    public const int maxCount = 15; //랭크 최대 표시 카운트
 
     private class ValueComparer : IComparer<KeyValuePair<string, int>>
     {

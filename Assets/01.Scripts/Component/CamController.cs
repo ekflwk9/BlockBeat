@@ -1,13 +1,14 @@
 ﻿using DG.Tweening;
 using NaughtyAttributes;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CamController : MonoBehaviour
 {
     public static CamController Instatnce { get; private set; }
     [field: SerializeField] public Camera cam { get; private set; }
-
+    public Vector3 rightTop { get; private set; }
     private Coroutine shakeCoroutine;
 
 #if UNITY_EDITOR
@@ -23,38 +24,21 @@ public class CamController : MonoBehaviour
         if (this.Singleton(Instatnce))
         {
             Instatnce = this;
-            InitBackGroundCam();
-            InitBackGroundScreen();
+            InitCamSize();
         }
     }
 
-    private void InitBackGroundCam()
+    private void InitCamSize()
     {
-        var backGroundCam = this.TryGetChildComponent<Camera>("BackGroundCamera");
-        if (!backGroundCam) return;
-
-        var rotateSpeed = 100f;
-        var newRotate = new Vector3(0, 360f, 0f);
-
-        var tween = backGroundCam.transform.DORotate(newRotate, rotateSpeed, RotateMode.FastBeyond360);
-        tween.SetEase(Ease.Linear);
-        tween.SetLoops(-1, LoopType.Restart);
-    }
-
-    private void InitBackGroundScreen()
-    {
-        var backGroundScreen = this.TryFindChild("BackGroundScreen");
-        if (!backGroundScreen) return;
-
         var camAngle = cam.fieldOfView * 0.5f;  //현재 각도
         var angleRad = camAngle * Mathf.Deg2Rad;
 
         var camSize = Vector3.zero;
         camSize.y = Mathf.Abs(this.transform.position.z - 1f) * Mathf.Tan(angleRad);
-        camSize.x = camSize.y * cam.aspect;
+        camSize.x = this.transform.position.x + (camSize.y * cam.aspect);
+        camSize.y += this.transform.position.y;
 
-        backGroundScreen.transform.localScale = camSize * 2f;
-        backGroundScreen.transform.position = Vector3.forward;
+        rightTop = camSize;
     }
 
     /// <summary>

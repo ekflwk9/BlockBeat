@@ -1,24 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public const int effectCount = 15;     //엠펙트 스폰 갯수
-    public const int blockSpawnCount = 20; //블럭 스폰 갯수
+    public const int effectCount = 15;       //임펙트 스폰 갯수
+    public const int blockSpawnCount = 20;   //블럭 스폰 갯수
     public const float maxBottom = -1.5f;    //블럭 시작 위치
+    public const float downSpeed = 16f;      //내려가는 속도
 
     public static GameManager Instance { get; private set; }
     public bool gameOver { get; private set; }
     public bool canTouch { get; private set; } = true;
 
     [SerializeField] private Block[] blocks;
-    [SerializeField] private BlockEffect[] effects;
+    [SerializeField] private BlockEffect[] blockEffects;
+    [SerializeField] private CoinEffect[] coinEffects;
     [SerializeField] private SpriteRenderer crosshair;
 
     private int comboCount;
-    private int effectIndex;
     private Block.Type previousBlockType;
+
+    private Dictionary<Type, int> effectIndex = new()
+    {
+        [typeof(BlockEffect)] = 0,
+        [typeof(CoinEffect)] = 0,
+    };
 
 #if UNITY_EDITOR
     private void Reset()
@@ -26,6 +35,7 @@ public class GameManager : MonoBehaviour
         ResetObject();
         ResetBlocks();
         ResetEffects();
+        ResetComboEffect();
         ResetCrossHair();
     }
 
@@ -65,21 +75,21 @@ public class GameManager : MonoBehaviour
 
     private void ResetEffects()
     {
-        effects = this.GetComponentsInChildren<BlockEffect>(true);
-        if (effects.Length != 0) return;
+        blockEffects = this.GetComponentsInChildren<BlockEffect>(true);
+        if (blockEffects.Length != 0) return;
 
-        effects = new BlockEffect[effectCount];
+        blockEffects = new BlockEffect[effectCount];
 
-        var path = Path.Combine("Prefabs", "BreakBlockEffect");
+        var path = Path.Combine("Prefabs", $"{typeof(BlockEffect).Name}");
         var load = Resources.Load<BlockEffect>(path);
 
         for (int i = 0; i < effectCount; i++)
         {
-            effects[i] = Instantiate(load);
-            effects[i].name = $"{load.gameObject.name} {i}";
+            blockEffects[i] = Instantiate(load);
+            blockEffects[i].name = $"{load.gameObject.name} {i}";
 
-            effects[i].transform.SetParent(this.transform);
-            effects[i].gameObject.SetActive(false);
+            blockEffects[i].transform.SetParent(this.transform);
+            blockEffects[i].gameObject.SetActive(false);
         }
     }
 
@@ -96,6 +106,26 @@ public class GameManager : MonoBehaviour
         crosshair.transform.position = Vector3.up * maxBottom;
         crosshair.name = load.gameObject.name;
         crosshair.transform.SetParent(this.transform);
+    }
+
+    private void ResetComboEffect()
+    {
+        coinEffects = this.GetComponentsInChildren<CoinEffect>(true);
+        if (coinEffects.Length != 0) return;
+
+        coinEffects = new CoinEffect[effectCount];
+
+        var path = Path.Combine("Prefabs", $"{typeof(CoinEffect).Name}");
+        var load = Resources.Load<CoinEffect>(path);
+
+        for (int i = 0; i < effectCount; i++)
+        {
+            coinEffects[i] = Instantiate(load);
+            coinEffects[i].name = $"{load.gameObject.name} {i}";
+
+            coinEffects[i].transform.SetParent(this.transform);
+            coinEffects[i].gameObject.SetActive(false);
+        }
     }
 #endif
 
@@ -121,22 +151,31 @@ public class GameManager : MonoBehaviour
         canTouch = false;
 
         var direction = _isLeft ? Block.Type.Left : Block.Type.Right;
-        var isBreak = blocks[0].CanBreak(direction);
 
-        if (isBreak)
+        if (blocks[0].CanBreak(direction))
         {
+            GetCoin(direction);
             Json.SetPlayPoint(Json.GetPlayPoint() + 1);
 
             UiManager.Get<PointUi>().UpPoint();
             UiManager.Get<TimerUi>().UpTimer();
 
-            OnEffect(_isLeft);
+            OnBlockEffect(_isLeft);
             SetNextBlock();
         }
 
         else
         {
             GameOver();
+        }
+    }
+
+    private void GetCoin(Block.Type _direction)
+    {
+        if (blocks[0].CanEatCoin(_direction))
+        {
+            Json.SetCoin(Json.GetCoin() + 1);
+            OnCoinEffect(_direction);
         }
     }
 
@@ -212,19 +251,33 @@ public class GameManager : MonoBehaviour
         blocks[length] = tempBlock;
     }
 
-    private void OnEffect(bool _isLeft)
+    private void OnBlockEffect(bool _isLeft)
     {
-        effectIndex++;
-        if (effects.Length <= effectIndex) effectIndex = 0;
+        var key = typeof(BlockEffect);
+        effectIndex[key]++;
+        if (blockEffects.Length <= effectIndex[key]) effectIndex[key] = 0;
 
-        effects[effectIndex].OnEffect(blocks[0], _isLeft);
+        blockEffects[effectIndex[key]].OnEffect(blocks[0], _isLeft);
+    }
+
+    private void OnCoinEffect(Block.Type _type)
+    {
+        var key = typeof(CoinEffect);
+        effectIndex[key]++;
+        if (coinEffects.Length <= effectIndex[key]) effectIndex[key] = 0;
+
+        var block = blocks[0].transform;
+        var spawnPos = block.position;
+
+        if (_type == Block.Type.Right) spawnPos.x += block.localScale.x;
+        else spawnPos.x -= block.localScale.x;
+
+        coinEffects[effectIndex[key]].OnEffect(spawnPos);
     }
 
     private void MoveBlock()
     {
-        var speed = 14f;
-
-        BlockSpeed(speed);
+        BlockSpeed(downSpeed);
         StartCoroutine(Move());
     }
 

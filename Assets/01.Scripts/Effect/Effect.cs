@@ -4,7 +4,7 @@ using UnityEngine;
 public class Effect : MonoBehaviour
 {
     [Header("비활성화시킬 시간"), SerializeField] protected float timer = 0.1f;
-    protected Coroutine coroutine;
+    private Coroutine coroutine;
 
     protected virtual void OnEnable()
     {
