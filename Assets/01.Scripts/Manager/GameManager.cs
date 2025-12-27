@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
             GetCoin(direction);
             Json.SetPlayPoint(Json.GetPlayPoint() + 1);
 
-            UiManager.Get<PointUi>().UpPoint();
+            UiManager.Get<PointUi>().ShowPoint();
             UiManager.Get<TimerUi>().UpTimer();
 
             OnBlockEffect(_isLeft);

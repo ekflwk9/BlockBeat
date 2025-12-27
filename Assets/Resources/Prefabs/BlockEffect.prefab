@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea304c1866e6b546a29506246ead22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
+  timer: 1.5
   render: {fileID: 9215552816797283080}
   rigid: {fileID: 7852572116104306659}
 --- !u!50 &7852572116104306659

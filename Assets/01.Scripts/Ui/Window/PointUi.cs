@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PointUi : UiBase
 {
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private TMP_Text coin;
+    [SerializeField] private TMP_Text point;
     [SerializeField] private CanvasGroup group;
 
 #if UNITY_EDITOR
@@ -16,10 +17,17 @@ public class PointUi : UiBase
         var canvas = this.TryGetComponent<Canvas>();
         if (canvas) canvas.sortingOrder = 10;
 
-        text = this.TryGetChildComponent<TMP_Text>();
-        if (text) text.text = "0";
+        point = this.TryGetChildComponent<TMP_Text>("PointText");
+        if (point) point.text = "0";
+
+        coin = this.TryGetChildComponent<TMP_Text>("CoinText");
     }
 #endif
+
+    private void Start()
+    {
+        coin.text = Json.GetCoin().ToString("N0");
+    }
 
     public override void On()
     {
@@ -32,8 +40,16 @@ public class PointUi : UiBase
     /// <summary>
     /// 점수 UI 업데이트
     /// </summary>
-    public void UpPoint()
+    public void ShowPoint()
     {
-        text.text = Json.GetPlayPoint().ToString();
+        point.text = Json.GetPlayPoint().ToString();
+    }
+
+    /// <summary>
+    /// 코인 UI 업데이트
+    /// </summary>
+    public void ShowCoin()
+    {
+        coin.text = Json.GetCoin().ToString("N0");
     }
 }

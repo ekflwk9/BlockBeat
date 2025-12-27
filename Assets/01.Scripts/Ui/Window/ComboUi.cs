@@ -58,7 +58,7 @@ public class ComboUi : UiBase
         combo.color = Color.white;
 
         var newPos = startPos;
-        newPos.x = Screen.width * 0.2f;
+        newPos.x = Screen.width * 0.8f;
         combo.transform.position = newPos;
 
         var tween = combo.transform.DOMoveX(startPos.x, 0.3f);

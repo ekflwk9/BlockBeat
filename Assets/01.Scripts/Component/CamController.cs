@@ -8,7 +8,7 @@ public class CamController : MonoBehaviour
 {
     public static CamController Instatnce { get; private set; }
     [field: SerializeField] public Camera cam { get; private set; }
-    public Vector3 rightTop { get; private set; }
+    public Vector3 leftTop { get; private set; }
     private Coroutine shakeCoroutine;
 
 #if UNITY_EDITOR
@@ -34,11 +34,11 @@ public class CamController : MonoBehaviour
         var angleRad = camAngle * Mathf.Deg2Rad;
 
         var camSize = Vector3.zero;
-        camSize.y = Mathf.Abs(this.transform.position.z - 1f) * Mathf.Tan(angleRad);
-        camSize.x = this.transform.position.x + (camSize.y * cam.aspect);
+        camSize.y = Mathf.Abs(this.transform.position.z) * Mathf.Tan(angleRad);
+        camSize.x = this.transform.position.x - (camSize.y * cam.aspect);
         camSize.y += this.transform.position.y;
 
-        rightTop = camSize;
+        leftTop = camSize;
     }
 
     /// <summary>
