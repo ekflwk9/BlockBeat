@@ -5,9 +5,6 @@ using UnityEngine;
 public class ComboUi : UiBase
 {
     [SerializeField] private TMP_Text combo;
-    [SerializeField] private SpriteRenderer fade;
-
-    private Color fadeOriginColor;
     private Vector3 startPos;
 
     private string[] text =
@@ -26,9 +23,7 @@ public class ComboUi : UiBase
     private void Reset()
     {
         SetName<ComboUi>();
-
         combo = this.TryGetChildComponent<TMP_Text>();
-        fade = this.TryGetChildComponent<SpriteRenderer>();
     }
 #endif
 
@@ -36,16 +31,6 @@ public class ComboUi : UiBase
     {
         startPos = combo.transform.position;
         combo.color = Color.clear;
-
-        var screenPos = new Vector3(0.5f, 0.5f);
-        var fadePos = CamController.Instatnce.cam.ViewportToWorldPoint(screenPos);
-        fadePos.z = 0f;
-
-        fade.transform.position = fadePos;
-        fade.transform.localScale = new Vector3(Screen.width, Screen.height);
-
-        fadeOriginColor = fade.color;
-        fade.color = Color.clear;
     }
 
     public void Show(int _score)
@@ -68,21 +53,5 @@ public class ComboUi : UiBase
     private void EndMove()
     {
         combo.DOFade(0f, 0.5f);
-    }
-
-    public void Fade()
-    {
-        fade.DOKill();
-
-        fade.color = fadeOriginColor;
-        fade.DOFade(0f, 0.5f);
-
-        var manager = GameManager.Instance.transform;
-
-        if (manager)
-        {
-            fade.transform.position = manager.position;
-            fade.transform.rotation = manager.rotation;
-        }
     }
 }

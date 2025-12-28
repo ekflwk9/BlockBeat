@@ -190,14 +190,17 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         crosshair.color = Color.red;
 
+        UiManager.Get<FadeUi>().GameOverFadeOut();
         UiManager.Get<TimerUi>().StopTimer();
+
+        CamController.Instatnce.Shake(0.2f, 0.2f);
         StartCoroutine(GameOverTimer());
     }
 
     private IEnumerator GameOverTimer()
     {
         yield return CoroutineManager.Wait(1.5f);
-        UiManager.Get<FadeUi>().FadeIn(0.5f, ChangeResultScene);
+        UiManager.Get<FadeUi>().FadeIn(0.4f, ChangeResultScene);
     }
 
     private void ChangeResultScene()
@@ -218,7 +221,7 @@ public class GameManager : MonoBehaviour
             (previousBlockType == Block.Type.Right && currentBlockType == Block.Type.Left))
         {
             UiManager.Get<ComboUi>().Show(comboCount);
-            UiManager.Get<ComboUi>().Fade();
+            UiManager.Get<FadeUi>().ComboFadeOut();
 
             CamController.Instatnce.Shake(0.15f, 0.1f);
             comboCount++;

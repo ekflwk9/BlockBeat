@@ -320,9 +320,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 37
+        y: 36
         width: 11
-        height: 11
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -342,9 +342,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 5
-        y: 51
+        y: 50
         width: 11
-        height: 6
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,10 +363,10 @@ TextureImporter:
       name: Back
       rect:
         serializedVersion: 2
-        x: 6
-        y: 24
-        width: 7
-        height: 8
+        x: 5
+        y: 23
+        width: 9
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -495,10 +495,10 @@ TextureImporter:
       name: Option
       rect:
         serializedVersion: 2
-        x: 4
+        x: 5
         y: 8
-        width: 12
-        height: 12
+        width: 10
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -562,9 +562,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 7
-        width: 22
-        height: 24
+        y: 6
+        width: 23
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -605,10 +605,10 @@ TextureImporter:
       name: Shop
       rect:
         serializedVersion: 2
-        x: 32
-        y: 47
-        width: 15
-        height: 12
+        x: 35
+        y: 48
+        width: 11
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -628,9 +628,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 35
-        y: 8
+        y: 7
         width: 10
-        height: 11
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -650,9 +650,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 53
-        y: 35
+        y: 34
         width: 17
-        height: 11
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -676,7 +676,7 @@ TextureImporter:
         width: 15
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -685,6 +685,28 @@ TextureImporter:
       bones: []
       spriteID: 12dc7a280cddbac46b16dbe6dc3369d2
       internalID: 1720723838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Interaction
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 87
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 183d6081801ee29479828ce35edc83b8
+      internalID: 739879867
       vertices: []
       indices: 
       edges: []
@@ -714,7 +736,9 @@ TextureImporter:
       Direction: -214823703
       Effect: -574432739
       Exit: 308805568
+      Game_0: 1223048133
       Home: -685620804
+      Interaction: 739879867
       Line: 129605610
       Lock: -800418259
       Music: -53253494

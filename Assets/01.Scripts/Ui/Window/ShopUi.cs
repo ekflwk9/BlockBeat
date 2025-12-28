@@ -29,7 +29,7 @@ public class ShopUi : UiBase
         SetContent();
 
         UiManager.Add<ShopUi>(this);
-        UiManager.Get<FadeUi>().FadeOut(0.5f);
+        UiManager.Get<FadeUi>().FadeOut(0.4f);
     }
 
     private void SetContent()

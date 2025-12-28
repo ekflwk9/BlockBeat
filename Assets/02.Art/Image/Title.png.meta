@@ -192,7 +192,7 @@ TextureImporter:
         width: 120
         height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -201,6 +201,28 @@ TextureImporter:
       bones: []
       spriteID: d74139800eac6a546a96baddfd28248d
       internalID: 1937177272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 55
+        width: 96
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47dd959a9c26800438dcdcb72cca052d
+      internalID: -125264896
       vertices: []
       indices: 
       edges: []
@@ -220,6 +242,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       GameOver: -1785989554
+      Title_0: -125264896
       TopPlayers: 1937177272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

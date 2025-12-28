@@ -137,7 +137,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!114 &833465504401876275
 MonoBehaviour:
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slide: {fileID: 6817675156306499237}
+  line: {fileID: 1959827090523665915}
   group: {fileID: 8879411641610745718}
 --- !u!1 &8936001749207596912
 GameObject:

@@ -42,7 +42,7 @@ public class TimerUi : UiBase
         if (coroutine != null) StopCoroutine(coroutine);
         if (this.gameObject.activeSelf) coroutine = StartCoroutine(Timer());
 
-        if (score < 13f) score += 0.05f;
+        if (score < 22f) score += 0.05f;
     }
 
     /// <summary>
