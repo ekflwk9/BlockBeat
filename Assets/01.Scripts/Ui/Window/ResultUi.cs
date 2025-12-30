@@ -62,7 +62,7 @@ public class ResultUi : UiBase
 
     private void ShowFade()
     {
-        UiManager.Get<FadeUi>().FadeOut(0.4f);
+        UiManager.Get<FadeUi>().FadeOut(0.3f);
     }
 
     private void SetComment()

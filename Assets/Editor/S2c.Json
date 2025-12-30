@@ -1,19 +1,20 @@
 {
   "playerData": {
-    "coin": 659,
+    "coin": 1245,
     "nickName": "Unnamed",
-    "advertPassCount": 0,
-    "currentPoint": 240,
+    "advertPassCount": 3,
+    "currentPoint": 219,
     "maxPoint": 0,
-    "currentTime": 38.3282471,
-    "combo": 13
+    "maxTime": 41.28077,
+    "currentTime": 32.06273,
+    "combo": 6
   },
   "settingData": {
     "musicSound": false,
     "effectSound": true
   },
   "inventoryData": {
-    "currentBlock": 1,
+    "currentBlock": 0,
     "blocks": [
       0
     ]

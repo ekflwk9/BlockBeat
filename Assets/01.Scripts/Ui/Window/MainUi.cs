@@ -17,7 +17,7 @@ public class MainUi : UiBase
     private void Start()
     {
         InitStartLine();
-        UiManager.Get<FadeUi>().FadeOut(0.4f);
+        UiManager.Get<FadeUi>().FadeOut(0.3f);
         GlobalVolumeManager.SetVignette(0f, 0f);
     }
 

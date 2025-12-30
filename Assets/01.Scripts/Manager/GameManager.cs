@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameOverTimer()
     {
         yield return CoroutineManager.Wait(1.5f);
-        UiManager.Get<FadeUi>().FadeIn(0.4f, ChangeResultScene);
+        UiManager.Get<FadeUi>().FadeIn(0.3f, ChangeResultScene);
     }
 
     private void ChangeResultScene()

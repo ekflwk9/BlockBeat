@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [System.Serializable]
     public struct Info
     {
-        public readonly Sprite idle, left, right;
+        [field: SerializeField] public Sprite idle { get; private set; }
+        [field: SerializeField] public Sprite left { get; private set; }
+        [field: SerializeField] public Sprite right { get; private set; }
 
         public Info(Sprite _idle, Sprite _left, Sprite _right)
         {
@@ -19,8 +22,8 @@ public class Block : MonoBehaviour
 
     public enum Name
     {
-        NormalBlock,
-        GraphicsBlock,
+        Normal,
+        Graphics,
     }
 
     public enum Type
@@ -57,7 +60,7 @@ public class Block : MonoBehaviour
     private void Awake()
     {
         InitBlock();
-        BreakBlock(this.transform.position);
+        SetBlokcDirection();
     }
 
     private void InitBlock()
@@ -153,11 +156,6 @@ public class Block : MonoBehaviour
 
     private void SetCoin()
     {
-        if (!coin)
-        {
-            return;
-        }
-
         if (UnityEngine.Random.Range(0, 4) == 1)
         {
             var newPos = this.transform.position;

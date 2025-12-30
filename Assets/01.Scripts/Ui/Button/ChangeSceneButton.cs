@@ -8,7 +8,7 @@ public class ChangeSceneButton : ButtonBase
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
-        UiManager.Get<FadeUi>().FadeIn(0.4f, EndFade);
+        UiManager.Get<FadeUi>().FadeIn(0.3f, EndFade);
     }
 
     private void EndFade()

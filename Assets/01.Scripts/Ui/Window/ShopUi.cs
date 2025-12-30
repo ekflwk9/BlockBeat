@@ -1,77 +1,117 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
 
 public class ShopUi : UiBase
 {
-    [SerializeField] private TMP_Text infoText;
+    [SerializeField] private BuyButton buyButton;
+    [SerializeField] private GameObject lockButton;
+    [SerializeField] private ShopSelectButton selectButton;
     [SerializeField] private BlockInventory inventory;
+    [SerializeField] private TMP_Text itemTitle;
+    [SerializeField] private TMP_Text coinText;
 
-    private Block.Name currentSelect = Json.GetMainBlock();
-    private Dictionary<Block.Name, ShopSlotButton> buttons = new();
-    private static Block.Name[] blocks = (Block.Name[])Enum.GetValues(typeof(Block.Name));
+    [SerializeField] private Block.Info[] items;
+    private int currentIndex = (int)Json.GetMainBlock();
 
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<ShopUi>();
+        FindText();
+        FinButton();
+        FindInventory();
+        LoadSprite();
+    }
 
-        infoText = this.TryGetChildComponent<TMP_Text>("InfoText");
+    private void FindText()
+    {
+        coinText = this.TryGetChildComponent<TMP_Text>("CoinText");
+        itemTitle = this.TryGetChildComponent<TMP_Text>("ItemTitleText");
+    }
+
+    private void FinButton()
+    {
+        lockButton = this.TryFindChild("LockButton");
+        buyButton = this.TryGetChildComponent<BuyButton>();
+        selectButton = this.TryGetChildComponent<ShopSelectButton>();
+    }
+
+    private void FindInventory()
+    {
         inventory = FindAnyObjectByType<BlockInventory>();
         if (!inventory) Service.Log($"{typeof(BlockInventory).Name}이 씬에 존재하지 않음");
+    }
+
+    private void LoadSprite()
+    {
+        var blockNames = (Block.Name[])Enum.GetValues(typeof(Block.Name));
+        items = new Block.Info[blockNames.Length];
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            var path = Path.Combine("Blocks", blockNames[i].ToString());
+            var idle = Resources.Load<Sprite>($"{path}/Block");
+            var left = Resources.Load<Sprite>($"{path}/LeftSpike");
+            var right = Resources.Load<Sprite>($"{path}/RightSpike");
+
+            items[i] = new Block.Info(idle, left, right);
+        }
     }
 #endif
 
     private void Start()
     {
-        SetContent();
+        UiUpdate();
+        coinText.text = Json.GetCoin().ToString();
 
         UiManager.Add<ShopUi>(this);
-        UiManager.Get<FadeUi>().FadeOut(0.4f);
-    }
-
-    private void SetContent()
-    {
-        var path = Path.Combine("Ui", "ShopSlotButton");
-        var load = Resources.Load<ShopSlotButton>(path);
-        var spawnPos = this.TryFindChild("Content").transform;
-
-        for (int i = 0; i < blocks.Length; i++)
-        {
-            var button = Instantiate(load);
-            button.transform.SetParent(spawnPos);
-
-            button.InitButton(blocks[i]);
-            buttons.Add(blocks[i], button);
-        }
+        UiManager.Get<FadeUi>().FadeOut(0.3f);
     }
 
     /// <summary>
-    /// 현재 메인 블록 설정
+    /// 현재 선택된 블록을 메인 블록으로
     /// </summary>
     public void SetMainBlock()
     {
-        buttons[Json.GetMainBlock()].UnMain();
-        buttons[currentSelect].Main();
-        Json.SetMainBlock(currentSelect);
+        Json.SetMainBlock((Block.Name)currentIndex);
+        selectButton.Select(true);
     }
 
     /// <summary>
-    /// 현재 선택한 블록 설정
+    /// 플레이어 데이터에 현재 선택된 블록 아이템 추가
     /// </summary>
-    /// <param name="_text"></param>
-    public void Select(Block.Name _blockName)
+    public void AddBlock()
     {
-        buttons[currentSelect].UnSelect();
-        currentSelect = _blockName;
+        Json.AddBlockItem((Block.Name)currentIndex);
+        coinText.text = Json.GetCoin().ToString();
     }
 
     /// <summary>
-    /// 블록 이미지 변경
+    /// 페이지 이동
     /// </summary>
-    public void ChangeBlocks(Block.Info _info)
+    public void Move(bool _isLeft)
+    {
+        currentIndex = _isLeft ? currentIndex - 1 : currentIndex + 1;
+
+        if (currentIndex < 0) currentIndex = items.Length - 1;
+        else if (items.Length <= currentIndex) currentIndex = 0;
+
+        UiUpdate();
+    }
+
+    private void UiUpdate()
+    {
+        var blockName = (Block.Name)currentIndex;
+
+        itemTitle.text = blockName.ToString();
+        selectButton.Select(blockName == Json.GetMainBlock());
+
+        ChangeBlock(items[currentIndex]);
+    }
+
+    private void ChangeBlock(Block.Info _info)
     {
         for (int i = 0; i < inventory.blocks.Length; i++)
         {

@@ -69,7 +69,7 @@ public class RankUi : UiBase
         if (FirebaseManager.connect) GetRanker();
         else connectionWindow.SetActive(true);
 
-        UiManager.Get<FadeUi>().FadeOut(0.4f);
+        UiManager.Get<FadeUi>().FadeOut(0.3f);
     }
 
     private void GetRanker()

@@ -214,7 +214,7 @@ TextureImporter:
         width: 96
         height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -223,6 +223,28 @@ TextureImporter:
       bones: []
       spriteID: 47dd959a9c26800438dcdcb72cca052d
       internalID: -125264896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skin
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 9
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 424b949411177e549bac406bba07a1a5
+      internalID: -1119556749
       vertices: []
       indices: 
       edges: []
@@ -242,6 +264,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       GameOver: -1785989554
+      Skin: -1119556749
       Title_0: -125264896
       TopPlayers: 1937177272
   mipmapLimitGroupName: 

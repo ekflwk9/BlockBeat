@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class InventoryData
 {
-    public Block.Name currentBlock = Block.Name.NormalBlock;
-    public HashSet<Block.Name> blocks = new() { { Block.Name.NormalBlock } };
+    public Block.Name currentBlock = Block.Name.Normal;
+    public HashSet<Block.Name> blocks = new() { { Block.Name.Normal } };
 }
 
 public class PlayerData
@@ -19,6 +19,7 @@ public class PlayerData
     public int currentPoint;
     public int maxPoint;
 
+    public float maxTime;
     public float currentTime;
     public int combo;
 }
@@ -91,9 +92,6 @@ public static class Json
     public static bool GetEffectSound() => data.settingData.effectSound;
     public static void SetEffectSound() => data.settingData.effectSound = !data.settingData.effectSound;
 
-    public static float GetPlayTime() => data.playerData.currentTime;
-    public static void PlayTime(float _time) => data.playerData.currentTime = _time;
-
     public static int GetPlayPoint() => data.playerData.currentPoint;
     public static int GetPlayMaxPoint() => data.playerData.maxPoint;
 
@@ -109,14 +107,20 @@ public static class Json
     public static void SetName(string _name) => data.playerData.nickName = _name;
     public static string GetName() => data.playerData.nickName;
 
+    public static float GetMaxPlayTime() => data.playerData.maxTime;
+    public static float GetPlayTime() => data.playerData.currentTime;
+    public static void PlayTime(float _time)
+    {
+        var playerData = data.playerData;
+
+        if (playerData.maxTime < _time) playerData.maxTime = _time;
+        playerData.currentTime = _time;
+    }
+
     public static void SetPlayPoint(int _point) => data.playerData.currentPoint = _point;
     public static void SaveMaxPoint()
     {
         var playerData = data.playerData;
-
-        if (playerData.maxPoint < playerData.currentPoint)
-        {
-            data.playerData.maxPoint = playerData.currentPoint;
-        }
+        if (playerData.maxPoint < playerData.currentPoint) playerData.maxPoint = playerData.currentPoint;
     }
 }
