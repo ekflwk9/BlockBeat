@@ -13,6 +13,8 @@ public class ShopUi : UiBase
     [SerializeField] private TMP_Text coinText;
     [SerializeField] private TMP_Text conditionText;
     [SerializeField] private GameObject conditionWindow;
+    [SerializeField] private GameObject lockIcon;
+    [SerializeField] private GameObject unLockIcon;
     [SerializeField] private Block.Info[] items;
 
     private Quest quest = new();
@@ -22,10 +24,18 @@ public class ShopUi : UiBase
     private void Reset()
     {
         SetName<ShopUi>();
+        FindIcon();
         FindText();
         FinButton();
         FindInventory();
         LoadSprite();
+    }
+
+    private void FindIcon()
+    {
+        lockIcon = this.TryFindChild("LockIcon");
+        unLockIcon = this.TryFindChild("UnLockIcon");
+        conditionWindow = this.TryFindChild("ConditionWindow");
     }
 
     private void FindText()
@@ -33,7 +43,6 @@ public class ShopUi : UiBase
         coinText = this.TryGetChildComponent<TMP_Text>("CoinText");
         itemTitle = this.TryGetChildComponent<TMP_Text>("ItemTitleText");
         conditionText = this.TryGetChildComponent<TMP_Text>("ConditionText");
-        conditionWindow = this.TryFindChild("ConditionWindow");
     }
 
     private void FinButton()
@@ -140,7 +149,11 @@ public class ShopUi : UiBase
         var newText = quest.Text(currentBlock);
         conditionText.text = newText;
 
-        conditionWindow.SetActive(!string.IsNullOrEmpty(newText));
+        var isCondition = !string.IsNullOrEmpty(newText);
+        conditionWindow.SetActive(isCondition);
+
+        lockIcon.SetActive(!complete);
+        unLockIcon.SetActive(complete);
 
         if (!buy) buyButton.SetPrice(quest.Price(currentBlock));
     }

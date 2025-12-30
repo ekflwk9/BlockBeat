@@ -18,6 +18,7 @@ public class Quest
 
     public Dictionary<Block.Name, Quest.List> list = new()
     {
+        [Block.Name.Normal] = NoConditions(_price: 500),
         [Block.Name.Graphics] = Point(150, _price: 500),
     };
 
@@ -54,9 +55,15 @@ public class Quest
         return list[_blockName].price;
     }
 
+    private static Quest.List NoConditions(int _price = 0)
+    {
+        return new Quest.List(string.Empty, true, _price);
+    }
+
     private static Quest.List Point(int _point, int _price = 0)
     {
-        var questText = "a";
+        var colorText = $"<color=#FF0000>{_point}</color>";
+        var questText = $"Over {colorText} Points";
         var complete = _point < Json.GetPlayMaxPoint();
 
         return new Quest.List(questText, complete, _price);
@@ -64,7 +71,8 @@ public class Quest
 
     private static Quest.List Survival(float _timer, int _price = 0)
     {
-        var questText = "b";
+        var colorText = $"<color=#FF0000>{_timer.ToString("F2")}</color>";
+        var questText = $"Maximum survival time over {colorText}s";
         var complete = _timer < Json.GetMaxPlayTime();
 
         return new Quest.List(questText, complete, _price);
@@ -72,7 +80,8 @@ public class Quest
 
     private static Quest.List Combo(int _combo, int _price = 0)
     {
-        var questText = "c";
+        var colorText = $"<color=#FF0000>{_combo}</color>";
+        var questText = $"Over {colorText} Combo";
         var complete = _combo < Json.GetCombo();
 
         return new Quest.List(questText, complete, _price);

@@ -101,11 +101,17 @@ public static class Json
     public static int GetCombo() => data.playerData.combo;
     public static void SetCombo(int _combo) => data.playerData.combo = _combo;
 
-    public static int GetCoin() => data.playerData.coin;
-    public static void SetCoin(int _coin) => data.playerData.coin = _coin;
-
     public static void SetName(string _name) => data.playerData.nickName = _name;
     public static string GetName() => data.playerData.nickName;
+
+    public static int GetCoin() => data.playerData.coin;
+    public static void SetCoin(int _coin)
+    {
+        if (999999999 <= _coin) _coin = 999999999;
+        else if (_coin < 0) _coin = 0;
+
+        data.playerData.coin = _coin;
+    }
 
     public static float GetMaxPlayTime() => data.playerData.maxTime;
     public static float GetPlayTime() => data.playerData.currentTime;

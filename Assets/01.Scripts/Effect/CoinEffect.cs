@@ -32,14 +32,12 @@ public class CoinEffect : Effect
 
     private IEnumerator OnEffect()
     {
-        var targetPos = CamController.Instatnce.leftTop;
+        var targetPos = CamController.Instatnce.top;
         rigid.linearVelocity = (targetPos - this.transform.position) * speed;
 
         while (true)
         {
-            var thisPos = this.transform.position;
-
-            if (thisPos.x < targetPos.x  || targetPos.y < thisPos.y)
+            if (targetPos.y < this.transform.position.y)
             {
                 UiManager.Get<PointUi>().ShowCoin();
                 this.gameObject.SetActive(false);
