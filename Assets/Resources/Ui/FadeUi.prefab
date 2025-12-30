@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combo: {r: 1, g: 1, b: 1, a: 0.21568628}
   gameOver: {r: 1, g: 0, b: 0, a: 0.21568628}
+  buy: {r: 0.007145524, g: 1, b: 0, a: 0.21568628}
   uiFade: {fileID: 2409662766258857256}
   gameFade: {fileID: 8694712521607236267}
 --- !u!1 &1680746359350822464

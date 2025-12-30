@@ -61,6 +61,7 @@ public class Block : MonoBehaviour
     {
         InitBlock();
         SetBlokcDirection();
+        if (coin) SetCoin();
     }
 
     private void InitBlock()

@@ -1,17 +1,28 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FadeUi : UiBase
 {
+    public enum Type
+    {
+        Combo,
+        GameOver,
+        Buy,
+    }
+
     [Header("콤보 성공시 색깔"), SerializeField] private Color combo;
     [Header("게임 오버시 색깔"), SerializeField] private Color gameOver;
+    [Header("상점 구매시 색깔"), SerializeField] private Color buy;
 
     [Space(20f)]
     [SerializeField] private Image uiFade;
     [SerializeField] private SpriteRenderer gameFade;
 
+    private const float alpha = 55f;
+    private Dictionary<Type, Color> color = new();
     private Action fadeFunc;
 
 #if UNITY_EDITOR
@@ -37,6 +48,7 @@ public class FadeUi : UiBase
     {
         Init();
         InitGameFade();
+        InitColor();
     }
 
     private void Init()
@@ -53,6 +65,13 @@ public class FadeUi : UiBase
         gameFade.transform.position = fadePos;
         gameFade.transform.localScale = new Vector3(Screen.width, Screen.height);
         gameFade.color = Color.clear;
+    }
+
+    private void InitColor()
+    {
+        color.Add(Type.Combo, combo);
+        color.Add(Type.GameOver, gameOver);
+        color.Add(Type.Buy, buy);
     }
 
     /// <summary>
@@ -88,26 +107,15 @@ public class FadeUi : UiBase
     }
 
     /// <summary>
-    /// 게임속 페이드 아웃
+    /// 뒷배경 페이드 아웃 재생
     /// </summary>
-    /// <param name="_timer"></param>
-    public void ComboFadeOut()
+    /// <param name="_type"></param>
+    public void FadeOut(Type _type)
     {
+        if (!color.ContainsKey(_type)) return;
         gameFade.DOKill();
 
-        gameFade.color = combo;
-        gameFade.DOFade(0f, 0.5f);
-    }
-
-    /// <summary>
-    /// 게임속 페이드 아웃
-    /// </summary>
-    /// <param name="_timer"></param>
-    public void GameOverFadeOut()
-    {
-        gameFade.DOKill();
-
-        gameFade.color = gameOver;
+        gameFade.color = color[_type];
         gameFade.DOFade(0f, 0.5f);
     }
 }

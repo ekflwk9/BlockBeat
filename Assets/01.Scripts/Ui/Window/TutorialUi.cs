@@ -2,16 +2,21 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TutorialUi : UiBase, IPointerClickHandler
 {
     [SerializeField] private CanvasGroup group;
+    [SerializeField] private Image leftLine;
+    [SerializeField] private Image rightLine;
 
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<TutorialUi>();
 
+        leftLine = this.TryGetChildComponent<Image>("LeftLine");
+        rightLine = this.TryGetChildComponent<Image>("RightLine");
         group = this.RequireComponent<CanvasGroup>();
 
         var infoT = this.TryGetChildComponent<TMP_Text>("Info");
@@ -23,6 +28,9 @@ public class TutorialUi : UiBase, IPointerClickHandler
     {
         GlobalVolumeManager.SetVignette(0.35f, 0f);
         base.On();
+
+        OnButtontLine(leftLine);
+        OnButtontLine(rightLine);
     }
 
     public override void Off()
@@ -33,6 +41,13 @@ public class TutorialUi : UiBase, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         OffAnimation();
+    }
+
+    private void OnButtontLine(Image _image)
+    {
+        var tween = _image.DOFade(0f, 0.5f);
+        tween.SetLoops(-1, LoopType.Yoyo);
+        tween.SetEase(Ease.Linear);
     }
 
     private void OffAnimation()
@@ -48,6 +63,8 @@ public class TutorialUi : UiBase, IPointerClickHandler
 
     private void EndFade()
     {
+        leftLine.DOKill();
+        rightLine.DOKill();
         this.gameObject.SetActive(false);
     }
 }

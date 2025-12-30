@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slide: {fileID: 6817675156306499237}
-  line: {fileID: 1959827090523665915}
   group: {fileID: 8879411641610745718}
 --- !u!1 &8936001749207596912
 GameObject:
@@ -241,8 +240,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.081833325, y: 0.8886667}
   m_AnchorMax: {x: 0.91600007, y: 0.9401667}
-  m_AnchoredPosition: {x: 0.5, y: 0}
-  m_SizeDelta: {x: -1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4495519058835886151
 CanvasRenderer:

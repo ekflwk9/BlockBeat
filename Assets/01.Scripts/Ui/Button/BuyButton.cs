@@ -36,6 +36,7 @@ public class BuyButton : ButtonBase
         {
             Json.SetCoin(playerCoin - price);
             UiManager.Get<ShopUi>().AddBlock();
+            UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.Buy);
 
             base.OnPointerDown(eventData);
             this.gameObject.SetActive(false);

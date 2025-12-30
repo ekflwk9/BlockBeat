@@ -11,8 +11,11 @@ public class ShopUi : UiBase
     [SerializeField] private BlockInventory inventory;
     [SerializeField] private TMP_Text itemTitle;
     [SerializeField] private TMP_Text coinText;
-
+    [SerializeField] private TMP_Text conditionText;
+    [SerializeField] private GameObject conditionWindow;
     [SerializeField] private Block.Info[] items;
+
+    private Quest quest = new();
     private int currentIndex = (int)Json.GetMainBlock();
 
 #if UNITY_EDITOR
@@ -29,6 +32,8 @@ public class ShopUi : UiBase
     {
         coinText = this.TryGetChildComponent<TMP_Text>("CoinText");
         itemTitle = this.TryGetChildComponent<TMP_Text>("ItemTitleText");
+        conditionText = this.TryGetChildComponent<TMP_Text>("ConditionText");
+        conditionWindow = this.TryFindChild("ConditionWindow");
     }
 
     private void FinButton()
@@ -64,7 +69,9 @@ public class ShopUi : UiBase
     private void Start()
     {
         UiUpdate();
-        coinText.text = Json.GetCoin().ToString();
+        ChangeBlock();
+        CheckQuest();
+        coinText.text = Json.GetCoin().ToString("N0");
 
         UiManager.Add<ShopUi>(this);
         UiManager.Get<FadeUi>().FadeOut(0.3f);
@@ -85,7 +92,7 @@ public class ShopUi : UiBase
     public void AddBlock()
     {
         Json.AddBlockItem((Block.Name)currentIndex);
-        coinText.text = Json.GetCoin().ToString();
+        coinText.text = Json.GetCoin().ToString("N0");
     }
 
     /// <summary>
@@ -99,6 +106,8 @@ public class ShopUi : UiBase
         else if (items.Length <= currentIndex) currentIndex = 0;
 
         UiUpdate();
+        ChangeBlock();
+        CheckQuest();
     }
 
     private void UiUpdate()
@@ -107,15 +116,32 @@ public class ShopUi : UiBase
 
         itemTitle.text = blockName.ToString();
         selectButton.Select(blockName == Json.GetMainBlock());
-
-        ChangeBlock(items[currentIndex]);
     }
 
-    private void ChangeBlock(Block.Info _info)
+    private void ChangeBlock()
     {
+        var info = items[currentIndex];
+
         for (int i = 0; i < inventory.blocks.Length; i++)
         {
-            inventory.blocks[i].ChangeSprite(_info);
+            inventory.blocks[i].ChangeSprite(info);
         }
+    }
+
+    private void CheckQuest()
+    {
+        var currentBlock = (Block.Name)currentIndex;
+        var complete = quest.Complete(currentBlock);
+        var buy = Json.GetBlockItem(currentBlock);
+
+        buyButton.gameObject.SetActive(!buy);
+        lockButton.SetActive(!complete);
+
+        var newText = quest.Text(currentBlock);
+        conditionText.text = newText;
+
+        conditionWindow.SetActive(!string.IsNullOrEmpty(newText));
+
+        if (!buy) buyButton.SetPrice(quest.Price(currentBlock));
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,8 @@ public class MainUi : UiBase
     private void Start()
     {
         InitStartLine();
+        InitCoinText();
+
         UiManager.Get<FadeUi>().FadeOut(0.3f);
         GlobalVolumeManager.SetVignette(0f, 0f);
     }
@@ -24,6 +27,12 @@ public class MainUi : UiBase
     private void OnDestroy()
     {
         line?.DOKill();
+    }
+
+    private void InitCoinText()
+    {
+        var coinText = this.TryGetChildComponent<TMP_Text>("CoinText");
+        if (coinText) coinText.text = Json.GetCoin().ToString("N0");
     }
 
     private void InitStartLine()
