@@ -1,12 +1,12 @@
-﻿{
+{
   "playerData": {
-    "coin": 1247,
+    "coin": 1145,
     "nickName": "Unnamed",
-    "advertPassCount": 1,
-    "currentPoint": 30,
+    "advertPassCount": 0,
+    "currentPoint": 274,
     "maxPoint": 151,
     "maxTime": 73.0822754,
-    "currentTime": 4.40444565,
+    "currentTime": 40.5327759,
     "combo": 5
   },
   "settingData": {
@@ -16,7 +16,8 @@
   "inventoryData": {
     "currentBlock": 0,
     "blocks": [
-      0
+      0,
+      1
     ]
   }
 }

@@ -165,12 +165,12 @@ TextureImporter:
       name: Option
       rect:
         serializedVersion: 2
-        x: 8
-        y: 133
+        x: 2
+        y: 183
         width: 65
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -187,9 +187,31 @@ TextureImporter:
       name: Credits
       rect:
         serializedVersion: 2
-        x: 8
-        y: 116
+        x: 2
+        y: 166
         width: 73
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e0510b16c0fc341b534fa5716000c6
+      internalID: -856157644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 149
+        width: 164
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -199,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35e0510b16c0fc341b534fa5716000c6
-      internalID: -856157644
+      spriteID: 40e768c57ac15fd40b85d00ef2f2b371
+      internalID: 1292177972
       vertices: []
       indices: 
       edges: []
@@ -221,6 +243,7 @@ TextureImporter:
     nameFileIdTable:
       Credits: -856157644
       Option: 1070120515
+      congratulations: 1292177972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
