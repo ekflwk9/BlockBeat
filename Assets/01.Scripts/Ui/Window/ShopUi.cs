@@ -102,6 +102,9 @@ public class ShopUi : UiBase
     {
         Json.AddBlockItem((Block.Name)currentIndex);
         coinText.text = Json.GetCoin().ToString("N0");
+
+        selectButton.Select(false);
+        selectButton.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -143,7 +146,11 @@ public class ShopUi : UiBase
         var complete = quest.Complete(currentBlock);
         var buy = Json.GetBlockItem(currentBlock);
 
-        buyButton.gameObject.SetActive(!buy);
+        var canBuy = complete && !buy;
+        if (canBuy) buyButton.SetPrice(quest.Price(currentBlock));
+        buyButton.gameObject.SetActive(canBuy);
+
+        selectButton.gameObject.SetActive(buy);
         lockButton.SetActive(!complete);
 
         var newText = quest.Text(currentBlock);
@@ -154,7 +161,5 @@ public class ShopUi : UiBase
 
         lockIcon.SetActive(!complete);
         unLockIcon.SetActive(complete);
-
-        if (!buy) buyButton.SetPrice(quest.Price(currentBlock));
     }
 }

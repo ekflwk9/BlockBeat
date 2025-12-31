@@ -62,27 +62,33 @@ public class Quest
 
     private static Quest.List Point(int _point, int _price = 0)
     {
-        var colorText = $"<color=#FF0000>{_point}</color>";
-        var questText = $"Over {colorText} Points";
         var complete = _point < Json.GetPlayMaxPoint();
+        var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
+
+        var newText = $"{color}{_point}</color>";
+        var questText = $"Over {newText} Points";
 
         return new Quest.List(questText, complete, _price);
     }
 
     private static Quest.List Survival(float _timer, int _price = 0)
     {
-        var colorText = $"<color=#FF0000>{_timer.ToString("F2")}</color>";
-        var questText = $"Maximum survival time over {colorText}s";
         var complete = _timer < Json.GetMaxPlayTime();
+        var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
+
+        var newText = $"{color}{_timer.ToString("F2")}</color>";
+        var questText = $"Maximum survival time over {newText}s";
 
         return new Quest.List(questText, complete, _price);
     }
 
     private static Quest.List Combo(int _combo, int _price = 0)
     {
-        var colorText = $"<color=#FF0000>{_combo}</color>";
-        var questText = $"Over {colorText} Combo";
         var complete = _combo < Json.GetCombo();
+        var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
+
+        var newText = $"{color}{_combo}</color>";
+        var questText = $"Over {newText} Combo";
 
         return new Quest.List(questText, complete, _price);
     }

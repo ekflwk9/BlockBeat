@@ -24,8 +24,6 @@ public class BuyButton : ButtonBase
         price = _coin;
         priceText.text = _coin.ToString();
         priceText.color = Json.GetCoin() < _coin ? Color.red : Color.white;
-
-        this.gameObject.SetActive(true);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
