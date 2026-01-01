@@ -75,8 +75,9 @@ public class RankUi : UiBase
     private void GetRanker()
     {
         var ranker = rankSystem.ranker;
+        var length = ranker.Count < user.Length ? ranker.Count : user.Length;
 
-        for (int i = 0; i < user.Length; i++)
+        for (int i = 0; i < length; i++)
         {
             user[i].text = ranker[i].Key;
             point[i].text = $"{ranker[i].Value} pts";

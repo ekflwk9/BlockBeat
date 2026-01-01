@@ -568,17 +568,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: RankUi
       objectReference: {fileID: 0}
-    - target: {fileID: 4616883701480261498, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
-      propertyPath: m_margin.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4616883701480261498, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
-      propertyPath: m_margin.z
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4616883701480261498, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
+    - target: {fileID: 4418925453695143826, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
+      propertyPath: m_Size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4710940565114993161, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
       propertyPath: m_AnchorMax.y
@@ -756,10 +748,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7899204050132740754, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8292581902787575225, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -787,6 +775,10 @@ PrefabInstance:
     - target: {fileID: 9140706978756767431, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140706978756767431, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 310.7431
       objectReference: {fileID: 0}
     - target: {fileID: 9208160081380361616, guid: f6a68890011a8ba42a4ab5658c7e2878, type: 3}
       propertyPath: m_AnchorMax.y

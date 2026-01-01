@@ -13,7 +13,7 @@ public class PlayerData
 {
     public int coin = 50;
 
-    public string nickName = "Unnamed";
+    public string nickName = Json.defaultName;
     public int advertPassCount;
 
     public int currentPoint;
@@ -73,6 +73,7 @@ public class JsonData
 
 public static class Json
 {
+    public const string defaultName = "Unnamed";
     private static readonly JsonData data = JsonData.Load();
 
     /// <summary>

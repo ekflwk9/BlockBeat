@@ -17,8 +17,8 @@ public static class FirebaseManager
     public static Dictionary<string, int> value { get; private set; } = new();
 
 #if !UNITY_EDITOR
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 #endif
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Start()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(Login);
@@ -69,7 +69,8 @@ public static class FirebaseManager
             var _nickName = currentUser.Child(userName).Value.ToString();
             var _point = System.Convert.ToInt32(currentUser.Child(pointName).Value);
 
-            value.Add(_nickName, _point);
+            if (!value.ContainsKey(_nickName)) value.Add(_nickName, _point);
+            else Service.Log($"{_nickName}은 이미 추가됨");
         }
     }
 

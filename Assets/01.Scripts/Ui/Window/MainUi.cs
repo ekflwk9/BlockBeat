@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MainUi : UiBase
 {
+    [SerializeField] private RankSystem rank;
     [SerializeField] private Image line;
 
 #if UNITY_EDITOR
@@ -12,6 +13,7 @@ public class MainUi : UiBase
     {
         SetName<MainUi>();
         line = this.TryGetChildComponent<Image>("StartLine");
+        rank = this.RequireComponent<RankSystem>();
     }
 #endif
 
@@ -22,6 +24,7 @@ public class MainUi : UiBase
 
         UiManager.Get<FadeUi>().FadeOut(0.3f);
         GlobalVolumeManager.SetVignette(0f, 0f);
+        if (rank.newRecord) UiManager.Get<AddPopupUi>().On();
     }
 
     private void OnDestroy()

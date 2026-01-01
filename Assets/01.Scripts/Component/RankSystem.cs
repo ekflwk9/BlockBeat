@@ -16,8 +16,9 @@ public class RankSystem : MonoBehaviour
         }
     }
 
-    public List<KeyValuePair<string, int>> ranker { get; private set; }
     private ValueComparer comparer = new();
+    public bool newRecord { get; private set; }
+    public List<KeyValuePair<string, int>> ranker { get; private set; }
 
     private void Awake()
     {
@@ -41,20 +42,20 @@ public class RankSystem : MonoBehaviour
             //본인과 이름이 같은가
             if (string.Equals(ranker[i].Key, Json.GetName()))
             {
-                NewRecord(i);
+                CheckNewRecord(i);
                 return;
             }
 
-            else if (NewRecord(i))
+            else if (CheckNewRecord(i))
             {
                 return;
             }
         }
     }
 
-    private bool NewRecord(int _targetIndex)
+    private bool CheckNewRecord(int _targetIndex)
     {
-        var myPoint = Json.GetPlayPoint();
+        var myPoint = Json.GetPlayMaxPoint();
 
         //현재 랭커보다 점수가 높은지
         if (ranker[_targetIndex].Value < myPoint)
@@ -65,7 +66,7 @@ public class RankSystem : MonoBehaviour
             //내 바로 위 랭커보다는 점수가 낮을 경우에만 (중복 점수 등록 방지)
             if (myPoint < nextRankerPoint)
             {
-                FirebaseManager.AddRank();
+                newRecord = true;
                 Sort();
             }
 
