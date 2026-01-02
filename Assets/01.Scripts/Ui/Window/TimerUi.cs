@@ -56,7 +56,7 @@ public class TimerUi : UiBase
     private void ResetSlide()
     {
         slide.fillAmount = 1f;
-        slide.color = Color.white;
+        slide.color = Color.green;
     }
 
     private IEnumerator Timer()

@@ -24,7 +24,7 @@ public class MainUi : UiBase
 
         UiManager.Get<FadeUi>().FadeOut(0.3f);
         GlobalVolumeManager.SetVignette(0f, 0f);
-        if (rank.newRecord) UiManager.Get<AddPopupUi>().On();
+        if (rank.newRecord) UiManager.On<AddPopupUi>();
     }
 
     private void OnDestroy()

@@ -31,7 +31,7 @@ public class BlockEffect : Effect
         direction.x = _isLeft ? power : -power;
 
         var verticalPower = power * 0.5f;
-        direction.y = Random.Range(-verticalPower, verticalPower);
+        direction.y = Random.Range(0f, verticalPower);
 
         rigid.linearVelocity = direction;
     }

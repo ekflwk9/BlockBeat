@@ -29,11 +29,20 @@ public class FadeUi : UiBase
     private void Reset()
     {
         SetName<FadeUi>();
-        gameFade = this.TryGetChildComponent<SpriteRenderer>();
 
+        SetCanvas();
+        SetUiFade();
+        SetGameFade();
+    }
+
+    private void SetCanvas()
+    {
         var canvas = this.TryGetComponent<Canvas>();
         if (canvas) canvas.sortingOrder = 100;
+    }
 
+    private void SetUiFade()
+    {
         uiFade = this.TryGetChildComponent<Image>();
 
         if (uiFade)
@@ -41,6 +50,12 @@ public class FadeUi : UiBase
             uiFade.color = Color.black;
             uiFade.color = Color.clear;
         }
+    }
+
+    private void SetGameFade()
+    {
+        gameFade = this.TryGetChildComponent<SpriteRenderer>();
+        if (gameFade) gameFade.sortingOrder = -50;
     }
 #endif
 

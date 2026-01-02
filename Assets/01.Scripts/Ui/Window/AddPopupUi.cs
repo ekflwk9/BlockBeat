@@ -39,7 +39,7 @@ public class AddPopupUi : UiBase
 
         else
         {
-            this.gameObject.SetActive(false);
+            base.Off();
             FirebaseManager.AddRank();
         }
     }
