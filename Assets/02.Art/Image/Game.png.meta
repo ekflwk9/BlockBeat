@@ -162,7 +162,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button
+      name: Window
       rect:
         serializedVersion: 2
         x: 3
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Window
+      name: Button
       rect:
         serializedVersion: 2
         x: 16
@@ -795,7 +795,7 @@ TextureImporter:
       Back: -593304721
       Box: -708003797
       BoxLine: 129605610
-      Button: -86275962
+      Button: -1799076402
       Check: 1720723838
       CircleBackGround: 1390069514
       CircleLine: 5327929
@@ -820,7 +820,7 @@ TextureImporter:
       Touch: -816767539
       Unlock: -397106282
       Wifi: -273858532
-      Window: -1799076402
+      Window: -86275962
       X: -679243451
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
