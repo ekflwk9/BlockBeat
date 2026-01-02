@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
 {
-    private List<(int, string)> sky = new();
+    private List<(int, string)> map = new();
 
 #if UNITY_EDITOR
     private void Reset()
@@ -22,32 +22,34 @@ public class LevelSystem : MonoBehaviour
     private void Awake()
     {
         InitLevel();
-        InitSky();
+        //InitSky();
     }
 
     private void InitLevel()
     {
-        //레벨 제한과 마테리얼 이름
-        sky.Add((-1, "Overcast"));
-        sky.Add((500, "GloriousPink"));
-        sky.Add((1000, "Space"));
+        //레벨 제한과 맵 프리팹 이름
+        map.Add((-1, "Overcast"));
+        map.Add((500, "GloriousPink"));
+        map.Add((1000, "Space"));
     }
 
-    private void InitSky()
+    private void InitMap()
     {
         var playerLevel = Json.GetPlayMaxPoint();
 
-        for (int i = sky.Count - 1; -1 < i; i--)
+        for (int i = map.Count - 1; -1 < i; i--)
         {
-            var (level, skyName) = sky[i];
+            var (level, mapName) = map[i];
 
             if (level < playerLevel)
             {
-                var path = Path.Combine("BackGround", skyName);
-                var load = Resources.Load<Material>(path);
+                var path = Path.Combine("Map", mapName);
+                var load = Resources.Load<GameObject>(path);
                 var spawn = Instantiate(load);
 
-                if (spawn) RenderSettings.skybox = spawn;
+                spawn.transform.position = Vector3.zero;
+                spawn.name = mapName;
+
                 break;
             }
         }
@@ -61,13 +63,13 @@ public class LevelSystem : MonoBehaviour
     {
         var playerLevel = Json.GetPlayMaxPoint();
 
-        for (int i = sky.Count - 1; -1 < i; i--)
+        for (int i = map.Count - 1; -1 < i; i--)
         {
-            var (level, skyName) = sky[i];
+            var (level, mapName) = map[i];
 
             if (level < playerLevel) return i;
         }
 
-        return sky.Count - 1;
+        return map.Count - 1;
     }
 }

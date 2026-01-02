@@ -1,20 +1,20 @@
 {
   "playerData": {
-    "coin": 1401,
+    "coin": 1838,
     "nickName": "Draw",
-    "advertPassCount": 0,
-    "currentPoint": 128,
+    "advertPassCount": 1,
+    "currentPoint": 283,
     "maxPoint": 248,
-    "maxTime": 73.0822754,
-    "currentTime": 17.7295532,
-    "combo": 3
+    "maxTime": 391.736145,
+    "currentTime": 44.3248863,
+    "combo": 6
   },
   "settingData": {
     "musicSound": false,
     "effectSound": true
   },
   "inventoryData": {
-    "currentBlock": 0,
+    "currentBlock": 1,
     "blocks": [
       0,
       1
