@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Block[] blocks;
     [SerializeField] private BlockEffect[] blockEffects;
     [SerializeField] private CoinEffect[] coinEffects;
-    [SerializeField] private SpriteRenderer crosshair;
 
     private int comboCount;
     private Block.Type previousBlockType;
@@ -36,7 +35,6 @@ public class GameManager : MonoBehaviour
         ResetBlocks();
         ResetEffects();
         ResetComboEffect();
-        ResetCrossHair();
     }
 
     private void ResetObject()
@@ -91,21 +89,6 @@ public class GameManager : MonoBehaviour
             blockEffects[i].transform.SetParent(this.transform);
             blockEffects[i].gameObject.SetActive(false);
         }
-    }
-
-    private void ResetCrossHair()
-    {
-        crosshair = this.TryGetChildComponent<SpriteRenderer>("CrossHairLine");
-        if (crosshair) return;
-
-        var path = Path.Combine("Prefabs", "CrossHairLine");
-        var load = Resources.Load<SpriteRenderer>(path);
-
-        crosshair = Instantiate(load);
-
-        crosshair.transform.position = Vector3.up * maxBottom;
-        crosshair.name = load.gameObject.name;
-        crosshair.transform.SetParent(this.transform);
     }
 
     private void ResetComboEffect()
@@ -188,7 +171,6 @@ public class GameManager : MonoBehaviour
         if (FirebaseManager.connect) Json.SaveMaxPoint();
 
         gameOver = true;
-        crosshair.color = Color.red;
 
         UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.GameOver);
         UiManager.Get<TimerUi>().StopTimer();

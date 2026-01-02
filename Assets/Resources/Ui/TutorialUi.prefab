@@ -161,7 +161,6 @@ GameObject:
   - component: {fileID: 2947243710819106343}
   - component: {fileID: 8404331768272337478}
   - component: {fileID: 840076253087910642}
-  - component: {fileID: 6680405478594258361}
   m_Layer: 5
   m_Name: LeftButton
   m_TagString: Untagged
@@ -229,20 +228,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6680405478594258361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4899970257378174153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ff75cb74f0aa84e8b299cf42b3bf49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  touch: {fileID: 3159966884453060364}
-  isLeft: 1
 --- !u!1 &4936256842727931397
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +314,6 @@ GameObject:
   - component: {fileID: 2047879361938736261}
   - component: {fileID: 1572789181885949160}
   - component: {fileID: 5544787620210699649}
-  - component: {fileID: 82251282578999091}
   m_Layer: 5
   m_Name: RightButton
   m_TagString: Untagged
@@ -397,20 +381,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &82251282578999091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5130926503374711819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ff75cb74f0aa84e8b299cf42b3bf49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  touch: {fileID: 5683490150048271962}
-  isLeft: 0
 --- !u!1 &5217828396571489644
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 159d91f41785dce42bf3607258f73aa7, type: 3}
+  m_Sprite: {fileID: -708003797, guid: e9d63cded95db2c49a16c19e44b8e7cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
