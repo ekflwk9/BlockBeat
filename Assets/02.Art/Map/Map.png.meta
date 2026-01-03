@@ -601,6 +601,204 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: NightLeftTop
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 121
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f03da92972309a64fbf9233da68ef6d7
+      internalID: 535593029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightMidleTop
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 121
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d82f6cf9acdc9f429878cd6b0d615ce
+      internalID: -403269213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightRightTop
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 121
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13f3edd67a853974890f1fffa297f3c0
+      internalID: 1315798440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightLeft
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 115
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 519b6282cd0c61f488313e983acc9107
+      internalID: 1633486670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightMidle
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 115
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36f66006db918d344a25aa1ab34c2272
+      internalID: 810748261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightRight
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 115
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57df691a18e849d41818c318b73d77b0
+      internalID: -1496887290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightObject1
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 121
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebd26e68770ec4e4fa8ad8d680835fd6
+      internalID: -782774526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightObject2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 96
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d02c4b6491283a84ea96f5400cbbad7c
+      internalID: 82247814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NightObject3
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 96
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e838597f5da22e40aa81fc364a45c53
+      internalID: -1966248257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -629,6 +827,15 @@ TextureImporter:
       ForestSkyMidle: -272287248
       ForestSkyTop: 1381719863
       Map_4: 944416104
+      NightLeft: 1633486670
+      NightLeftTop: 535593029
+      NightMidle: 810748261
+      NightMidleTop: -403269213
+      NightObject1: -782774526
+      NightObject2: 82247814
+      NightObject3: -1966248257
+      NightRight: -1496887290
+      NightRightTop: 1315798440
       SnowMountLeft: 44348254
       SnowMountLeftTop: 1594084502
       SnowMountMidle: 908407132
