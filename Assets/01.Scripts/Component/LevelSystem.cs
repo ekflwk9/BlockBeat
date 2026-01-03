@@ -22,15 +22,13 @@ public class LevelSystem : MonoBehaviour
     private void Awake()
     {
         InitLevel();
-        //InitSky();
+        InitMap();
     }
 
     private void InitLevel()
     {
         //레벨 제한과 맵 프리팹 이름
-        map.Add((-1, "Overcast"));
-        map.Add((500, "GloriousPink"));
-        map.Add((1000, "Space"));
+        map.Add((-1, "Forest"));
     }
 
     private void InitMap()
@@ -47,9 +45,7 @@ public class LevelSystem : MonoBehaviour
                 var load = Resources.Load<GameObject>(path);
                 var spawn = Instantiate(load);
 
-                spawn.transform.position = Vector3.zero;
                 spawn.name = mapName;
-
                 break;
             }
         }

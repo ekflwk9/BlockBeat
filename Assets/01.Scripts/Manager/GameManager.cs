@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public const int effectCount = 15;       //임펙트 스폰 갯수
+    public const int effectCount = 8;       //임펙트 스폰 갯수
     public const int blockSpawnCount = 20;   //블럭 스폰 갯수
     public const float maxBottom = -1.5f;    //블럭 시작 위치
     public const float downSpeed = 16f;      //내려가는 속도
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         ResetObject();
         ResetBlocks();
         ResetEffects();
-        ResetComboEffect();
+        ResetCoinEffect();
     }
 
     private void ResetObject()
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ResetComboEffect()
+    private void ResetCoinEffect()
     {
         coinEffects = this.GetComponentsInChildren<CoinEffect>(true);
         if (coinEffects.Length != 0) return;
