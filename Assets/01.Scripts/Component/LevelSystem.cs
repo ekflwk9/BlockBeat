@@ -29,6 +29,7 @@ public class LevelSystem : MonoBehaviour
     {
         //레벨 제한과 맵 프리팹 이름
         map.Add((-1, "Forest"));
+        map.Add((50, "SnowMount"));
     }
 
     private void InitMap()

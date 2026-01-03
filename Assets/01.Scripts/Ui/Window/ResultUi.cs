@@ -52,7 +52,7 @@ public class ResultUi : UiBase
 
     private void Start()
     {
-        ShowFade(); 
+        ShowFade();
         SetComment();
         SetPlayPoint();
         SetMaxPoint();
@@ -91,6 +91,7 @@ public class ResultUi : UiBase
 
         var fontSize = maxPoint.fontSize * 0.6f;
 
+#if !UNITY_EDITOR
         if (FirebaseManager.connect)
         {
             var playPoint = Json.GetPlayPoint();
@@ -111,6 +112,15 @@ public class ResultUi : UiBase
             maxPoint.color = Color.gray;
             maxPoint.text = newSize;
         }
+#else
+        var playPoint = Json.GetPlayPoint();
+        var playMaxPoint = Json.GetPlayMaxPoint();
+
+        var newText = $"<size={fontSize}>New !</size>";
+        var newRecord = (playMaxPoint != 0 && playMaxPoint == playPoint) ? $"<color=#00FF00>{newText}</color>" : string.Empty;
+
+        maxPoint.text = $"{newRecord}    {playMaxPoint}";
+#endif
     }
 
     private void SetCombo()

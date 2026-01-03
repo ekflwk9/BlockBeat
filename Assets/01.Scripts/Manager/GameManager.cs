@@ -168,9 +168,13 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (gameOver) return;
-        if (FirebaseManager.connect) Json.SaveMaxPoint();
-
         gameOver = true;
+
+#if !UNITY_EDITOR
+        if (FirebaseManager.connect) Json.SaveMaxPoint();
+#else
+        Json.SaveMaxPoint();
+#endif
 
         UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.GameOver);
         UiManager.Get<TimerUi>().StopTimer();
