@@ -20,6 +20,10 @@ public class Quest
     {
         [Block.Name.Normal] = NoConditions(_price: 500),
         [Block.Name.Graphics] = Point(150, _price: 500),
+        [Block.Name.Ice] = NoConditions(_price: 500),
+        [Block.Name.Dotory] = NoConditions(_price: 500),
+        [Block.Name.Bamboo] = NoConditions(_price: 500),
+        [Block.Name.Bbiyak] = NoConditions(_price: 500),
     };
 
     /// <summary>

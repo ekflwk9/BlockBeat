@@ -24,6 +24,10 @@ public class Block : MonoBehaviour
     {
         Normal,
         Graphics,
+        Ice,
+        Dotory,
+        Bamboo,
+        Bbiyak,
     }
 
     public enum Type

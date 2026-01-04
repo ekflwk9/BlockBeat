@@ -1718,6 +1718,18 @@ MonoBehaviour:
   - <idle>k__BackingField: {fileID: 21300000, guid: 4be2e28091b85b7409e39e9cebde0774, type: 3}
     <left>k__BackingField: {fileID: 21300000, guid: 063847faf7556f94ebb6e76d356efe88, type: 3}
     <right>k__BackingField: {fileID: 21300000, guid: 81a804bc27d617f4bb6c2b9e748ac2fc, type: 3}
+  - <idle>k__BackingField: {fileID: 21300000, guid: 01114020201bc1e419ccc0028924a2cb, type: 3}
+    <left>k__BackingField: {fileID: 21300000, guid: d3df7bc86c08ed24a99a42eb8d7368df, type: 3}
+    <right>k__BackingField: {fileID: 21300000, guid: d55a7647eae57cf46908c23cd962d659, type: 3}
+  - <idle>k__BackingField: {fileID: 21300000, guid: e0b65da2d77155d4fa87192048182792, type: 3}
+    <left>k__BackingField: {fileID: 21300000, guid: ac3a9366c3be6aa43856fa01a8147e13, type: 3}
+    <right>k__BackingField: {fileID: 21300000, guid: 3207b0ef8107bed4d9b81d50775599a1, type: 3}
+  - <idle>k__BackingField: {fileID: 21300000, guid: 59fdfc23c0008fd48b6dbc8062c9bbf4, type: 3}
+    <left>k__BackingField: {fileID: 21300000, guid: 474719807085d4c44ae04e7c7da3df61, type: 3}
+    <right>k__BackingField: {fileID: 21300000, guid: ee8fd572d5b8acf4599819f136eda94f, type: 3}
+  - <idle>k__BackingField: {fileID: 21300000, guid: b5a058b267989b84595078d1929914d7, type: 3}
+    <left>k__BackingField: {fileID: 21300000, guid: edd964169ad6f1e44916f71334d2866c, type: 3}
+    <right>k__BackingField: {fileID: 21300000, guid: 190e222cec235714da6562035204a726, type: 3}
 --- !u!1 &5662251978838016466
 GameObject:
   m_ObjectHideFlags: 0
