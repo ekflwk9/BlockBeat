@@ -30,6 +30,8 @@ public class LevelSystem : MonoBehaviour
         //레벨 제한과 맵 프리팹 이름
         map.Add((-1, "Forest"));
         map.Add((50, "SnowMount"));
+        map.Add((100, "Night"));
+        map.Add((150, "Mars"));
     }
 
     private void InitMap()
@@ -58,7 +60,7 @@ public class LevelSystem : MonoBehaviour
     /// <returns></returns>
     public int GetLevel()
     {
-        var playerLevel = Json.GetPlayMaxPoint();
+        var playerLevel = Json.GetPlayPoint();
 
         for (int i = map.Count - 1; -1 < i; i--)
         {
