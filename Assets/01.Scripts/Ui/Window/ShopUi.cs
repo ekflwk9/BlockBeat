@@ -13,8 +13,6 @@ public class ShopUi : UiBase
     [SerializeField] private TMP_Text coinText;
     [SerializeField] private TMP_Text conditionText;
     [SerializeField] private GameObject conditionWindow;
-    [SerializeField] private GameObject lockIcon;
-    [SerializeField] private GameObject unLockIcon;
     [SerializeField] private Block.Info[] items;
 
     private Quest quest = new();
@@ -33,8 +31,6 @@ public class ShopUi : UiBase
 
     private void FindIcon()
     {
-        lockIcon = this.TryFindChild("LockIcon");
-        unLockIcon = this.TryFindChild("UnLockIcon");
         conditionWindow = this.TryFindChild("ConditionWindow");
     }
 
@@ -158,8 +154,5 @@ public class ShopUi : UiBase
 
         var isCondition = !string.IsNullOrEmpty(newText);
         conditionWindow.SetActive(isCondition);
-
-        lockIcon.SetActive(!complete);
-        unLockIcon.SetActive(complete);
     }
 }

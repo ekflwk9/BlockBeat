@@ -22,8 +22,10 @@ public class Quest
         [Block.Name.Graphics] = Point(150, _price: 500),
         [Block.Name.Ice] = NoConditions(_price: 500),
         [Block.Name.Dotory] = NoConditions(_price: 500),
-        [Block.Name.Bamboo] = NoConditions(_price: 500),
-        [Block.Name.Bbiyak] = NoConditions(_price: 500),
+        [Block.Name.Bamboo] = Survival(_timer: 45f, _price: 500),
+        [Block.Name.Bbiyak] = Combo(_combo: 6, _price: 500),
+        [Block.Name.BobSang] = NoConditions(_price: 500),
+        [Block.Name.Warrior] = NoConditions(_price: 500),
     };
 
     /// <summary>
@@ -81,14 +83,14 @@ public class Quest
         var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
 
         var newText = $"{color}{_timer.ToString("F2")}</color>";
-        var questText = $"Maximum survival time over {newText}s";
+        var questText = $"Survival time over {newText}s";
 
         return new Quest.List(questText, complete, _price);
     }
 
     private static Quest.List Combo(int _combo, int _price = 0)
     {
-        var complete = _combo < Json.GetCombo();
+        var complete = _combo < Json.GetMaxCombo();
         var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
 
         var newText = $"{color}{_combo}</color>";

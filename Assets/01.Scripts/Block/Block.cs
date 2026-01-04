@@ -28,6 +28,8 @@ public class Block : MonoBehaviour
         Dotory,
         Bamboo,
         Bbiyak,
+        BobSang,
+        Warrior,
     }
 
     public enum Type

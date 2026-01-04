@@ -21,7 +21,9 @@ public class PlayerData
 
     public float maxTime;
     public float currentTime;
+
     public int combo;
+    public int maxCombo;
 }
 
 public class SettingData
@@ -99,8 +101,13 @@ public static class Json
     public static void SetAdvertPass(int _passCount) => data.playerData.advertPassCount = _passCount;
     public static int GetAdvertPass() => data.playerData.advertPassCount;
 
+    public static int GetMaxCombo() => data.playerData.maxCombo;
     public static int GetCombo() => data.playerData.combo;
-    public static void SetCombo(int _combo) => data.playerData.combo = _combo;
+    public static void SetCombo(int _combo)
+    { 
+        var playerData = data.playerData;
+        if(playerData.maxCombo < _combo) data.playerData.maxCombo = _combo;
+    }
 
     public static void SetName(string _name) => data.playerData.nickName = _name;
     public static string GetName() => data.playerData.nickName;
