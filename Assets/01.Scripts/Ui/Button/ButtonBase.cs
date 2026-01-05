@@ -15,7 +15,15 @@ public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler, IPointerU
 
     private void OnDisable() => touch?.gameObject.SetActive(false);
 
-    public virtual void OnPointerDown(PointerEventData eventData) => touch?.gameObject.SetActive(true);
+    public virtual void OnPointerDown(PointerEventData eventData)
+    {
+        SoundManager.OnEffect(SoundManager.SoundName.Touch);
+        touch?.gameObject.SetActive(true);
+    }
 
-    public void OnPointerUp(PointerEventData eventData) => touch?.gameObject.SetActive(false);
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        touch?.gameObject.SetActive(false);
+    }
 }
+

@@ -21,10 +21,8 @@ public class MainUi : UiBase
     {
         InitStartLine();
         InitCoinText();
-
-        UiManager.Get<FadeUi>().FadeOut(0.3f);
-        GlobalVolumeManager.SetVignette(0f, 0f);
-        if (rank.newRecord) UiManager.On<AddPopupUi>();
+        InitMainSound();
+        InitUi();
     }
 
     private void OnDestroy()
@@ -43,5 +41,17 @@ public class MainUi : UiBase
         var tween = line.DOFade(0f, 0.5f);
         tween.SetLoops(-1, LoopType.Yoyo);
         tween.SetEase(Ease.Linear);
+    }
+
+    private void InitUi()
+    {
+        UiManager.Get<FadeUi>().FadeOut(0.3f);
+        GlobalVolumeManager.SetVignette(0f, 0f);
+        if (rank.newRecord) UiManager.On<AddPopupUi>();
+    }
+
+    private void InitMainSound()
+    {
+        SoundManager.OnMusic(SoundManager.SoundName.MainMusic);
     }
 }

@@ -138,6 +138,8 @@ public class GameManager : MonoBehaviour
         if (blocks[0].CanBreak(direction))
         {
             GetCoin(direction);
+
+            SoundManager.OnEffect(SoundManager.SoundName.Block);
             Json.SetPlayPoint(Json.GetPlayPoint() + 1);
 
             UiManager.Get<PointUi>().ShowPoint();
@@ -158,6 +160,7 @@ public class GameManager : MonoBehaviour
         if (blocks[0].CanEatCoin(_direction))
         {
             Json.SetCoin(Json.GetCoin() + 1);
+            SoundManager.OnEffect(SoundManager.SoundName.Coin);
             OnCoinEffect(_direction);
         }
     }
@@ -175,6 +178,9 @@ public class GameManager : MonoBehaviour
 #else
         Json.SaveMaxPoint();
 #endif
+
+        SoundManager.OffMusic();
+        SoundManager.OnEffect(SoundManager.SoundName.Dead);
 
         UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.GameOver);
         UiManager.Get<TimerUi>().StopTimer();
@@ -209,6 +215,7 @@ public class GameManager : MonoBehaviour
             UiManager.Get<ComboUi>().Show(comboCount);
             UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.Combo);
 
+            SoundManager.OnEffect(SoundManager.SoundName.Combo);
             CamController.Instatnce.Shake(0.15f, 0.1f);
             comboCount++;
 

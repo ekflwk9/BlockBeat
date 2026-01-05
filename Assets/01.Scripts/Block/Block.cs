@@ -23,13 +23,16 @@ public class Block : MonoBehaviour
     public enum Name
     {
         Normal,
-        Graphics,
+        Gwasok,
         Ice,
         Dotory,
         Bamboo,
         Bbiyak,
         BobSang,
         Warrior,
+        Sniper,
+        Slime,
+        Orak,
     }
 
     public enum Type

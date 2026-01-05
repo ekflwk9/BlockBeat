@@ -1,38 +1,70 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public static class SoundManager
 {
     public enum SoundName
     {
-    
+        Block,
+        Buy,
+        Coin,
+        Combo,
+        Dead,
+        Touch,
+        GameOver,
+        MainMusic,
     }
 
-    private static AudioSource music = Init();
+    private static AudioSource music;
     private static AudioSource[] effect;
 
     private static Dictionary<SoundName, AudioClip> sounds = new();
-    private static int effectIndex;
+    private static int effectIndex = Init();
 
-    private static AudioSource Init()
+    private static int Init()
     {
         var manager = new GameObject("[SoundManager]");
         MonoBehaviour.DontDestroyOnLoad(manager);
 
-        music = manager.AddComponent<AudioSource>();
+        InitMusic(manager);
+        InitEffect(manager);
+        InitSound();
+
+        return 0;
+    }
+
+    private static void InitMusic(GameObject _instance)
+    {
+        music = _instance.AddComponent<AudioSource>();
         music.playOnAwake = false;
         music.loop = true;
+    }
 
+    private static void InitEffect(GameObject _instance)
+    {
         var effectCount = 10;
         effect = new AudioSource[effectCount];
 
         for (int i = 0; i < effectCount; i++)
         {
-            effect[i] = manager.AddComponent<AudioSource>();
+            effect[i] = _instance.AddComponent<AudioSource>();
             effect[i].playOnAwake = false;
         }
+    }
 
-        return music;
+    private static void InitSound()
+    {
+        var soundNames = (SoundName[])Enum.GetValues(typeof(SoundName));
+        var path = "Sound";
+
+        for (int i = 0; i < soundNames.Length; i++)
+        {
+            var fileName = Path.Combine(path, soundNames[i].ToString());
+            var load = Resources.Load<AudioClip>(fileName);
+            if (load) sounds.Add(soundNames[i], load);
+        }
     }
 
     /// <summary>
@@ -40,7 +72,7 @@ public static class SoundManager
     /// </summary>
     public static void OnEffect(SoundName _soundName)
     {
-        if(!sounds.ContainsKey(_soundName))
+        if (!sounds.ContainsKey(_soundName))
         {
             Service.Log($"{_soundName.ToString()}이라는 사운드는 로드되지 않음");
             return;
@@ -56,7 +88,7 @@ public static class SoundManager
     /// <summary>
     /// 배경음 재생
     /// </summary>
-    public static void OnMusic(SoundName _soundName)
+    public static void OnMusic(SoundName _soundName, bool _isLoop = true)
     {
         if (!sounds.ContainsKey(_soundName))
         {
@@ -64,8 +96,23 @@ public static class SoundManager
             return;
         }
 
+        else if(music.clip && Equals(sounds[_soundName], music.clip))
+        {
+            return;
+        }
+
+        music.loop = _isLoop;
         music.clip = sounds[_soundName];
         music.Play();
+    }
+
+    /// <summary>
+    /// 사운드 정지 (일시 정지 아님)
+    /// </summary>
+    public static void OffMusic()
+    {
+        music.clip = null;
+        music.Stop();
     }
 
     /// <summary>
@@ -74,9 +121,10 @@ public static class SoundManager
     /// <param name="_isOff"></param>
     public static void SetEffectVolume()
     {
-        var newVolume = Json.GetEffectSound() ? 1f : 0f;
         Json.SetEffectSound();
         Json.Save();
+
+        var newVolume = Json.GetEffectSound() ? 1f : 0f;
 
         for (int i = 0; i < effect.Length; i++)
         {
@@ -90,8 +138,9 @@ public static class SoundManager
     /// <param name="_isOff"></param>
     public static void SetMusicVolume()
     {
-        music.volume = Json.GetMusicSound() ? 1f : 0f;
         Json.SetMusicSound();
         Json.Save();
+
+        music.volume = Json.GetMusicSound() ? 1f : 0f;
     }
 }

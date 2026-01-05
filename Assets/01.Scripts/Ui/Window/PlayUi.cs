@@ -26,7 +26,13 @@ public class PlayUi : UiBase
     private void Start()
     {
         InitUi();
+        InitSound();
         StartCoroutine(StartGame());
+    }
+
+    private void InitSound()
+    {
+        SoundManager.OnMusic(SoundManager.SoundName.MainMusic);
     }
 
     private void InitUi()

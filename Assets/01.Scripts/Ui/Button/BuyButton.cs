@@ -32,6 +32,8 @@ public class BuyButton : ButtonBase
 
         if (price <= playerCoin)
         {
+            SoundManager.OnEffect(SoundManager.SoundName.Buy);
+
             Json.SetCoin(playerCoin - price);
             UiManager.Get<ShopUi>().AddBlock();
             UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.Buy);

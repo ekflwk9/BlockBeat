@@ -58,11 +58,20 @@ public class ResultUi : UiBase
         SetMaxPoint();
         SetCombo();
         SetTimer();
+        OnMusic();
     }
 
     private void ShowFade()
     {
         UiManager.Get<FadeUi>().FadeOut(0.3f);
+    }
+
+    private void OnMusic()
+    {
+        if (Json.GetAdvertPass() < AdvertisementSystem.maxPassCount)
+        {
+            SoundManager.OnMusic(SoundManager.SoundName.GameOver, false);
+        }
     }
 
     private void SetComment()

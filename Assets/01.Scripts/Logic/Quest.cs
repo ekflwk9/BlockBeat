@@ -19,13 +19,17 @@ public class Quest
     public Dictionary<Block.Name, Quest.List> list = new()
     {
         [Block.Name.Normal] = NoConditions(_price: 500),
-        [Block.Name.Graphics] = Point(150, _price: 500),
+        //[Block.Name.Graphics] = Point(150, _price: 500),
+        [Block.Name.Gwasok] = NoConditions(_price: 500),
         [Block.Name.Ice] = NoConditions(_price: 500),
         [Block.Name.Dotory] = NoConditions(_price: 500),
         [Block.Name.Bamboo] = Survival(_timer: 45f, _price: 500),
         [Block.Name.Bbiyak] = Combo(_combo: 6, _price: 500),
         [Block.Name.BobSang] = NoConditions(_price: 500),
         [Block.Name.Warrior] = NoConditions(_price: 500),
+        [Block.Name.Sniper] = NoConditions(_price: 500),
+        [Block.Name.Slime] = NoConditions(_price: 500),
+        [Block.Name.Orak] = NoConditions(_price: 500),
     };
 
     /// <summary>
