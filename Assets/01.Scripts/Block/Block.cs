@@ -25,7 +25,7 @@ public class Block : MonoBehaviour
         Normal,
         Gwasok,
         Ice,
-        Dotory,
+        //Dotory,
         Bamboo,
         Bbiyak,
         BobSang,

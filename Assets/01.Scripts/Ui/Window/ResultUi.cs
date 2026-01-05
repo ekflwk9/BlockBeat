@@ -15,8 +15,8 @@ public class ResultUi : UiBase
     [SerializeField] private TMP_Text timer;
     [SerializeField] private TMP_Text timerTitle;
 
-    [SerializeField] private TMP_Text combo;
-    [SerializeField] private TMP_Text comboTitle;
+    [SerializeField] private TMP_Text evade;
+    [SerializeField] private TMP_Text evadeTitle;
 
     private string[] comment =
     {
@@ -45,8 +45,8 @@ public class ResultUi : UiBase
         maxPointTitle = this.TryGetChildComponent<TMP_Text>("MaxPointTitle");
         maxPoint = this.TryGetChildComponent<TMP_Text>("MaxPoint");
 
-        comboTitle = this.TryGetChildComponent<TMP_Text>("ComboTitle");
-        combo = this.TryGetChildComponent<TMP_Text>("Combo");
+        evadeTitle = this.TryGetChildComponent<TMP_Text>("EvadeTitle");
+        evade = this.TryGetChildComponent<TMP_Text>("Evade");
     }
 #endif
 
@@ -56,7 +56,7 @@ public class ResultUi : UiBase
         SetComment();
         SetPlayPoint();
         SetMaxPoint();
-        SetCombo();
+        SetEvade();
         SetTimer();
         OnMusic();
     }
@@ -132,10 +132,10 @@ public class ResultUi : UiBase
 #endif
     }
 
-    private void SetCombo()
+    private void SetEvade()
     {
-        comboTitle.text = "Most Combo";
-        combo.text = Json.GetCombo().ToString();
+        evadeTitle.text = "Most Evade";
+        evade.text = Json.GetEvade().ToString();
     }
 
     private void SetTimer()

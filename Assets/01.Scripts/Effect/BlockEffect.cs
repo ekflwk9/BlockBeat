@@ -33,6 +33,13 @@ public class BlockEffect : Effect
         var verticalPower = power * 0.5f;
         direction.y = Random.Range(0f, verticalPower);
 
+        RandonRotate();
         rigid.linearVelocity = direction;
+    }
+
+    private void RandonRotate()
+    {
+        var newRotate = Random.Range(-30f, 30f);
+        this.transform.rotation = Quaternion.Euler(0, 0, newRotate);
     }
 }

@@ -10,7 +10,7 @@ public static class SoundManager
         Block,
         Buy,
         Coin,
-        Combo,
+        Evade,
         Dead,
         Touch,
         GameOver,
@@ -122,8 +122,6 @@ public static class SoundManager
     public static void SetEffectVolume()
     {
         Json.SetEffectSound();
-        Json.Save();
-
         var newVolume = Json.GetEffectSound() ? 1f : 0f;
 
         for (int i = 0; i < effect.Length; i++)
@@ -139,8 +137,6 @@ public static class SoundManager
     public static void SetMusicVolume()
     {
         Json.SetMusicSound();
-        Json.Save();
-
         music.volume = Json.GetMusicSound() ? 1f : 0f;
     }
 }

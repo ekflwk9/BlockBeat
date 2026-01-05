@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour
     public bool gameOver { get; private set; }
     public bool canTouch { get; private set; } = true;
 
+    [SerializeField] private CrossHair crossHair;
     [SerializeField] private Block[] blocks;
     [SerializeField] private BlockEffect[] blockEffects;
     [SerializeField] private CoinEffect[] coinEffects;
 
-    private int comboCount;
+    private int evadeCount;
     private Block.Type previousBlockType;
 
     private Dictionary<Type, int> effectIndex = new()
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
         ResetObject();
+        ResetCrossHair();
         ResetBlocks();
         ResetEffects();
         ResetCoinEffect();
@@ -110,6 +112,21 @@ public class GameManager : MonoBehaviour
             coinEffects[i].gameObject.SetActive(false);
         }
     }
+
+    private void ResetCrossHair()
+    {
+        crossHair = this.TryGetChildComponent<CrossHair>();
+
+        if (!crossHair)
+        {
+            var path = Path.Combine("Prefabs", $"{typeof(CrossHair).Name}");
+            var load = Resources.Load<CrossHair>(path);
+
+            crossHair = Instantiate(load);
+            crossHair.name = load.name;
+            crossHair.transform.SetParent(this.transform);
+        }
+    }
 #endif
 
     private void Awake()
@@ -120,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     private void InitDate()
     {
-        Json.SetCombo(0);
+        Json.SetEvade(0);
         Json.SetPlayPoint(0);
     }
 
@@ -138,6 +155,7 @@ public class GameManager : MonoBehaviour
         if (blocks[0].CanBreak(direction))
         {
             GetCoin(direction);
+            crossHair.OnAnimtion();
 
             SoundManager.OnEffect(SoundManager.SoundName.Block);
             Json.SetPlayPoint(Json.GetPlayPoint() + 1);
@@ -172,6 +190,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver) return;
         gameOver = true;
+        crossHair.gameObject.SetActive(false);
 
 #if !UNITY_EDITOR
         if (FirebaseManager.connect) Json.SaveMaxPoint();
@@ -212,19 +231,19 @@ public class GameManager : MonoBehaviour
         if ((previousBlockType == Block.Type.Left && currentBlockType == Block.Type.Right) ||
             (previousBlockType == Block.Type.Right && currentBlockType == Block.Type.Left))
         {
-            UiManager.Get<ComboUi>().Show(comboCount);
-            UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.Combo);
+            UiManager.Get<EvadeUi>().Show(evadeCount);
+            UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.Evade);
 
-            SoundManager.OnEffect(SoundManager.SoundName.Combo);
+            SoundManager.OnEffect(SoundManager.SoundName.Evade);
             CamController.Instatnce.Shake(0.15f, 0.1f);
-            comboCount++;
+            evadeCount++;
 
-            if (Json.GetCombo() < comboCount) Json.SetCombo(comboCount);
+            if (Json.GetEvade() < evadeCount) Json.SetEvade(evadeCount);
         }
 
         else
         {
-            comboCount = 0;
+            evadeCount = 0;
         }
 
         blocks[0].BreakBlock(lastBlockPos);

@@ -19,12 +19,11 @@ public class Quest
     public Dictionary<Block.Name, Quest.List> list = new()
     {
         [Block.Name.Normal] = NoConditions(_price: 500),
-        //[Block.Name.Graphics] = Point(150, _price: 500),
-        [Block.Name.Gwasok] = NoConditions(_price: 500),
+        [Block.Name.Gwasok] = Point(150, _price: 500),
         [Block.Name.Ice] = NoConditions(_price: 500),
-        [Block.Name.Dotory] = NoConditions(_price: 500),
+        //[Block.Name.Dotory] = NoConditions(_price: 500),
         [Block.Name.Bamboo] = Survival(_timer: 45f, _price: 500),
-        [Block.Name.Bbiyak] = Combo(_combo: 6, _price: 500),
+        [Block.Name.Bbiyak] = Evade(_evade: 6, _price: 500),
         [Block.Name.BobSang] = NoConditions(_price: 500),
         [Block.Name.Warrior] = NoConditions(_price: 500),
         [Block.Name.Sniper] = NoConditions(_price: 500),
@@ -92,13 +91,13 @@ public class Quest
         return new Quest.List(questText, complete, _price);
     }
 
-    private static Quest.List Combo(int _combo, int _price = 0)
+    private static Quest.List Evade(int _evade, int _price = 0)
     {
-        var complete = _combo < Json.GetMaxCombo();
+        var complete = _evade < Json.GetMaxEvade();
         var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
 
-        var newText = $"{color}{_combo}</color>";
-        var questText = $"Over {newText} Combo";
+        var newText = $"{color}{_evade}</color>";
+        var questText = $"Over {newText} Evade";
 
         return new Quest.List(questText, complete, _price);
     }

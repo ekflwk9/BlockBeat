@@ -4,7 +4,7 @@ using UnityEngine.Advertisements;
 #if UNITY_ANDROID || UNITY_IOS
 public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    public const int maxPassCount = 3;
+    public const int maxPassCount = 2;
     private static bool isBanner;
 
 #if UNITY_IOS

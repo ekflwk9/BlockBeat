@@ -39,7 +39,7 @@ public class PlayUi : UiBase
     {
         UiManager.Off<PointUi>();
         UiManager.Off<TimerUi>();
-        UiManager.On<ComboUi>();
+        UiManager.On<EvadeUi>();
         UiManager.On<TutorialUi>();
 
         UiManager.Get<FadeUi>().FadeOut(0.5f);

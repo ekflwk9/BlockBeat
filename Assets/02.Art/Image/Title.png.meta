@@ -206,7 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Title_0
+      name: GameOverFade
       rect:
         serializedVersion: 2
         x: 1
@@ -264,8 +264,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       GameOver: -1785989554
+      GameOverFade: -125264896
       Skin: -1119556749
-      Title_0: -125264896
       TopPlayers: 1937177272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

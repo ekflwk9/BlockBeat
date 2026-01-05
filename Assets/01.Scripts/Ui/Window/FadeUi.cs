@@ -8,12 +8,12 @@ public class FadeUi : UiBase
 {
     public enum Type
     {
-        Combo,
+        Evade,
         GameOver,
         Buy,
     }
 
-    [Header("콤보 성공시 색깔"), SerializeField] private Color combo;
+    [Header("콤보 성공시 색깔"), SerializeField] private Color evade;
     [Header("게임 오버시 색깔"), SerializeField] private Color gameOver;
     [Header("상점 구매시 색깔"), SerializeField] private Color buy;
 
@@ -84,7 +84,7 @@ public class FadeUi : UiBase
 
     private void InitColor()
     {
-        color.Add(Type.Combo, combo);
+        color.Add(Type.Evade, evade);
         color.Add(Type.GameOver, gameOver);
         color.Add(Type.Buy, buy);
     }

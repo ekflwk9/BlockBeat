@@ -22,8 +22,8 @@ public class PlayerData
     public float maxTime;
     public float currentTime;
 
-    public int combo;
-    public int maxCombo;
+    public int evade;
+    public int maxEvade;
 }
 
 public class SettingData
@@ -101,12 +101,14 @@ public static class Json
     public static void SetAdvertPass(int _passCount) => data.playerData.advertPassCount = _passCount;
     public static int GetAdvertPass() => data.playerData.advertPassCount;
 
-    public static int GetMaxCombo() => data.playerData.maxCombo;
-    public static int GetCombo() => data.playerData.combo;
-    public static void SetCombo(int _combo)
+    public static int GetMaxEvade() => data.playerData.maxEvade;
+    public static int GetEvade() => data.playerData.evade;
+    public static void SetEvade(int _evade)
     { 
         var playerData = data.playerData;
-        if(playerData.maxCombo < _combo) data.playerData.maxCombo = _combo;
+
+        if (playerData.maxEvade < _evade) data.playerData.maxEvade = _evade;
+        data.playerData.evade = _evade;
     }
 
     public static void SetName(string _name) => data.playerData.nickName = _name;

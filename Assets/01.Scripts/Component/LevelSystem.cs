@@ -25,6 +25,13 @@ public class LevelSystem : MonoBehaviour
         InitMap();
     }
 
+    private void OnApplicationQuit()
+    {
+#if !UNITY_EDITOR
+        Json.Save();
+#endif
+    }
+
     private void InitLevel()
     {
         //레벨 제한과 맵 프리팹 이름
