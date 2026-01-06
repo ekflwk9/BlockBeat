@@ -777,6 +777,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Metal
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 87
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d8aef1e144b3e346bef97f4529b339c
+      internalID: -1087616352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 74
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cec3abae5044e14c859e4b073c3eca4
+      internalID: 1399140962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -808,6 +852,7 @@ TextureImporter:
       Interaction: 739879867
       Line: -1474332777
       Lock: -800418259
+      Metal: -1087616352
       Music: -53253494
       Option: 2113249720
       Rank: 2097346951
@@ -821,6 +866,7 @@ TextureImporter:
       Unlock: -397106282
       Wifi: -273858532
       Window: -86275962
+      Window2: 1399140962
       X: -679243451
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

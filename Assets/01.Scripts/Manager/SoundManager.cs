@@ -30,6 +30,7 @@ public static class SoundManager
 
         InitMusic(manager);
         InitEffect(manager);
+        InitVolume();
         InitSound();
 
         return 0;
@@ -51,6 +52,16 @@ public static class SoundManager
         {
             effect[i] = _instance.AddComponent<AudioSource>();
             effect[i].playOnAwake = false;
+        }
+    }
+
+    private static void InitVolume()
+    {
+        music.volume = Json.GetMusicSound() ? 1f : 0f;
+
+        for (int i = 0; i < effect.Length; i++)
+        {
+            effect[i].volume = Json.GetEffectSound() ? 1f : 0f;
         }
     }
 

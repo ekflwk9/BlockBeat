@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class CoroutineManager
 {
-    private static WaitForFixedUpdate waitFixed = new();
+    //private static WaitForFixedUpdate waitFixed = new();
     private static Dictionary<float, WaitForSeconds> wait = new(capacity : 50);
 
     /// <summary>
@@ -21,8 +21,8 @@ public static class CoroutineManager
     /// FixedUpdate가 모두 완료될 때까지 멈추는 코루틴
     /// </summary>
     /// <returns></returns>
-    public static WaitForFixedUpdate WaitFixed()
-    {
-        return waitFixed;
-    }
+    //public static WaitForFixedUpdate WaitFixed()
+    //{
+    //    return waitFixed;
+    //}
 }

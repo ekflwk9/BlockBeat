@@ -1,5 +1,7 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResultUi : UiBase
 {
@@ -17,6 +19,9 @@ public class ResultUi : UiBase
 
     [SerializeField] private TMP_Text evade;
     [SerializeField] private TMP_Text evadeTitle;
+
+    [SerializeField] private Image gameOverFade;
+    private Coroutine coroutine;
 
     private string[] comment =
     {
@@ -47,6 +52,8 @@ public class ResultUi : UiBase
 
         evadeTitle = this.TryGetChildComponent<TMP_Text>("EvadeTitle");
         evade = this.TryGetChildComponent<TMP_Text>("Evade");
+
+        gameOverFade = this.TryGetChildComponent<Image>("GameOverFade");
     }
 #endif
 
@@ -61,9 +68,29 @@ public class ResultUi : UiBase
         OnMusic();
     }
 
+    private void OnDestroy()
+    {
+        if (coroutine != null) StopCoroutine(coroutine);
+    }
+
     private void ShowFade()
     {
         UiManager.Get<FadeUi>().FadeOut(0.3f);
+        coroutine = StartCoroutine(OnGameOverFade());
+    }
+
+    private IEnumerator OnGameOverFade()
+    {
+        var loop = 4;
+        var speed = 0.07f;
+
+        for (int i = 0; i < loop; i++)
+        {
+            gameOverFade.color = Color.white;
+            yield return CoroutineManager.Wait(speed);
+            gameOverFade.color = Color.clear;
+            yield return CoroutineManager.Wait(speed);
+        }
     }
 
     private void OnMusic()
