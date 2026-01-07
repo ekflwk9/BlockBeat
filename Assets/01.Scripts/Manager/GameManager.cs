@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Block[] blocks;
     [SerializeField] private BlockEffect[] blockEffects;
     [SerializeField] private CoinEffect[] coinEffects;
+    [SerializeField] private LightEffect[] lightEffects;
 
     private int evadeCount;
     private Block.Type previousBlockType;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         ResetObject();
         ResetCrossHair();
         ResetBlocks();
+        ResetLightEffects();
         ResetEffects();
         ResetCoinEffect();
     }
@@ -70,6 +72,26 @@ public class GameManager : MonoBehaviour
 
                 blocks[i] = block;
             }
+        }
+    }
+
+    private void ResetLightEffects()
+    {
+        lightEffects = this.GetComponentsInChildren<LightEffect>(true);
+        if (lightEffects.Length != 0) return;
+
+        lightEffects = new LightEffect[effectCount];
+
+        var path = Path.Combine("Prefabs", "LightEffect");
+        var load = Resources.Load<LightEffect>(path);
+
+        for (int i = 0; i < effectCount; i++)
+        {
+            lightEffects[i] = Instantiate(load);
+            lightEffects[i].name = $"{load.gameObject.name} {i}";
+
+            lightEffects[i].transform.SetParent(this.transform);
+            lightEffects[i].gameObject.SetActive(false);
         }
     }
 
@@ -287,7 +309,9 @@ public class GameManager : MonoBehaviour
         if (_type == Block.Type.Right) spawnPos.x += block.localScale.x;
         else spawnPos.x -= block.localScale.x;
 
-        coinEffects[effectIndex[key]].OnEffect(spawnPos);
+        var index = effectIndex[key];
+        coinEffects[index].OnEffect(spawnPos);
+        lightEffects[index].OnEffect(spawnPos);
     }
 
     private void MoveBlock()

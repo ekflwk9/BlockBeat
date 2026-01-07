@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7149809093034110010}
   - component: {fileID: 4214668737529079425}
+  - component: {fileID: 4466105378566332781}
   m_Layer: 0
   m_Name: ForestBack
   m_TagString: Untagged
@@ -87,6 +88,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4466105378566332781
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596194017975808807}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9807303732bb4884ea45df35995fdca3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3847635499968183713
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1396919331301023544}
   - component: {fileID: 8700650429891429290}
+  - component: {fileID: 8438245000481206848}
   m_Layer: 0
   m_Name: ForestFront
   m_TagString: Untagged
@@ -221,6 +245,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8438245000481206848
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6378604944204642928}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7fbe718e87f2ab14c8b4f3be379703e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8576675159975811876
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +713,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -704,12 +750,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 8
     m_Data: {fileID: -1704572897, guid: 84d55a33c990fdd41b5c0b10a0102de9, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 1624520783, guid: 84d55a33c990fdd41b5c0b10a0102de9, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: 1738400469, guid: 84d55a33c990fdd41b5c0b10a0102de9, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 1738400469, guid: 84d55a33c990fdd41b5c0b10a0102de9, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 1624520783, guid: 84d55a33c990fdd41b5c0b10a0102de9, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 1485589360, guid: 84d55a33c990fdd41b5c0b10a0102de9, type: 3}
   - m_RefCount: 1

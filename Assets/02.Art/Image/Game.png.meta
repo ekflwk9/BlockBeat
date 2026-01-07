@@ -808,7 +808,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       customData: 
       outline: []
@@ -854,6 +854,7 @@ TextureImporter:
       Lock: -800418259
       Metal: -1087616352
       Music: -53253494
+      NoLineWindow: 329490089
       Option: 2113249720
       Rank: 2097346951
       Shop: -115685040
