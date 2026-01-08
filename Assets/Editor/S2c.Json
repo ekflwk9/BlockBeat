@@ -15,9 +15,10 @@
     "effectSound": true
   },
   "inventoryData": {
-    "currentBlock": 1,
+    "currentBlock": 6,
     "blocks": [
-      0
+      0,
+      6
     ]
   }
 }
