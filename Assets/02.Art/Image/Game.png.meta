@@ -250,32 +250,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxLine
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 74
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 2, z: 2, w: 2}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e92debea2267b0b4ba9eabb291afa926
-      internalID: 129605610
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: CircleLine
       rect:
         serializedVersion: 2
-        x: 29
+        x: 16
         y: 74
         width: 10
         height: 10
@@ -715,7 +693,7 @@ TextureImporter:
       name: Box
       rect:
         serializedVersion: 2
-        x: 43
+        x: 30
         y: 74
         width: 10
         height: 10
@@ -843,6 +821,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: RankBack
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 74
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41070a5abd4b18b4d94685c6fe247e71
+      internalID: 1532200473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RankFront
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 74
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85a1d99820cbe6a43b8cdc34035aebb1
+      internalID: -468866499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -879,6 +901,8 @@ TextureImporter:
       NoLineWindow: 329490089
       Option: 2113249720
       Rank: 2097346951
+      RankBack: 1532200473
+      RankFront: -468866499
       Shop: -115685040
       SoundOff: 32219321
       Start: 443491875
