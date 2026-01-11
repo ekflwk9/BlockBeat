@@ -32,7 +32,7 @@ public class Block : MonoBehaviour
         Slime,
         Orak,
         Sniper,
-        BobSang,
+        //BobSang,
         Cactus,
     }
 

@@ -122,7 +122,7 @@ public class ResultUi : UiBase
         //$"<size={지정할 폰트 사이즈}>{출력할 string}</size>";
         //"<color=#FF0000>{출력할 string}</color>";
 
-        maxPoint.color = Color.black;
+        maxPoint.color = Color.white;
         maxPointTitle.text = "Best";
 
         var fontSize = maxPoint.fontSize * 0.8f;

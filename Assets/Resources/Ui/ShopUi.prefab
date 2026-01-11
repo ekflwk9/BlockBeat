@@ -1615,9 +1615,6 @@ MonoBehaviour:
   - <idle>k__BackingField: {fileID: 21300000, guid: 9923ba93657e25d49aa9dd4c3731834a, type: 3}
     <left>k__BackingField: {fileID: 21300000, guid: ad656202143112949812b04d5c91bd1a, type: 3}
     <right>k__BackingField: {fileID: 21300000, guid: a0fdfc9dcfeffc34c9e93e4c794e29aa, type: 3}
-  - <idle>k__BackingField: {fileID: 21300000, guid: ffcbda7ee2f18ab4ab3aa532d52a6232, type: 3}
-    <left>k__BackingField: {fileID: 21300000, guid: 14ceb7a630f12654d9cc34797b6d23a5, type: 3}
-    <right>k__BackingField: {fileID: 21300000, guid: 25bd573311fea0f4296111b2b5b18a3f, type: 3}
   - <idle>k__BackingField: {fileID: 21300000, guid: 9d92a98364eef3b45a423b6481e97056, type: 3}
     <left>k__BackingField: {fileID: 21300000, guid: 99f24e734fb07fb4c9fc9c08c9f6dc3c, type: 3}
     <right>k__BackingField: {fileID: 21300000, guid: d54f91301e319034f8e73ae4b7597a78, type: 3}
