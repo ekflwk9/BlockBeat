@@ -26,7 +26,7 @@ public class Quest
         [Block.Name.Ice] = NoConditions(_price: 1000),
         [Block.Name.Gwasok] = Point(300, _price: 1500),
         [Block.Name.Slime] = Evade(_evade: 4, _price: 1000),
-        [Block.Name.Orak] = Survival(_timer: 70f),
+        [Block.Name.Orak] = Survival(_timer: 70f, _price : 1500),
         [Block.Name.Sniper] = Point(500, _price: 2000),
         [Block.Name.BobSang] = NoConditions(_price: 500),
         [Block.Name.Cactus] = NoConditions(_price: 3000),
