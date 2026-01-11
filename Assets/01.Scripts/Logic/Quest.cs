@@ -18,18 +18,18 @@ public class Quest
 
     public Dictionary<Block.Name, Quest.List> list = new()
     {
-        [Block.Name.Normal] = NoConditions(_price: 500),
-        [Block.Name.Warrior] = NoConditions(_price: 500),
-        [Block.Name.Bbiyak] = Evade(_evade: 6, _price: 500),
+        [Block.Name.Normal] = NoConditions(_price: 0),
+        [Block.Name.Warrior] = NoConditions(_price: 1000),
+        [Block.Name.Bbiyak] = Evade(_evade: 6, _price: 1500),
         //[Block.Name.Dotory] = NoConditions(_price: 500),
-        [Block.Name.Bamboo] = Survival(_timer: 45f, _price: 500),
-        [Block.Name.Ice] = NoConditions(_price: 500),
-        [Block.Name.Gwasok] = Point(150, _price: 500),
-        [Block.Name.Slime] = NoConditions(_price: 500),
-        [Block.Name.Orak] = NoConditions(_price: 500),
-        [Block.Name.Sniper] = NoConditions(_price: 500),
+        [Block.Name.Bamboo] = Survival(_timer: 45f, _price: 1000),
+        [Block.Name.Ice] = NoConditions(_price: 1000),
+        [Block.Name.Gwasok] = Point(300, _price: 1500),
+        [Block.Name.Slime] = Evade(_evade: 4, _price: 1000),
+        [Block.Name.Orak] = Survival(_timer: 70f),
+        [Block.Name.Sniper] = Point(500, _price: 2000),
         [Block.Name.BobSang] = NoConditions(_price: 500),
-        [Block.Name.Cactus] = NoConditions(_price: 500),
+        [Block.Name.Cactus] = NoConditions(_price: 3000),
     };
 
     /// <summary>

@@ -206,16 +206,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Title
+      name: AlphaLine
       rect:
         serializedVersion: 2
-        x: 29
-        y: 87
-        width: 10
-        height: 10
+        x: 82
+        y: 89
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 4, w: 4}
+      border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
       physicsShape: []
@@ -536,28 +536,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlphaLine
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 74
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 2, z: 2, w: 2}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb43989d62b21a54aaad073d9e267470
-      internalID: -710544511
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Music
       rect:
         serializedVersion: 2
@@ -693,7 +671,7 @@ TextureImporter:
       name: Interaction
       rect:
         serializedVersion: 2
-        x: 57
+        x: 42
         y: 87
         width: 10
         height: 10
@@ -738,7 +716,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 43
-        y: 87
+        y: 74
         width: 10
         height: 10
       alignment: 0
@@ -759,8 +737,8 @@ TextureImporter:
       name: Line
       rect:
         serializedVersion: 2
-        x: 57
-        y: 74
+        x: 68
+        y: 87
         width: 10
         height: 10
       alignment: 0
@@ -781,7 +759,7 @@ TextureImporter:
       name: Metal
       rect:
         serializedVersion: 2
-        x: 70
+        x: 55
         y: 87
         width: 10
         height: 10
@@ -803,8 +781,8 @@ TextureImporter:
       name: Window2
       rect:
         serializedVersion: 2
-        x: 70
-        y: 74
+        x: 29
+        y: 87
         width: 10
         height: 10
       alignment: 0
@@ -817,6 +795,50 @@ TextureImporter:
       bones: []
       spriteID: 3cec3abae5044e14c859e4b073c3eca4
       internalID: 1399140962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TimeSlide
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 75
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 587be64a5e3b81a42a46612341d8e330
+      internalID: 2055896170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 74
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0313c0a6c618d744b5f8a966db04dc1
+      internalID: -1992121731
       vertices: []
       indices: 
       edges: []
@@ -835,7 +857,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      AlphaLine: -710544511
+      AlphaLine: -741590954
       Back: -593304721
       Box: -708003797
       BoxLine: 129605610
@@ -861,9 +883,10 @@ TextureImporter:
       SoundOff: 32219321
       Start: 443491875
       Stop: 1869370090
+      TimeSlide: -766610619
       Timer: 1223048133
-      Title: -741590954
       Touch: -816767539
+      Tutorial: -1992121731
       Unlock: -397106282
       Wifi: -273858532
       Window: -86275962
