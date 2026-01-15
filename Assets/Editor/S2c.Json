@@ -1,13 +1,13 @@
-{
+﻿{
   "playerData": {
-    "coin": 3051,
-    "nickName": "R1flee",
+    "coin": 3033,
+    "nickName": "Unnamed",
     "advertPassCount": 1,
-    "currentPoint": 104,
-    "maxPoint": 104,
+    "currentPoint": 0,
+    "maxPoint": 0,
     "maxTime": 391.736145,
-    "currentTime": 15.3500862,
-    "evade": 2,
+    "currentTime": 16.7368565,
+    "evade": 5,
     "maxEvade": 11
   },
   "settingData": {
@@ -15,10 +15,9 @@
     "effectSound": true
   },
   "inventoryData": {
-    "currentBlock": 6,
+    "currentBlock": 9,
     "blocks": [
-      0,
-      6
+      0
     ]
   }
 }
