@@ -17,8 +17,8 @@ public static class FirebaseManager
     public static Dictionary<string, int> value { get; private set; } = new();
 
 #if !UNITY_EDITOR
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 #endif
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Start()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(Login);
@@ -31,7 +31,7 @@ public static class FirebaseManager
             if (_task.Result != DependencyStatus.Available) return;
             var auth = FirebaseAuth.DefaultInstance;
 
-            if (auth == null) await auth.SignInAnonymouslyAsync();
+            if (auth.CurrentUser == null) await auth.SignInAnonymouslyAsync();
             Load();
         }
 
@@ -79,7 +79,7 @@ public static class FirebaseManager
     /// </summary>
     public static void AddRank()
     {
-        if (!connect) return;
+        if (!connect) return; 
 
         //내 데이터 경로
         var userID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;

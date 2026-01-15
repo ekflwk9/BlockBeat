@@ -1,13 +1,13 @@
 {
   "playerData": {
-    "coin": 3010,
-    "nickName": "R1fle",
+    "coin": 3051,
+    "nickName": "R1flee",
     "advertPassCount": 1,
-    "currentPoint": 33,
-    "maxPoint": 33,
+    "currentPoint": 104,
+    "maxPoint": 104,
     "maxTime": 391.736145,
-    "currentTime": 5.097107,
-    "evade": 1,
+    "currentTime": 15.3500862,
+    "evade": 2,
     "maxEvade": 11
   },
   "settingData": {

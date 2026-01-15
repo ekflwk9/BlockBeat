@@ -8,12 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:461178779374:android:a941358be93dac993ae5ff",
+        "mobilesdk_app_id": "1:461178779374:android:1c76429b2511a54c3ae5ff",
         "android_client_info": {
-          "package_name": "com.UnityTechnologies.com.unity.template.urpblank"
+          "package_name": "com.janingyun.blockbeat"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "461178779374-i909oplv00u1sgqoli6cojn9igrpet9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB2lOSAzBBlMRgCBrpOrylwOIEsiLmLyLE"
@@ -21,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461178779374-i909oplv00u1sgqoli6cojn9igrpet9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
