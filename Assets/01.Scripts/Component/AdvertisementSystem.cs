@@ -29,6 +29,7 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
         {
             Json.SetAdvertPass(0); //패스 횟수 초기화
             Advertisement.Initialize(gameID, Application.isEditor, this);
+            Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
         }
     }
 
@@ -46,7 +47,6 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
         {
             isBanner = true;
 
-            Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
             Advertisement.Banner.Show(placementID);
         }
 
