@@ -22,6 +22,7 @@ public class MainUi : UiBase
         InitStartLine();
         InitCoinText();
         InitMainSound();
+        InitFrame();
         InitUi();
     }
 
@@ -53,5 +54,10 @@ public class MainUi : UiBase
     private void InitMainSound()
     {
         SoundManager.OnMusic(SoundManager.SoundName.MainMusic);
+    }
+
+    private void InitFrame()
+    {
+        Application.targetFrameRate = 60;
     }
 }
