@@ -4,7 +4,6 @@ using Firebase.Database;
 using Firebase.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
 
 public static class FirebaseManager
 {
@@ -21,7 +20,15 @@ public static class FirebaseManager
 #endif
     private static void Start()
     {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(Login);
+        try
+        {
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(Login);
+        }
+
+        catch
+        {
+            connect = false;
+        }
     }
 
     private static async void Login(Task<DependencyStatus> _task)
@@ -79,7 +86,7 @@ public static class FirebaseManager
     /// </summary>
     public static void AddRank()
     {
-        if (!connect) return; 
+        if (!connect) return;
 
         //내 데이터 경로
         var userID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;

@@ -35,12 +35,9 @@ public class EditorMenu : EditorWindow
         var today = DateTime.Now.ToString("yyyyMMdd");
         var newVersion = $"0.{today}.0";
 
-        if (!string.Equals(newVersion, PlayerSettings.bundleVersion))
-        {
-            PlayerSettings.bundleVersion = newVersion;
-            PlayerSettings.Android.bundleVersionCode++;
+        PlayerSettings.bundleVersion = newVersion;
+        PlayerSettings.Android.bundleVersionCode++;
 
-            Debug.Log($"현재 버전{PlayerSettings.bundleVersion}\n코드 : {PlayerSettings.Android.bundleVersionCode}");
-        }
+        Debug.Log($"현재 버전{PlayerSettings.bundleVersion}\n코드 : {PlayerSettings.Android.bundleVersionCode}");
     }
 }
