@@ -187,13 +187,13 @@ TextureImporter:
       name: Button
       rect:
         serializedVersion: 2
-        x: 16
-        y: 87
-        width: 10
-        height: 10
+        x: 43
+        y: 55
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 4, w: 4}
+      border: {x: 6, y: 6, z: 6, w: 6}
       customData: 
       outline: []
       physicsShape: []
@@ -209,7 +209,7 @@ TextureImporter:
       name: AlphaLine
       rect:
         serializedVersion: 2
-        x: 82
+        x: 69
         y: 89
         width: 6
         height: 6
@@ -451,7 +451,7 @@ TextureImporter:
       name: CircleBackGround
       rect:
         serializedVersion: 2
-        x: 43
+        x: 30
         y: 61
         width: 10
         height: 10
@@ -649,7 +649,7 @@ TextureImporter:
       name: Interaction
       rect:
         serializedVersion: 2
-        x: 42
+        x: 29
         y: 87
         width: 10
         height: 10
@@ -715,7 +715,7 @@ TextureImporter:
       name: Line
       rect:
         serializedVersion: 2
-        x: 68
+        x: 55
         y: 87
         width: 10
         height: 10
@@ -737,7 +737,7 @@ TextureImporter:
       name: Metal
       rect:
         serializedVersion: 2
-        x: 55
+        x: 42
         y: 87
         width: 10
         height: 10
@@ -759,7 +759,7 @@ TextureImporter:
       name: Window2
       rect:
         serializedVersion: 2
-        x: 29
+        x: 16
         y: 87
         width: 10
         height: 10
@@ -781,8 +781,8 @@ TextureImporter:
       name: TimeSlide
       rect:
         serializedVersion: 2
-        x: 80
-        y: 75
+        x: 79
+        y: 87
         width: 10
         height: 10
       alignment: 0
@@ -830,7 +830,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       customData: 
       outline: []
@@ -852,7 +852,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       customData: 
       outline: []
@@ -891,6 +891,7 @@ TextureImporter:
       Direction: -214823703
       Effect: -574432739
       Exit: 308805568
+      Game_0: 323335800
       Home: -685620804
       InsideWindow: 1365502395
       Interaction: 739879867

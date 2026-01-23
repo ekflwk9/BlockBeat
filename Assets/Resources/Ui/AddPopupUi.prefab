@@ -763,8 +763,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 70377b2cb656a7142ab087b49c4497ae, type: 2}
-  m_sharedMaterial: {fileID: -8388242068246165155, guid: 70377b2cb656a7142ab087b49c4497ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cc3dc7bcf57f3e04895fca92fbd8498d, type: 2}
+  m_sharedMaterial: {fileID: 2543401707402679677, guid: cc3dc7bcf57f3e04895fca92fbd8498d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -788,8 +788,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

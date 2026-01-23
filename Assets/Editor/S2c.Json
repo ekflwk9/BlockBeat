@@ -1,17 +1,17 @@
 {
   "playerData": {
-    "coin": 3033,
+    "coin": 3052,
     "nickName": "Unnamed",
-    "advertPassCount": 0,
-    "currentPoint": 0,
-    "maxPoint": 0,
+    "advertPassCount": 1,
+    "currentPoint": 1,
+    "maxPoint": 31,
     "maxTime": 391.736145,
-    "currentTime": 16.7368565,
-    "evade": 5,
+    "currentTime": 0.174057961,
+    "evade": 0,
     "maxEvade": 11
   },
   "settingData": {
-    "musicSound": false,
+    "musicSound": true,
     "effectSound": true
   },
   "inventoryData": {
