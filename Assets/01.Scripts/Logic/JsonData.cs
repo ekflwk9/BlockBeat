@@ -104,7 +104,7 @@ public static class Json
     public static int GetMaxEvade() => data.playerData.maxEvade;
     public static int GetEvade() => data.playerData.evade;
     public static void SetEvade(int _evade)
-    { 
+    {
         var playerData = data.playerData;
 
         if (playerData.maxEvade < _evade) data.playerData.maxEvade = _evade;

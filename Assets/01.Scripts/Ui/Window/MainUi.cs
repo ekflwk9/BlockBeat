@@ -31,6 +31,11 @@ public class MainUi : UiBase
         line?.DOKill();
     }
 
+    private void InitSave()
+    {
+        Json.Save();
+    }
+
     private void InitCoinText()
     {
         var coinText = this.TryGetChildComponent<TMP_Text>("CoinText");

@@ -45,6 +45,7 @@ public static class SceneChangeManager
         if (!scene.ContainsKey(_sceneName)) scene.Add(_sceneName, _sceneName.ToString());
         currentScene = _sceneName;
 
+        Json.Save();
         SceneManager.LoadScene(scene[_sceneName]);
     }
 }
