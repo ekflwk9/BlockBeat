@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class EditorMenu : EditorWindow
 {
     private const float defaultSpace = 10f;
@@ -28,6 +29,7 @@ public class EditorMenu : EditorWindow
     private void OnGUI()
     {
         Button(VersionUpdate);
+        Button(CheckVersion);
     }
 
     private void VersionUpdate()
@@ -38,6 +40,12 @@ public class EditorMenu : EditorWindow
         PlayerSettings.bundleVersion = newVersion;
         PlayerSettings.Android.bundleVersionCode++;
 
-        Debug.Log($"현재 버전{PlayerSettings.bundleVersion}\n코드 : {PlayerSettings.Android.bundleVersionCode}");
+        Debug.Log($"현재 버전 코드 : {PlayerSettings.Android.bundleVersionCode}\n현재 버전{PlayerSettings.bundleVersion}");
+    }
+
+    private void CheckVersion()
+    {
+        Debug.Log($"현재 버전 코드 : {PlayerSettings.Android.bundleVersionCode}\n현재 버전{PlayerSettings.bundleVersion}");
     }
 }
+#endif
