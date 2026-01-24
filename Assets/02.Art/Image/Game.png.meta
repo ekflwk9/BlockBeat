@@ -184,32 +184,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 55
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 6, y: 6, z: 6, w: 6}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd74505d5b525c6479decb051c551e18
-      internalID: -1799076402
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: AlphaLine
       rect:
         serializedVersion: 2
-        x: 69
+        x: 44
         y: 89
         width: 6
         height: 6
@@ -223,50 +201,6 @@ TextureImporter:
       bones: []
       spriteID: f8484f3d6166d2c4e843dae458ef8a2c
       internalID: -741590954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Touch
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 74
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 6, z: 2, w: 2}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d136d26df1fa2840a7ffdcb7ba42802
-      internalID: -816767539
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CircleLine
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 74
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 2, z: 2, w: 2}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a9c26e495074d84aa34ee8e7cdd7b2d
-      internalID: 5327929
       vertices: []
       indices: 
       edges: []
@@ -448,28 +382,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CircleBackGround
-      rect:
-        serializedVersion: 2
-        x: 30
-        y: 61
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f51a15c2db933e949bbdc5f396f3d4ff
-      internalID: 1390069514
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Option
       rect:
         serializedVersion: 2
@@ -646,28 +558,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Interaction
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 87
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 4, w: 4}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 183d6081801ee29479828ce35edc83b8
-      internalID: 739879867
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Timer
       rect:
         serializedVersion: 2
@@ -693,7 +583,7 @@ TextureImporter:
       name: Box
       rect:
         serializedVersion: 2
-        x: 30
+        x: 16
         y: 74
         width: 10
         height: 10
@@ -712,32 +602,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Line
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 87
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 4, w: 4}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 72102ee55e7a4104396203036874ce21
-      internalID: -1474332777
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Metal
       rect:
         serializedVersion: 2
-        x: 42
+        x: 30
         y: 87
         width: 10
         height: 10
@@ -781,7 +649,7 @@ TextureImporter:
       name: TimeSlide
       rect:
         serializedVersion: 2
-        x: 79
+        x: 54
         y: 87
         width: 10
         height: 10
@@ -803,8 +671,8 @@ TextureImporter:
       name: Tutorial
       rect:
         serializedVersion: 2
-        x: 68
-        y: 74
+        x: 81
+        y: 87
         width: 10
         height: 10
       alignment: 0
@@ -825,8 +693,8 @@ TextureImporter:
       name: RankBack
       rect:
         serializedVersion: 2
-        x: 42
-        y: 74
+        x: 68
+        y: 87
         width: 10
         height: 10
       alignment: 0
@@ -844,10 +712,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RankFront
+      name: Touch
       rect:
         serializedVersion: 2
-        x: 55
+        x: 3
         y: 74
         width: 10
         height: 10
@@ -859,8 +727,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85a1d99820cbe6a43b8cdc34035aebb1
-      internalID: -468866499
+      spriteID: dd6f5ffc017411a4fa2575d29d70d02a
+      internalID: -816767539
       vertices: []
       indices: 
       edges: []
@@ -883,7 +751,7 @@ TextureImporter:
       Back: -593304721
       Box: -708003797
       BoxLine: 129605610
-      Button: -1799076402
+      Button: 739879867
       Check: 1720723838
       CircleBackGround: 1390069514
       CircleLine: 5327929
@@ -891,10 +759,8 @@ TextureImporter:
       Direction: -214823703
       Effect: -574432739
       Exit: 308805568
-      Game_0: 323335800
       Home: -685620804
       InsideWindow: 1365502395
-      Interaction: 739879867
       Line: -1474332777
       Lock: -800418259
       Metal: -1087616352
@@ -910,7 +776,7 @@ TextureImporter:
       Stop: 1869370090
       TimeSlide: -766610619
       Timer: 1223048133
-      Touch: -816767539
+      Touch: 323335800
       Tutorial: -1992121731
       Unlock: -397106282
       Wifi: -273858532
