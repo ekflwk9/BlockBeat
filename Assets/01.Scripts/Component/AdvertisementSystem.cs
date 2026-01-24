@@ -4,7 +4,7 @@ using UnityEngine.Advertisements;
 #if UNITY_ANDROID || UNITY_IOS
 public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    public const int maxPassCount = 2;
+    public const int maxPassCount = 4;
     private static bool isBanner;
 
 #if UNITY_IOS
@@ -27,7 +27,6 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
     {
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Json.SetAdvertPass(0); //패스 횟수 초기화
             Advertisement.Initialize(gameID, Application.isEditor, this);
             Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
         }
@@ -46,7 +45,6 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
              SceneChangeManager.currentScene == SceneChangeManager.SceneName.Rank))
         {
             isBanner = true;
-
             Advertisement.Banner.Show(placementID);
         }
 
@@ -64,15 +62,15 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
         if (SceneChangeManager.currentScene != SceneChangeManager.SceneName.Result) return;
         var passCount = Json.GetAdvertPass();
 
-        if (maxPassCount <= passCount)
+        if (passCount < maxPassCount)
         {
-            Json.SetAdvertPass(0);
-            Advertisement.Show(placementID, this);
+            Json.SetAdvertPass(passCount + 1);
         }
 
         else
         {
-            Json.SetAdvertPass(passCount + 1);
+            Json.SetAdvertPass(0);
+            Advertisement.Show(placementID, this);
         }
     }
 
