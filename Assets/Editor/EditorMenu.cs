@@ -30,6 +30,7 @@ public class EditorMenu : EditorWindow
     {
         Button(CheckVersion);
         Button(VersionUpdate);
+        Button(FirebaseEditor.FirebaseSortExport);
     }
 
     private void VersionUpdate()
