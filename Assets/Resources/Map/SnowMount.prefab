@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1623377456128557016}
   - component: {fileID: 1474839780380075918}
-  - component: {fileID: 7738993303319333817}
+  - component: {fileID: 6240226717670379372}
+  - component: {fileID: 7658346643950373927}
   m_Layer: 0
   m_Name: ForestBack
   m_TagString: Untagged
@@ -88,28 +89,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7738993303319333817
-Animator:
-  serializedVersion: 7
+--- !u!50 &6240226717670379372
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884416933533301182}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
+--- !u!114 &7658346643950373927
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2884416933533301182}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9807303732bb4884ea45df35995fdca3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81cfcc2f01d9dc1479b745bd5b19d923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 6240226717670379372}
+  isFront: 0
+  leftPos: -0.5
+  rightPos: 0.5
 --- !u!1 &3562548140939995689
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,10 +5084,10 @@ Transform:
   m_Children:
   - {fileID: 6147452223870283086}
   - {fileID: 4809289848084395718}
-  - {fileID: 1623377456128557016}
-  - {fileID: 382666208016175315}
   - {fileID: 2085703228334537936}
   - {fileID: 6452512825622854234}
+  - {fileID: 1623377456128557016}
+  - {fileID: 382666208016175315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &5858766139073281467
@@ -5697,7 +5719,8 @@ GameObject:
   m_Component:
   - component: {fileID: 382666208016175315}
   - component: {fileID: 3638705105011591217}
-  - component: {fileID: 6360546321440245182}
+  - component: {fileID: 2689800023232394103}
+  - component: {fileID: 7924782506233025695}
   m_Layer: 0
   m_Name: ForestFront
   m_TagString: Untagged
@@ -5775,28 +5798,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6360546321440245182
-Animator:
-  serializedVersion: 7
+--- !u!50 &2689800023232394103
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586173217153385358}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
+--- !u!114 &7924782506233025695
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8586173217153385358}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7fbe718e87f2ab14c8b4f3be379703e6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81cfcc2f01d9dc1479b745bd5b19d923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 2689800023232394103}
+  isFront: 1
+  leftPos: -0.5
+  rightPos: 0.5
 --- !u!1 &8873661197641214816
 GameObject:
   m_ObjectHideFlags: 0

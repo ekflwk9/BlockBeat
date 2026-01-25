@@ -33,10 +33,10 @@ Transform:
   - {fileID: 6170337301780319822}
   - {fileID: 9140872926830701572}
   - {fileID: 28362337734780483}
-  - {fileID: 4603435350120324328}
-  - {fileID: 6543701470943938915}
-  - {fileID: 1055235468483120399}
   - {fileID: 4518691001329550104}
+  - {fileID: 4603435350120324328}
+  - {fileID: 1055235468483120399}
+  - {fileID: 6543701470943938915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &4104491771985081539
@@ -968,7 +968,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6543701470943938915}
   - component: {fileID: 3830378756012064890}
-  - component: {fileID: 7348138379448826921}
+  - component: {fileID: 2736832494029210798}
+  - component: {fileID: 4822654443019729388}
   m_Layer: 0
   m_Name: ForestFront
   m_TagString: Untagged
@@ -1046,28 +1047,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7348138379448826921
-Animator:
-  serializedVersion: 7
+--- !u!50 &2736832494029210798
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4366892534255863928}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
+--- !u!114 &4822654443019729388
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4366892534255863928}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7fbe718e87f2ab14c8b4f3be379703e6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81cfcc2f01d9dc1479b745bd5b19d923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 2736832494029210798}
+  isFront: 1
+  leftPos: -0.5
+  rightPos: 0.5
 --- !u!1 &4703098837842178224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,9 +1100,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1055235468483120399}
   - component: {fileID: 3633300816511336986}
-  - component: {fileID: 8127349373289790157}
+  - component: {fileID: 6859904931780478604}
+  - component: {fileID: 436193707339926505}
   m_Layer: 0
-  m_Name: Wood
+  m_Name: ForestBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1156,28 +1179,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8127349373289790157
-Animator:
-  serializedVersion: 7
+--- !u!50 &6859904931780478604
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4703098837842178224}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
+--- !u!114 &436193707339926505
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4703098837842178224}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9807303732bb4884ea45df35995fdca3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81cfcc2f01d9dc1479b745bd5b19d923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 6859904931780478604}
+  isFront: 0
+  leftPos: -0.5
+  rightPos: 0.5
 --- !u!1 &6783058096706723993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1233,7 @@ GameObject:
   - component: {fileID: 4603435350120324328}
   - component: {fileID: 6525861208570128786}
   m_Layer: 0
-  m_Name: ForestBack
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
