@@ -94,7 +94,7 @@ public class FadeUi : UiBase
     /// </summary>
     /// <param name="_timer"></param>
     /// <param name="_func"></param>
-    public void FadeIn(float _timer = 1f, Action _func = null)
+    public void FadeIn(Action _func = null, float _timer = 0.3f)
     {
         uiFade.raycastTarget = true;
         uiFade.color = Color.clear;

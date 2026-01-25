@@ -6,7 +6,8 @@ public static class SceneChangeManager
 {
     public enum SceneName
     {
-        Start,
+        Intro,
+        Main,
         Rank,
         Shop,
         Result,

@@ -22,18 +22,12 @@ public class MainUi : UiBase
         InitStartLine();
         InitCoinText();
         InitMainSound();
-        InitFrame();
         InitUi();
     }
 
     private void OnDestroy()
     {
         line?.DOKill();
-    }
-
-    private void InitSave()
-    {
-        Json.Save();
     }
 
     private void InitCoinText()
@@ -52,17 +46,11 @@ public class MainUi : UiBase
     private void InitUi()
     {
         UiManager.Get<FadeUi>().FadeOut(0.3f);
-        GlobalVolumeManager.SetVignette(0f, 0f);
         if (rank.newRecord) UiManager.On<AddPopupUi>();
     }
 
     private void InitMainSound()
     {
         SoundManager.OnMusic(SoundManager.SoundName.MainMusic);
-    }
-
-    private void InitFrame()
-    {
-        Application.targetFrameRate = 60;
     }
 }
