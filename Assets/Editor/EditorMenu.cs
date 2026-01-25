@@ -28,8 +28,8 @@ public class EditorMenu : EditorWindow
 
     private void OnGUI()
     {
-        Button(VersionUpdate);
         Button(CheckVersion);
+        Button(VersionUpdate);
     }
 
     private void VersionUpdate()

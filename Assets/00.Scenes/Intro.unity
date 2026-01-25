@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 610374822}
   - component: {fileID: 610374826}
   m_Layer: 5
-  m_Name: ResultUi
+  m_Name: IntroUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b50dc69603aece48a880e2226aed0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logo: {fileID: 98786999}
 --- !u!1 &1790962718
 GameObject:
   m_ObjectHideFlags: 0
