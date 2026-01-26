@@ -62,14 +62,15 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
         if (SceneChangeManager.currentScene != SceneChangeManager.SceneName.Result) return;
         var passCount = Json.GetAdvertPass();
 
-        if (passCount < maxPassCount)
+        if (maxPassCount < passCount)
         {
-            Json.SetAdvertPass(passCount + 1);
+            Json.SetAdvertPass(0);
+            Advertisement.Show(placementID, this);
         }
 
-        else
+        else if (50 < Json.GetPlayPoint())
         {
-            Advertisement.Show(placementID, this);
+            Json.SetAdvertPass(passCount + 1);
         }
     }
 

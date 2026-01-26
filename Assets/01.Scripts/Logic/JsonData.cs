@@ -125,7 +125,7 @@ public static class Json
 
     public static float GetMaxPlayTime() => data.playerData.maxTime;
     public static float GetPlayTime() => data.playerData.currentTime;
-    public static void PlayTime(float _time)
+    public static void SetPlayTime(float _time)
     {
         var playerData = data.playerData;
 

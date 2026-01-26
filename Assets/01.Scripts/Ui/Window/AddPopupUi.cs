@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +12,57 @@ public class AddPopupUi : UiBase
     [SerializeField] private TMP_InputField input;
     [SerializeField] private Image buttonLine;
 
+    string[] forbiddenWords = new string[]
+    {
+        "fuck",
+        "fucker",
+        "fucking",
+        "motherfucker",
+        "shit",
+        "bullshit",
+        "shithead",
+        "asshole",
+        "bitch",
+        "bastard",
+        "cunt",
+        "Sex",
+        "dick",
+        "cock",
+        "pussy",
+        "twat",
+        "ass",
+        "damn",
+        "jackass",
+        "dumbass",
+        "prick",
+        "slut",
+        "whore",
+        "hoe",
+        "sonofabitch",
+        "retard",
+        "idiot",
+        "moron",
+        "stupid",
+        "jerk",
+        "loser",
+        "trash",
+        "scumbag",
+        "creep",
+        "weirdo",
+        "f*ck",
+        "f**k",
+        "fuq",
+        "fuk",
+        "sh1t",
+        "b!tch",
+        "a$$",
+        "biatch",
+    };
 
 #if UNITY_EDITOR
     private void Reset()
     {
         SetName<AddPopupUi>();
-
         warningText = this.TryGetChildComponent<TMP_Text>("WarningText");
         buttonLine = this.TryGetChildComponent<Image>("ButtonLine");
         input = this.TryGetChildComponent<TMP_InputField>();
@@ -39,7 +85,6 @@ public class AddPopupUi : UiBase
 
         else
         {
-            base.Off();
             FirebaseManager.AddRank();
         }
     }
@@ -68,14 +113,14 @@ public class AddPopupUi : UiBase
         if (string.IsNullOrWhiteSpace(nickName) || nickName.Contains(" "))
         {
             OnWarning("No spaces are allowed, and at least one character must be entered.");
-            return true;
+            return false;
         }
 
         //글자수 제한 검사
         else if (maxTextCount <= nickName.Length)
         {
             OnWarning($"You cannot exceed {maxTextCount} characters.");
-            return true;
+            return false;
         }
 
         var enumer = FirebaseManager.value.GetEnumerator();
@@ -86,11 +131,20 @@ public class AddPopupUi : UiBase
             if (string.Equals(nickName, enumer.Current.Key))
             {
                 OnWarning("An identical name already exists.");
-                return true;
+                return false;
             }
         }
 
-        return false;
+        for (int i = 0; i < forbiddenWords.Length; i++)
+        {
+            if (nickName.Contains(forbiddenWords[i], StringComparison.OrdinalIgnoreCase))
+            {
+                OnWarning("It contains an invalid word.");
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public string InputName()

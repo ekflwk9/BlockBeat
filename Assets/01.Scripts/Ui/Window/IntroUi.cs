@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class IntroUi : UiBase
 {
-    private const float timer = 1.5f;
     [SerializeField] private Image logo;
 
 #if UNITY_EDITOR
@@ -20,7 +19,7 @@ public class IntroUi : UiBase
     {
         InitGlobalVolume();
         InitFrame();
-        StartCoroutine(Timer());
+        OnAnimation();
     }
 
     private void InitGlobalVolume()
@@ -33,9 +32,29 @@ public class IntroUi : UiBase
         Application.targetFrameRate = 60;
     }
 
+    private void OnAnimation()
+    {
+        SoundManager.OnEffect(SoundManager.SoundName.Logo);
+
+        var newScale = logo.transform.localScale * 1.1f;
+        var tween = logo.transform.DOScale(newScale, 0.2f);
+        tween.OnComplete(OnOriginScale);
+    }
+
+    private void OnOriginScale()
+    {
+        var tween = logo.transform.DOScale(Vector3.one, 0.2f);
+        tween.OnComplete(EndAnimation);
+    }
+
+    private void EndAnimation()
+    {
+        StartCoroutine(Timer());
+    }
+
     private IEnumerator Timer()
     {
-        yield return CoroutineManager.Wait(timer);
+        yield return CoroutineManager.Wait(0.7f);
         UiManager.Get<FadeUi>().FadeIn(EndFade);
     }
 

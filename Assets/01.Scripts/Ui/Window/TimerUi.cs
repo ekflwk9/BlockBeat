@@ -50,7 +50,8 @@ public class TimerUi : UiBase
     /// </summary>
     public void StopTimer()
     {
-        Json.PlayTime(Time.time - startTime);
+        var timer = startTime == 0 ? 0 : Time.time - startTime;
+        Json.SetPlayTime(timer);
     }
 
     private void ResetSlide()
