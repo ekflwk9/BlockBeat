@@ -20,7 +20,7 @@ public class IntroUi : UiBase
     {
         InitGlobalVolume();
         InitFrame();
-        InitLogo();
+        StartCoroutine(Timer());
     }
 
     private void InitGlobalVolume()
@@ -33,19 +33,9 @@ public class IntroUi : UiBase
         Application.targetFrameRate = 60;
     }
 
-    private void InitLogo()
-    {
-        var nextScale = logo.rectTransform.localScale * 1.1f;
-        logo.rectTransform.DOScale(nextScale, timer);
-
-        StartCoroutine(Timer());
-    }
-
     private IEnumerator Timer()
     {
         yield return CoroutineManager.Wait(timer);
-
-        logo.DOKill();
         UiManager.Get<FadeUi>().FadeIn(EndFade);
     }
 
