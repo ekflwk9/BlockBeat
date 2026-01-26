@@ -16,12 +16,12 @@ public static class FirebaseEditor
 
     private class UserInfo
     {
-        public readonly string nickName;
+        public readonly string nickname;
         public readonly int point;
 
         public UserInfo(string nickName, int point)
         {
-            this.nickName = nickName;
+            this.nickname = nickName;
             this.point = point;
         }
     }
