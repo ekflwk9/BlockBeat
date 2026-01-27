@@ -7,7 +7,6 @@ public static class SoundManager
 {
     public enum SoundName
     {
-        Logo,
         Block,
         Buy,
         Coin,

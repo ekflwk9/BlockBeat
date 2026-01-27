@@ -1,10 +1,14 @@
 ﻿using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class IntroUi : UiBase
 {
+    private const float timer = 2f;
+    private const float zoom = 1.1f;
+    private const float startSize = 10f;
+    private const float imageSize = 520f;
+
     [SerializeField] private Image logo;
 
 #if UNITY_EDITOR
@@ -12,8 +16,23 @@ public class IntroUi : UiBase
     {
         SetName<IntroUi>();
         logo = this.TryGetChildComponent<Image>("Logo");
+
+        if (logo)
+        {
+            var size = imageSize - startSize;
+            var newSize = new Vector2(size, size);
+
+            logo.rectTransform.sizeDelta = newSize;
+            logo.color = new Color(1f, 1f, 1f, 0f);
+        }
     }
 #endif
+
+    private void OnDestroy()
+    {
+        logo.DOKill();
+        logo.transform.DOKill();
+    }
 
     private void Awake()
     {
@@ -34,27 +53,14 @@ public class IntroUi : UiBase
 
     private void OnAnimation()
     {
-        SoundManager.OnEffect(SoundManager.SoundName.Logo);
-
-        var newScale = logo.transform.localScale * 1.1f;
-        var tween = logo.transform.DOScale(newScale, 0.2f);
-        tween.OnComplete(OnOriginScale);
-    }
-
-    private void OnOriginScale()
-    {
-        var tween = logo.transform.DOScale(Vector3.one, 0.2f);
+        var fade = logo.DOFade(1f, timer);
+        var newScale = logo.transform.localScale * zoom;
+        var tween = logo.transform.DOScale(newScale, timer);
         tween.OnComplete(EndAnimation);
     }
 
     private void EndAnimation()
     {
-        StartCoroutine(Timer());
-    }
-
-    private IEnumerator Timer()
-    {
-        yield return CoroutineManager.Wait(0.7f);
         UiManager.Get<FadeUi>().FadeIn(EndFade);
     }
 
