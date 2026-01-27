@@ -2028,6 +2028,7 @@ GameObject:
   - component: {fileID: 2607160318495537458}
   - component: {fileID: 1830128541078364052}
   - component: {fileID: 435865425946018433}
+  - component: {fileID: 4352714598986932277}
   m_Layer: 5
   m_Name: ResultUi
   m_TagString: Untagged
@@ -2137,6 +2138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa82e8449d8324e45a277076e7724b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ads: {fileID: 4352714598986932277}
   commentTitle: {fileID: 2938933514147544389}
   level: {fileID: 435865425946018433}
   pointTitle: {fileID: 1512050468918020101}
@@ -2158,6 +2160,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40c8892135071c147b0b0a80df44c831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4352714598986932277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015216879181361557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c560772f9b245dc4f97ffdca9797c71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6183192644401491813

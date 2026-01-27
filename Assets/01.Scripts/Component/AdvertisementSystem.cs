@@ -5,7 +5,6 @@ using UnityEngine.Advertisements;
 public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     public const int maxPassCount = 2;
-    private static bool isBanner;
 
 #if UNITY_IOS
     private const string gameID = "6003730";
@@ -13,14 +12,6 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
 #elif UNITY_ANDROID
     private const string gameID = "6003731";
     private const string placementID = "Rewarded_Android";
-#endif
-
-#if UNITY_EDITOR
-    private void Reset()
-    {
-        this.name = typeof(AdvertisementSystem).Name;
-        this.transform.position = Vector3.zero;
-    }
 #endif
 
     void Awake()
@@ -32,46 +23,30 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
         }
     }
 
-    private void Start()
+    /// <summary>
+    /// 배너광고 출력 여부
+    /// </summary>
+    /// <param name="_enabled"></param>
+    public void ShowBanner(bool _enabled)
     {
-        ShowBanner();
-        ShowVideo();
-    }
-
-    private void ShowBanner()
-    {
-        if ((Json.GetAdvertPass() < maxPassCount) &&
-            (SceneChangeManager.currentScene == SceneChangeManager.SceneName.Result ||
-             SceneChangeManager.currentScene == SceneChangeManager.SceneName.Rank))
+        if (_enabled)
         {
-            isBanner = true;
             Advertisement.Banner.Show(placementID);
         }
 
-        else if (isBanner)
+        else
         {
-            isBanner = false;
-
             Advertisement.Banner.Hide();
             Advertisement.Banner.Load(placementID);
         }
     }
 
-    private void ShowVideo()
+    /// <summary>
+    /// 광고 출력
+    /// </summary>
+    public void ShowVideo()
     {
-        if (SceneChangeManager.currentScene != SceneChangeManager.SceneName.Result) return;
-        var passCount = Json.GetAdvertPass();
-
-        if (maxPassCount < passCount)
-        {
-            Json.SetAdvertPass(0); 
-            Advertisement.Show(placementID, this);
-        }
-
-        else if (50 < Json.GetPlayPoint())
-        {
-            Json.SetAdvertPass(passCount + 1);
-        }
+        Advertisement.Show(placementID, this);
     }
 
     #region Initialize

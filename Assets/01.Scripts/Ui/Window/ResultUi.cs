@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ResultUi : UiBase
 {
+    [SerializeField] private AdvertisementSystem ads;
+
     [SerializeField] private TMP_Text commentTitle;
     [SerializeField] private LevelSystem level;
 
@@ -53,6 +55,7 @@ public class ResultUi : UiBase
         evadeTitle = this.TryGetChildComponent<TMP_Text>("EvadeTitle");
         evade = this.TryGetChildComponent<TMP_Text>("Evade");
 
+        ads = this.RequireComponent<AdvertisementSystem>();
         gameOverFade = this.TryGetChildComponent<Image>("GameOverFade");
     }
 #endif
@@ -71,6 +74,7 @@ public class ResultUi : UiBase
     private void OnDestroy()
     {
         if (coroutine != null) StopCoroutine(coroutine);
+        ads.ShowBanner(false);
     }
 
     private void ShowFade()
@@ -96,8 +100,22 @@ public class ResultUi : UiBase
     private void OnMusic()
     {
 #if UNITY_ANDROID || UNITY_IOS
-        if (Json.GetAdvertPass() <= AdvertisementSystem.maxPassCount)
+        var passCount = Json.GetAdvertPass();
+
+        if (AdvertisementSystem.maxPassCount < passCount)
         {
+            Json.SetAdvertPass(0);
+            SoundManager.OffMusic();
+
+            ads.ShowBanner(false);
+            ads.ShowVideo();
+        }
+
+        else if (50 < Json.GetPlayPoint())
+        {
+            ads.ShowBanner(true);
+
+            Json.SetAdvertPass(passCount + 1);
             SoundManager.OnMusic(SoundManager.SoundName.GameOver, false);
         }
 #endif

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RankUi : UiBase
 {
+    [SerializeField] private AdvertisementSystem ads;
     [SerializeField] private RankSystem rankSystem;
     [SerializeField] private GameObject connectionWindow;
 
@@ -14,13 +15,14 @@ public class RankUi : UiBase
     private void Reset()
     {
         SetName<RankUi>();
-        GetRankSystem();
+        GetSystem();
         FindWindow();
         FindText();
     }
 
-    private void GetRankSystem()
+    private void GetSystem()
     {
+        ads = this.RequireComponent<AdvertisementSystem>();
         rankSystem = this.RequireComponent<RankSystem>();
     }
 
@@ -64,11 +66,19 @@ public class RankUi : UiBase
     }
 #endif
 
+    private void OnDestroy()
+    {
+        ads.ShowBanner(false);
+    }
+
     private void Start()
     {
         if (FirebaseManager.connect) GetRanker();
         else connectionWindow.SetActive(true);
 
+#if UNITY_ANDROID || UNITY_IOS
+        ads.ShowBanner(true);
+#endif
         UiManager.Get<FadeUi>().FadeOut(0.3f);
     }
 
