@@ -15,7 +15,7 @@ public class TitleMoving : MonoBehaviour
 
     private void Awake()
     {
-        var movePos = rect.anchoredPosition.y - 5f;
+        var movePos = rect.anchoredPosition.y - 7f;
         var tween = rect.DOAnchorPosY(movePos, moveSpeed);
         tween.SetLoops(-1, LoopType.Yoyo);
         tween.SetEase(Ease.Linear);

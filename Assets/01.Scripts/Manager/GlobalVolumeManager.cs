@@ -11,7 +11,6 @@ public static class GlobalVolumeManager
     private static Dictionary<VolumeComponent, Tween> tween = new();
 
     private static Vignette vignette;
-    private static ChromaticAberration chromaticAberration;
 
     private static Volume Init()
     {
@@ -31,9 +30,9 @@ public static class GlobalVolumeManager
 
     public static void VolumeInit()
     {
-        chromaticAberration = TryGet<ChromaticAberration>();
-        chromaticAberration.active = true;
-        chromaticAberration.intensity.overrideState = true;
+        //chromaticAberration = TryGet<ChromaticAberration>();
+        //chromaticAberration.active = true;
+        //chromaticAberration.intensity.overrideState = true;
 
         vignette = TryGet<Vignette>();
         vignette.active = true;
@@ -54,17 +53,17 @@ public static class GlobalVolumeManager
         }
     }
 
-    public static void SetChromatic(float intensity, float duration = 1f)
-    {
-        if (tween.ContainsKey(chromaticAberration)) tween[chromaticAberration].Kill();
-        else tween.Add(chromaticAberration, null);
+    //public static void SetChromatic(float intensity, float duration = 1f)
+    //{
+    //    if (tween.ContainsKey(chromaticAberration)) tween[chromaticAberration].Kill();
+    //    else tween.Add(chromaticAberration, null);
 
-        if (0f < duration) DOTween.To(GetChromaticValue, SetChromaticValue, intensity, duration);
-        else chromaticAberration.intensity.value = intensity;
-    }
+    //    if (0f < duration) DOTween.To(GetChromaticValue, SetChromaticValue, intensity, duration);
+    //    else chromaticAberration.intensity.value = intensity;
+    //}
 
-    private static float GetChromaticValue() => chromaticAberration.intensity.value;
-    private static void SetChromaticValue(float _value) => chromaticAberration.intensity.value = _value;
+    //private static float GetChromaticValue() => chromaticAberration.intensity.value;
+    //private static void SetChromaticValue(float _value) => chromaticAberration.intensity.value = _value;
 
     public static void SetVignette(float intensity, float duration = 1f)
     {
