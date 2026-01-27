@@ -34,7 +34,7 @@ public class IntroUi : UiBase
         logo.transform.DOKill();
     }
 
-    private void Awake()
+    protected override void Awake()
     {
         InitGlobalVolume();
         InitFrame();

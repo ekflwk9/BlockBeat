@@ -96,7 +96,7 @@ public class ResultUi : UiBase
     private void OnMusic()
     {
 #if UNITY_ANDROID || UNITY_IOS
-        if (Json.GetAdvertPass() < AdvertisementSystem.maxPassCount)
+        if (Json.GetAdvertPass() <= AdvertisementSystem.maxPassCount)
         {
             SoundManager.OnMusic(SoundManager.SoundName.GameOver, false);
         }

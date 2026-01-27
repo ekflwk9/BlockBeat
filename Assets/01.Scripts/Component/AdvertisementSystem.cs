@@ -4,7 +4,7 @@ using UnityEngine.Advertisements;
 #if UNITY_ANDROID || UNITY_IOS
 public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    public const int maxPassCount = 4;
+    public const int maxPassCount = 2;
     private static bool isBanner;
 
 #if UNITY_IOS
@@ -64,7 +64,7 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
 
         if (maxPassCount < passCount)
         {
-            Json.SetAdvertPass(0);
+            Json.SetAdvertPass(0); 
             Advertisement.Show(placementID, this);
         }
 
