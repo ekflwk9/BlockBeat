@@ -85,6 +85,7 @@ public class AddPopupUi : UiBase
 
         else
         {
+            base.Off();
             FirebaseManager.AddRank();
         }
     }
