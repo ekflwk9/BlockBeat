@@ -3862,7 +3862,6 @@ GameObject:
   - component: {fileID: 104818486329418532}
   - component: {fileID: 7903443520351762314}
   - component: {fileID: 7337743656797731770}
-  - component: {fileID: 4343088536146877536}
   m_Layer: 5
   m_Name: RankUi
   m_TagString: Untagged
@@ -3968,7 +3967,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb04da38fad903a469839e93e36dcfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ads: {fileID: 4343088536146877536}
   rankSystem: {fileID: 7337743656797731770}
   connectionWindow: {fileID: 7899204050132740754}
   user:
@@ -4013,18 +4011,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88a42e8c4be43d443b1e607d281ff5c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4343088536146877536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4250848143837237139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c560772f9b245dc4f97ffdca9797c71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4367252665589686656

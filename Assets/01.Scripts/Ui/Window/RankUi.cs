@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RankUi : UiBase
 {
-    [SerializeField] private AdvertisementSystem ads;
     [SerializeField] private RankSystem rankSystem;
     [SerializeField] private GameObject connectionWindow;
 
@@ -22,7 +21,6 @@ public class RankUi : UiBase
 
     private void GetSystem()
     {
-        ads = this.RequireComponent<AdvertisementSystem>();
         rankSystem = this.RequireComponent<RankSystem>();
     }
 
@@ -68,7 +66,9 @@ public class RankUi : UiBase
 
     private void OnDestroy()
     {
-        ads.ShowBanner(false);
+#if UNITY_ANDROID || UNITY_IOS
+        AdvertisementSystem.ShowBanner(false);
+#endif
     }
 
     private void Start()
@@ -77,7 +77,7 @@ public class RankUi : UiBase
         else connectionWindow.SetActive(true);
 
 #if UNITY_ANDROID || UNITY_IOS
-        ads.ShowBanner(true);
+        AdvertisementSystem.ShowBanner(true);
 #endif
         UiManager.Get<FadeUi>().FadeOut(0.3f);
     }

@@ -2,8 +2,9 @@
 using UnityEngine.Advertisements;
 
 #if UNITY_ANDROID || UNITY_IOS
-public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+public class AdvertisementSystem : IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
+    private static AdvertisementSystem instance = new();
     public const int maxPassCount = 2;
 
 #if UNITY_IOS
@@ -14,11 +15,12 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
     private const string placementID = "Rewarded_Android";
 #endif
 
-    void Awake()
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void Init()
     {
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Advertisement.Initialize(gameID, Application.isEditor, this);
+            Advertisement.Initialize(gameID, Application.isEditor, instance);
             Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
         }
     }
@@ -27,7 +29,7 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
     /// 배너광고 출력 여부
     /// </summary>
     /// <param name="_enabled"></param>
-    public void ShowBanner(bool _enabled)
+    public static void ShowBanner(bool _enabled)
     {
         if (_enabled)
         {
@@ -44,9 +46,9 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
     /// <summary>
     /// 광고 출력
     /// </summary>
-    public void ShowVideo()
+    public static void ShowVideo()
     {
-        Advertisement.Show(placementID, this);
+        Advertisement.Show(placementID, instance);
     }
 
     #region Initialize
@@ -88,7 +90,6 @@ public class AdvertisementSystem : MonoBehaviour, IUnityAdsInitializationListene
     public void OnUnityAdsShowStart(string placementId)
     {
         Service.Log($"광고 출력 시작");
-        //사운드 일시 정지
     }
 
     public void OnUnityAdsShowClick(string placementId)
