@@ -73,17 +73,18 @@ public static class FirebaseEditor
             data.leaderboard.Add(tempPair[i].Key, tempPair[i].Value);
         }
 
-        _firebaseData = JsonConvert.SerializeObject(data, Formatting.None);
-        Save(_firebaseData);
+        Save(data);
     }
 
-    private static void Save(System.String _firebaseData)
+    private static void Save(FirebaseData _data)
     {
         var editorPath = Path.Combine(Application.dataPath, "Editor");
         var jsonPath = Path.Combine(editorPath, jsonName);
 
         if (!Directory.Exists(editorPath)) Directory.CreateDirectory(editorPath);
-        File.WriteAllText(jsonPath, _firebaseData);
+
+        var saveFile = JsonConvert.SerializeObject(_data, Formatting.None);
+        File.WriteAllText(jsonPath, saveFile);
 
         AssetDatabase.Refresh();
     }
