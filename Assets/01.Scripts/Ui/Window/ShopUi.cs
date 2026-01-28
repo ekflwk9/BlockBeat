@@ -79,7 +79,7 @@ public class ShopUi : UiBase
         coinText.text = Json.GetCoin().ToString("N0");
 
         UiManager.Add<ShopUi>(this);
-        UiManager.Get<FadeUi>().FadeOut(0.3f);
+        UiManager.Get<FadeUi>().FadeOut();
     }
 
     /// <summary>

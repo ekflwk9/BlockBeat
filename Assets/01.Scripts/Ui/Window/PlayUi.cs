@@ -42,7 +42,7 @@ public class PlayUi : UiBase
         UiManager.On<EvadeUi>();
         UiManager.On<TutorialUi>();
 
-        UiManager.Get<FadeUi>().FadeOut(0.5f);
+        UiManager.Get<FadeUi>().FadeOut();
     }
 
     /// <summary>

@@ -79,7 +79,7 @@ public class ResultUi : UiBase
 
     private void ShowFade()
     {
-        UiManager.Get<FadeUi>().FadeOut(0.3f);
+        UiManager.Get<FadeUi>().FadeOut();
         coroutine = StartCoroutine(OnGameOverFade());
     }
 

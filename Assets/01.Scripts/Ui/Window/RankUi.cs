@@ -79,7 +79,7 @@ public class RankUi : UiBase
 #if UNITY_ANDROID || UNITY_IOS
         AdvertisementSystem.ShowBanner(true);
 #endif
-        UiManager.Get<FadeUi>().FadeOut(0.3f);
+        UiManager.Get<FadeUi>().FadeOut();
     }
 
     private void GetRanker()

@@ -114,7 +114,7 @@ public class FadeUi : UiBase
     /// UI 페이드 아웃
     /// </summary>
     /// <param name="_timer"></param>
-    public void FadeOut(float _timer = 1f)
+    public void FadeOut(float _timer = 0.3f)
     {
         uiFade.raycastTarget = false;
         uiFade.color = Color.black;

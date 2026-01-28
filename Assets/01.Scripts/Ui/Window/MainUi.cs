@@ -45,7 +45,7 @@ public class MainUi : UiBase
 
     private void InitUi()
     {
-        UiManager.Get<FadeUi>().FadeOut(0.3f);
+        UiManager.Get<FadeUi>().FadeOut();
         if (rank.newRecord) UiManager.On<AddPopupUi>();
     }
 

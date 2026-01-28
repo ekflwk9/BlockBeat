@@ -103,7 +103,7 @@ public class AdvertisementSystem : IUnityAdsInitializationListener, IUnityAdsLoa
 
         Json.SetAdvertPass(0);
         Advertisement.Load(placementID, this);
-        UiManager.Get<FadeUi>().FadeOut(0.5f);
+        UiManager.Get<FadeUi>().FadeOut();
     }
     #endregion
 }

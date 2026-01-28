@@ -53,6 +53,8 @@ public class IntroUi : UiBase
 
     private void OnAnimation()
     {
+        UiManager.On<FadeUi>();
+
         var fade = logo.DOFade(1f, timer);
         var newScale = logo.transform.localScale * zoom;
         var tween = logo.transform.DOScale(newScale, timer);
