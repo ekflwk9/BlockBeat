@@ -34,6 +34,7 @@ public class Block : MonoBehaviour
         Sniper,
         //BobSang,
         Cactus,
+        Beer,
     }
 
     public enum Type

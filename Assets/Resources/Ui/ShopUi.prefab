@@ -1503,7 +1503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8329678b021334fa05b0032057b264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoResolution: 0
   buyButton: {fileID: 3780093033416070574}
   lockButton: {fileID: 1236101799683062659}
   selectButton: {fileID: 7105260113783310098}
@@ -1543,6 +1542,9 @@ MonoBehaviour:
   - <idle>k__BackingField: {fileID: 21300000, guid: 9d92a98364eef3b45a423b6481e97056, type: 3}
     <left>k__BackingField: {fileID: 21300000, guid: 99f24e734fb07fb4c9fc9c08c9f6dc3c, type: 3}
     <right>k__BackingField: {fileID: 21300000, guid: d54f91301e319034f8e73ae4b7597a78, type: 3}
+  - <idle>k__BackingField: {fileID: 21300000, guid: 9e188a0514e9d8a4580831945a982635, type: 3}
+    <left>k__BackingField: {fileID: 21300000, guid: 4d13c4ad183de054e9cf112b1acbadd4, type: 3}
+    <right>k__BackingField: {fileID: 21300000, guid: 0f5450c2e31e9e047ac9518426e7e376, type: 3}
 --- !u!1 &5662251978838016466
 GameObject:
   m_ObjectHideFlags: 0

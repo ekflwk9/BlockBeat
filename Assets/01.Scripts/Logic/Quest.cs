@@ -30,6 +30,7 @@ public class Quest
         [Block.Name.Sniper] = Point(_point: 500, _price: 2000),
         //[Block.Name.BobSang] = NoConditions(_price: 500),
         [Block.Name.Cactus] = NoConditions(_price: 3000),
+        [Block.Name.Beer] = Survival(_timer: 40f, _price: 1000),
     };
 
     /// <summary>
