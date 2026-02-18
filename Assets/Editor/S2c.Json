@@ -1,13 +1,13 @@
 {
   "playerData": {
-    "coin": 3161,
+    "coin": 3173,
     "nickName": "Unnamed",
-    "advertPassCount": 0,
-    "currentPoint": 20,
+    "advertPassCount": 1,
+    "currentPoint": 65,
     "maxPoint": 85,
     "maxTime": 391.736145,
-    "currentTime": 2.796795,
-    "evade": 1,
+    "currentTime": 11.4426584,
+    "evade": 3,
     "maxEvade": 11
   },
   "settingData": {
