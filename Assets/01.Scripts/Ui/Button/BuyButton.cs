@@ -8,9 +8,8 @@ public class BuyButton : ButtonBase
     private int price;
 
 #if UNITY_EDITOR
-    protected override void Reset()
+    private void Reset()
     {
-        base.Reset();
         priceText = this.TryGetChildComponent<TMP_Text>("PriceText");
     }
 #endif

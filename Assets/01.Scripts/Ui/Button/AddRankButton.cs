@@ -4,10 +4,8 @@ using UnityEngine.EventSystems;
 public class AddRankButton : ButtonBase
 {
 #if UNITY_EDITOR
-    protected override void Reset()
+    private void Reset()
     {
-        base.Reset();
-
         var text = this.TryGetChildComponent<TMP_Text>();
         if (text) text.text = "OK";
     }

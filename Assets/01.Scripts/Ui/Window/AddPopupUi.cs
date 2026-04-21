@@ -10,7 +10,6 @@ public class AddPopupUi : UiBase
 
     [SerializeField] private TMP_Text warningText;
     [SerializeField] private TMP_InputField input;
-    [SerializeField] private Image buttonLine;
 
     string[] forbiddenWords = new string[]
     {
@@ -64,14 +63,12 @@ public class AddPopupUi : UiBase
     {
         SetName<AddPopupUi>();
         warningText = this.TryGetChildComponent<TMP_Text>("WarningText");
-        buttonLine = this.TryGetChildComponent<Image>("ButtonLine");
         input = this.TryGetChildComponent<TMP_InputField>();
     }
 #endif
 
     private void OnDestroy()
     {
-        buttonLine.DOKill();
         warningText.DOKill();
     }
 
@@ -80,7 +77,6 @@ public class AddPopupUi : UiBase
         if (string.Equals(Json.defaultName, Json.GetName()))
         {
             base.On();
-            InitStartLine();
         }
 
         else
@@ -88,13 +84,6 @@ public class AddPopupUi : UiBase
             base.Off();
             FirebaseManager.AddRank();
         }
-    }
-
-    private void InitStartLine()
-    {
-        var tween = buttonLine.DOFade(0f, 0.5f);
-        tween.SetLoops(-1, LoopType.Yoyo);
-        tween.SetEase(Ease.Linear);
     }
 
     private void OnWarning(string _text)

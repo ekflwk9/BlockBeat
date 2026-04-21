@@ -8,9 +8,8 @@ public class ShopSelectButton : ButtonBase
     private bool isSelect;
 
 #if UNITY_EDITOR
-    protected override void Reset()
+    private void Reset()
     {
-        base.Reset();
         button = this.TryGetChildComponent<TMP_Text>();
     }
 #endif

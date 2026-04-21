@@ -6,9 +6,8 @@ public class CloseButton : ButtonBase
     [SerializeField] private UiBase window;
 
 #if UNITY_EDITOR
-    protected override void Reset()
+    private void Reset()
     {
-        base.Reset();
         window = this.transform.TryFindParent().TryGetComponent<UiBase>();
     }
 #endif

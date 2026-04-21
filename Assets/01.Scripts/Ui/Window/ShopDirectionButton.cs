@@ -6,11 +6,9 @@ public class ShopDirectionButton : ButtonBase
     [SerializeField] private bool isLeft;
 
 #if UNITY_EDITOR
-    protected override void Reset()
+    private void Reset()
     {
-        base.Reset();
-
-        var rect = this.TryGetComponent<RectTransform>();
+        var rect = this.transform as RectTransform;
         if (rect) isLeft = rect.anchorMax.x < 0.5f;
     }
 #endif

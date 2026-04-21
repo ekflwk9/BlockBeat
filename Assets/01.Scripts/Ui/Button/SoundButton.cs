@@ -15,10 +15,8 @@ public class SoundButton : ButtonBase
     [SerializeField] private GameObject prohibition;
 
 #if UNITY_EDITOR
-    protected override void Reset()
+    private void Reset()
     {
-        base.Reset();
-
         prohibition = this.TryFindChild("Prohibition");
         if (prohibition) prohibition.SetActive(false);
     }

@@ -1,29 +1,23 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public abstract class ButtonBase : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] protected RectTransform touch;
+    protected const float PunchEffectSpeed = 0.15f;
+    protected float originButtonScale;
 
-#if UNITY_EDITOR
-    protected virtual void Reset()
-    {
-        touch = this.TryGetChildComponent<RectTransform>("Touch");
-        if (touch) touch.gameObject.SetActive(false);
-    }
-#endif
-
-    private void OnDisable() => touch?.gameObject.SetActive(false);
+    protected virtual void Awake() => originButtonScale = this.transform.localScale.x;
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         SoundManager.OnEffect(SoundManager.SoundName.Touch);
-        touch?.gameObject.SetActive(true);
+
+        this.transform.DOKill();
+        var tween = this.transform.DOScale(originButtonScale * 1.25f, PunchEffectSpeed);
+        tween.OnComplete(Revers);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        touch?.gameObject.SetActive(false);
-    }
+    private void Revers() => this.transform.DOScale(originButtonScale * 1.25f, PunchEffectSpeed);
 }
 
