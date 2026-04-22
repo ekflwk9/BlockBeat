@@ -1,15 +1,19 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AddPopupUi : UiBase
 {
     private const int maxTextCount = 10; //최대 입력 가능 글자 수
+    private const float PopupSpeed = 3f;
 
-    [SerializeField] private TMP_Text warningText;
     [SerializeField] private TMP_InputField input;
+    [SerializeField] private TMP_Text warningText;
+    [SerializeField] private RectTransform warningWindow;
+
+    private Coroutine coroutine;
 
     string[] forbiddenWords = new string[]
     {
@@ -62,8 +66,12 @@ public class AddPopupUi : UiBase
     private void Reset()
     {
         SetName<AddPopupUi>();
+
         warningText = this.TryGetChildComponent<TMP_Text>("WarningText");
         input = this.TryGetChildComponent<TMP_InputField>();
+
+        warningWindow = this.TryGetChildComponent<RectTransform>("Warning");
+        if (warningWindow) warningWindow.transform.localScale = Vector3.zero;
     }
 #endif
 
@@ -91,8 +99,17 @@ public class AddPopupUi : UiBase
         warningText.text = _text;
         warningText.color = Color.red;
 
-        warningText.DOKill();
-        warningText.DOFade(0f, 5f);
+        warningWindow.DOKill();
+        warningWindow.DOScale(1f, PopupSpeed);
+
+        if (coroutine != null) StopCoroutine(coroutine);
+        coroutine = StartCoroutine(Revers());
+    }
+
+    private IEnumerator Revers()
+    {
+        yield return CoroutineManager.Wait(PopupSpeed);
+        warningWindow.DOScale(1f, PopupSpeed);
     }
 
     public bool CanChangeName()

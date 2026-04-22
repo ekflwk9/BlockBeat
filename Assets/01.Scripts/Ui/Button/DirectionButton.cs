@@ -15,6 +15,7 @@ public class DirectionButton : ButtonBase
 
     public override void OnPointerDown(PointerEventData eventData)
     {
+        base.OnPointerDown(eventData);
         GameManager.Instance?.Touch(isLeft);
     }
 }

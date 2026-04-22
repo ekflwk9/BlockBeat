@@ -113,12 +113,12 @@ TextureImporter:
       name: buttonSquare_green_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 0
-        width: 199
-        height: 219
+        x: 0
+        y: 10
+        width: 200
+        height: 209
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 32, y: 48, z: 32, w: 36}
       customData: 
       outline: []
