@@ -15,8 +15,8 @@ public class TutorialUi : UiBase, IPointerClickHandler
     {
         SetName<TutorialUi>();
 
-        leftLine = this.TryGetChildComponent<Image>("LeftLine");
-        rightLine = this.TryGetChildComponent<Image>("RightLine");
+        leftLine = this.TryGetChildComponent<Image>("LeftLight");
+        rightLine = this.TryGetChildComponent<Image>("RightLight");
         group = this.RequireComponent<CanvasGroup>();
 
         var infoT = this.TryGetChildComponent<TMP_Text>("Info");

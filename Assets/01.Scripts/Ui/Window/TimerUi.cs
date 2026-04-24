@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class TimerUi : UiBase
 {
     [SerializeField] private Image slide;
     [SerializeField] private CanvasGroup group;
+    [SerializeField] private Sprite green, red;
 
     private Coroutine coroutine;
     private float score;
@@ -57,7 +59,7 @@ public class TimerUi : UiBase
     private void ResetSlide()
     {
         slide.fillAmount = 1f;
-        slide.color = Color.green;
+        slide.sprite = green;
     }
 
     private IEnumerator Timer()
@@ -72,7 +74,7 @@ public class TimerUi : UiBase
             slide.fillAmount -= (score * 0.1f) * Time.smoothDeltaTime;
 
             if (slide.fillAmount <= 0f) manager.GameOver();
-            else if (slide.fillAmount < 0.5f) slide.color = Color.red;
+            else if (slide.fillAmount < 0.5f) slide.sprite = red;
 
             yield return null;
         }

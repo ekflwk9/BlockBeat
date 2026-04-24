@@ -12,13 +12,13 @@ public class SoundButton : ButtonBase
     [Header("설정할 사운드 타입"), SerializeField] private SoundType type;
 
     [Space(10f)]
-    [SerializeField] private GameObject prohibition;
+    [SerializeField] private RectTransform onIcon, offIcon;
 
 #if UNITY_EDITOR
     private void Reset()
     {
-        prohibition = this.TryFindChild("Prohibition");
-        if (prohibition) prohibition.SetActive(false);
+        onIcon = this.TryGetChildComponent<RectTransform>("OnIcon");
+        offIcon = this.TryGetChildComponent<RectTransform>("OffIcon");
     }
 #endif
 
@@ -30,7 +30,8 @@ public class SoundButton : ButtonBase
     private void SetIcon()
     {
         var isOn = type == SoundType.Effect ? Json.GetEffectSound() : Json.GetMusicSound();
-        prohibition.SetActive(!isOn);
+        onIcon.gameObject.SetActive(isOn);
+        offIcon.gameObject.SetActive(!isOn);
     }
 
     public override void OnPointerDown(PointerEventData eventData)

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ResultUi : UiBase
 {
+    [SerializeField] private TMP_Text title;
+
     [SerializeField] private TMP_Text commentTitle;
     [SerializeField] private LevelSystem level;
 
@@ -20,7 +22,6 @@ public class ResultUi : UiBase
     [SerializeField] private TMP_Text evade;
     [SerializeField] private TMP_Text evadeTitle;
 
-    [SerializeField] private Image gameOverFade;
     private Coroutine coroutine;
 
     private string[] comment =
@@ -53,7 +54,7 @@ public class ResultUi : UiBase
         evadeTitle = this.TryGetChildComponent<TMP_Text>("EvadeTitle");
         evade = this.TryGetChildComponent<TMP_Text>("Evade");
 
-        gameOverFade = this.TryGetChildComponent<Image>("GameOverFade");
+        title = this.TryGetChildComponent<TMP_Text>("Title");
     }
 #endif
 
@@ -90,9 +91,9 @@ public class ResultUi : UiBase
 
         for (int i = 0; i < loop; i++)
         {
-            gameOverFade.color = Color.white;
+            title.color = Color.black;
             yield return CoroutineManager.Wait(speed);
-            gameOverFade.color = Color.clear;
+            title.color = Color.white;
             yield return CoroutineManager.Wait(speed);
         }
     }
