@@ -18,8 +18,8 @@ public static class FirebaseManager
     public static Dictionary<string, int> value { get; private set; } = new();
 
 #if !UNITY_EDITOR
-#endif
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+#endif
     private static void Start()
     {
         try
