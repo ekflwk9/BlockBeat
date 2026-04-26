@@ -2,6 +2,7 @@
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,8 +18,8 @@ public static class FirebaseManager
     public static Dictionary<string, int> value { get; private set; } = new();
 
 #if !UNITY_EDITOR
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 #endif
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Start()
     {
         try
@@ -26,8 +27,9 @@ public static class FirebaseManager
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(Login);
         }
 
-        catch
+        catch (Exception e)
         {
+            Service.Log(e.ToString());
             connect = false;
         }
     }
@@ -43,8 +45,9 @@ public static class FirebaseManager
             Load();
         }
 
-        catch
+        catch (Exception e)
         {
+            Service.Log(e.ToString());
             connect = false;
         }
     }
@@ -60,8 +63,9 @@ public static class FirebaseManager
             InitData(values);
         }
 
-        catch
+        catch (Exception e)
         {
+            Service.Log(e.ToString());
             connect = false;
         }
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CrossHair : MonoBehaviour
 {
-    private const float startPos = 0.6f;
+    private const float startPos = 0.9f;
     private const float moveSpeed = 0.2f;
 
     [SerializeField] private Transform left, right;

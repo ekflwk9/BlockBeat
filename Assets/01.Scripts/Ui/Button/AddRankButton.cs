@@ -17,7 +17,6 @@ public class AddRankButton : ButtonBase
 
         if (UiManager.Get<AddPopupUi>().CanChangeName())
         {
-            UiManager.Off<AddPopupUi>();
             UiManager.Get<FadeUi>().FadeIn(ChangeRankSene);
         }
     }

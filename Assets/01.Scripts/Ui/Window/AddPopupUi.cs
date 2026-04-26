@@ -7,7 +7,8 @@ using UnityEngine;
 public class AddPopupUi : UiBase
 {
     private const int maxTextCount = 10; //최대 입력 가능 글자 수
-    private const float PopupSpeed = 3f;
+    private const float PopupSpeed = 0.15f;
+    private const float PopupTimer = 2.5f;
 
     [SerializeField] private TMP_InputField input;
     [SerializeField] private TMP_Text warningText;
@@ -98,6 +99,7 @@ public class AddPopupUi : UiBase
     {
         warningText.text = _text;
         warningText.color = Color.red;
+        warningWindow.transform.localScale = Vector3.zero;
 
         warningWindow.DOKill();
         warningWindow.DOScale(1f, PopupSpeed);
@@ -108,8 +110,8 @@ public class AddPopupUi : UiBase
 
     private IEnumerator Revers()
     {
-        yield return CoroutineManager.Wait(PopupSpeed);
-        warningWindow.DOScale(1f, PopupSpeed);
+        yield return CoroutineManager.Wait(PopupTimer);
+        warningWindow.DOScale(0f, PopupSpeed);
     }
 
     public bool CanChangeName()
