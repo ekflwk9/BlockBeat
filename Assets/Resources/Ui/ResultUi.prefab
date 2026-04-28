@@ -1732,7 +1732,6 @@ GameObject:
   - component: {fileID: 90380788609106789}
   - component: {fileID: 2607160318495537458}
   - component: {fileID: 1830128541078364052}
-  - component: {fileID: 435865425946018433}
   m_Layer: 5
   m_Name: ResultUi
   m_TagString: Untagged
@@ -1844,7 +1843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ResultUi
   title: {fileID: 3564414550516161765}
   commentTitle: {fileID: 2938933514147544389}
-  level: {fileID: 435865425946018433}
+  level: {fileID: 0}
   pointTitle: {fileID: 1512050468918020101}
   point: {fileID: 6407762905962015365}
   maxPointTitle: {fileID: 6611537992099782360}
@@ -1853,18 +1852,6 @@ MonoBehaviour:
   timerTitle: {fileID: 7760414859808117957}
   evade: {fileID: 1824500900957275462}
   evadeTitle: {fileID: 5309370233536507186}
---- !u!114 &435865425946018433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6015216879181361557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40c8892135071c147b0b0a80df44c831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6183192644401491813
 GameObject:
   m_ObjectHideFlags: 0

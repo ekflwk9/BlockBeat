@@ -83,23 +83,35 @@ public static class Json
     /// </summary>
     public static void Save() => data.Save();
 
+    /// <summary>
+    /// 플레이어 정보에 관한 데이터
+    /// </summary>
+    /// <returns></returns>
+    public static PlayerData PlayerData() => data.playerData;
+
+    /// <summary>
+    /// 게임 셋팅에 관한 데이터
+    /// </summary>
+    /// <returns></returns>
+    public static SettingData SettingData() => data.settingData;
+
+    /// <summary>
+    /// 플레이어의 소지 아이템에 관한 데이터
+    /// </summary>
+    /// <returns></returns>
+    public static InventoryData InventoryData() => data.inventoryData;
+
+
     public static bool GetBlockItem(Block.Name _blockName) => data.inventoryData.blocks.Contains(_blockName);
     public static void AddBlockItem(Block.Name _blockName) => data.inventoryData.blocks.Add(_blockName);
 
     public static Block.Name GetMainBlock() => data.inventoryData.currentBlock;
     public static void SetMainBlock(Block.Name _blockName) => data.inventoryData.currentBlock = _blockName;
 
-    public static bool GetMusicSound() => data.settingData.musicSound;
-    public static void SetMusicSound() => data.settingData.musicSound = !data.settingData.musicSound;
-
-    public static bool GetEffectSound() => data.settingData.effectSound;
-    public static void SetEffectSound() => data.settingData.effectSound = !data.settingData.effectSound;
-
     public static int GetPlayPoint() => data.playerData.currentPoint;
     public static int GetPlayMaxPoint() => data.playerData.maxPoint;
 
     public static void SetAdvertPass(int _passCount) => data.playerData.advertPassCount = _passCount;
-    public static int GetAdvertPass() => data.playerData.advertPassCount;
 
     public static int GetMaxEvade() => data.playerData.maxEvade;
     public static int GetEvade() => data.playerData.evade;

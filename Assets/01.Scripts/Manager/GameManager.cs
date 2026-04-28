@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
             GetCoin(direction);
             crossHair.OnAnimtion();
 
+            CamController.Instatnce.UpColor();
             SoundManager.OnEffect(SoundManager.SoundName.Block);
             Json.SetPlayPoint(Json.GetPlayPoint() + 1);
 

@@ -29,7 +29,9 @@ public class SoundButton : ButtonBase
 
     private void SetIcon()
     {
-        var isOn = type == SoundType.Effect ? Json.GetEffectSound() : Json.GetMusicSound();
+        var setting = Json.SettingData();
+        var isOn = type == SoundType.Effect ? setting.effectSound : setting.musicSound;
+
         onIcon.gameObject.SetActive(isOn);
         offIcon.gameObject.SetActive(!isOn);
     }

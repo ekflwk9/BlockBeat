@@ -1,14 +1,11 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ResultUi : UiBase
 {
     [SerializeField] private TMP_Text title;
-
     [SerializeField] private TMP_Text commentTitle;
-    [SerializeField] private LevelSystem level;
 
     [SerializeField] private TMP_Text pointTitle;
     [SerializeField] private TMP_Text point;
@@ -39,8 +36,8 @@ public class ResultUi : UiBase
         var canvas = this.TryGetComponent<Canvas>();
         if (canvas) canvas.sortingOrder = 20;
 
+        title = this.TryGetChildComponent<TMP_Text>("Title");
         commentTitle = this.TryGetChildComponent<TMP_Text>("CommentTitle");
-        level = this.RequireComponent<LevelSystem>();
 
         pointTitle = this.TryGetChildComponent<TMP_Text>("PointTitle");
         point = this.TryGetChildComponent<TMP_Text>("Point");
@@ -53,8 +50,6 @@ public class ResultUi : UiBase
 
         evadeTitle = this.TryGetChildComponent<TMP_Text>("EvadeTitle");
         evade = this.TryGetChildComponent<TMP_Text>("Evade");
-
-        title = this.TryGetChildComponent<TMP_Text>("Title");
     }
 #endif
 
@@ -101,7 +96,7 @@ public class ResultUi : UiBase
     private void OnMusic()
     {
 #if UNITY_ANDROID || UNITY_IOS
-        var passCount = Json.GetAdvertPass();
+        var passCount = Json.PlayerData().advertPassCount;
 
         if (AdvertisementSystem.maxPassCount < passCount)
         {
@@ -121,12 +116,12 @@ public class ResultUi : UiBase
 
     private void SetComment()
     {
-        var index = level.GetLevel();
+        //if (index < 0) index = 0;
+        //else if (comment.Length <= index) index = comment.Length - 1;
 
-        if (index < 0) index = 0;
-        else if (comment.Length <= index) index = comment.Length - 1;
+        //commentTitle.text = comment[index];
 
-        commentTitle.text = comment[index];
+        commentTitle.text = "Test";
     }
 
     private void SetPlayPoint()

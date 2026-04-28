@@ -57,11 +57,12 @@ public static class SoundManager
 
     private static void InitVolume()
     {
-        music.volume = Json.GetMusicSound() ? 1f : 0f;
+        var setting = Json.SettingData();
+        music.volume = setting.musicSound ? 1f : 0f;
 
         for (int i = 0; i < effect.Length; i++)
         {
-            effect[i].volume = Json.GetEffectSound() ? 1f : 0f;
+            effect[i].volume = setting.effectSound ? 1f : 0f;
         }
     }
 
@@ -107,7 +108,7 @@ public static class SoundManager
             return;
         }
 
-        else if(music.clip && Equals(sounds[_soundName], music.clip))
+        else if (music.clip && Equals(sounds[_soundName], music.clip))
         {
             return;
         }
@@ -132,8 +133,10 @@ public static class SoundManager
     /// <param name="_isOff"></param>
     public static void SetEffectVolume()
     {
-        Json.SetEffectSound();
-        var newVolume = Json.GetEffectSound() ? 1f : 0f;
+        var setting = Json.SettingData();
+        setting.effectSound = !setting.effectSound;
+
+        var newVolume = setting.effectSound ? 1f : 0f;
 
         for (int i = 0; i < effect.Length; i++)
         {
@@ -147,7 +150,9 @@ public static class SoundManager
     /// <param name="_isOff"></param>
     public static void SetMusicVolume()
     {
-        Json.SetMusicSound();
-        music.volume = Json.GetMusicSound() ? 1f : 0f;
+        var setting = Json.SettingData();
+        setting.musicSound = !setting.musicSound;
+
+        music.volume = setting.musicSound ? 1f : 0f;
     }
 }
