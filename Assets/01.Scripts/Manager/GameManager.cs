@@ -220,7 +220,11 @@ public class GameManager : MonoBehaviour
         crossHair.gameObject.SetActive(false);
 
 #if !UNITY_EDITOR
-        if (FirebaseManager.connect) Json.SaveMaxPoint();
+        var playerData = Json.PlayerData();
+        var connect = FirebaseManager.connect;
+        var newRecord = playerData.maxPoint < playerData.currentPoint;
+
+        if (connect && newRecord) playerData.maxPoint = playerData.currentPoint;
 #else
         var playerData = Json.PlayerData();
         if (playerData.maxPoint < playerData.currentPoint) playerData.maxPoint = playerData.currentPoint;
