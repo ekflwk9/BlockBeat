@@ -118,7 +118,7 @@ public class ResultUi : UiBase
     {
         var length = comment.Length;
         var currentPoint = Json.PlayerData().currentPoint;
-        var checkPoint = (currentPoint / 1000) * length;
+        var checkPoint = (int)((currentPoint / 500f) * length);
         var index = Mathf.Min(checkPoint, length - 1);
 
         commentTitle.text = comment[index];
@@ -139,12 +139,13 @@ public class ResultUi : UiBase
         maxPointTitle.text = "Best";
 
         var fontSize = maxPoint.fontSize * 0.8f;
+        var playerData = Json.PlayerData();
 
 #if !UNITY_EDITOR
         if (FirebaseManager.connect)
         {
-            var playPoint = Json.GetPlayPoint();
-            var playMaxPoint = Json.GetPlayMaxPoint();
+            var playPoint = playerData.currentPoint;
+            var playMaxPoint = playerData.maxPoint;
 
 
             var newText = $"<size={fontSize}>New !</size>";
