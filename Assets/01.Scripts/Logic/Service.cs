@@ -9,7 +9,7 @@ public static class Service
     /// <param name="_this"></param>
     public static void Remove<T>(this Component _this) where T : Component
     {
-        if(_this.TryGetComponent<T>(out var _component))
+        if (_this.TryGetComponent<T>(out var _component))
         {
             MonoBehaviour.DestroyImmediate(_component);
         }

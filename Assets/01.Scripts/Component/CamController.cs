@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour
 {
-    private const float ChangeColorSpeed = 0.15f;
 
     public static CamController Instatnce { get; private set; }
     [field: SerializeField] public Camera cam { get; private set; }
@@ -12,9 +11,6 @@ public class CamController : MonoBehaviour
 
     public Vector3 top { get; private set; }
     private Coroutine shakeCoroutine;
-
-    private float topColorDelta = 0.5f;
-    private float bottomColorDelta = 0.5f;
 
 #if UNITY_EDITOR
     private void Reset()
@@ -38,10 +34,10 @@ public class CamController : MonoBehaviour
 
     private void InitBackGroundColor()
     {
-        topColorDelta = Random.Range(0f, 1f);
-        var ranColor = Color.HSVToRGB(topColorDelta, 1f, 1f);
+        var topDelta = Random.Range(0.6f, 0.9f);
+        var bottomDelta = Random.Range(0.1f, 0.4f);
 
-        gradient.SetColor(ranColor, Color.purple);
+        gradient.ChangeColor(topDelta, bottomDelta);
     }
 
     private void InitCamSize()
@@ -91,19 +87,8 @@ public class CamController : MonoBehaviour
     /// 배경색 변경
     /// </summary>
     /// <param name="_changeColor"></param>
-    public void UpColor()
+    public void ChangeColor()
     {
-        var frameTime = Time.smoothDeltaTime * ChangeColorSpeed;
-
-        topColorDelta += frameTime;
-        topColorDelta = 0.5f <= topColorDelta ? 0.5f : topColorDelta;
-
-        bottomColorDelta += frameTime;
-        bottomColorDelta = bottomColorDelta <= 0f ? 0.5f : bottomColorDelta;
-
-        var topColor = Color.HSVToRGB(topColorDelta, 1f, 1f);
-        var bottomColor = Color.HSVToRGB(bottomColorDelta, 1f, 1f);
-
-        gradient.SetColor(topColor, bottomColor);
+        gradient.ChangeColor();
     }
 }

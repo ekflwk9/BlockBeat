@@ -101,7 +101,7 @@ public class AdvertisementSystem : IUnityAdsInitializationListener, IUnityAdsLoa
     {
         Service.Log($"광고 시청 후 광고를 닫았음");
 
-        Json.SetAdvertPass(0);
+        Json.PlayerData().advertPassCount = 0;
         Advertisement.Load(placementID, this);
         UiManager.Get<FadeUi>().FadeOut();
     }

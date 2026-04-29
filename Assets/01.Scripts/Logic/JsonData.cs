@@ -11,6 +11,7 @@ public class InventoryData
 
 public class PlayerData
 {
+    public const int MaxCoin = 999999999;
     public int coin = 50;
 
     public string nickName = Json.defaultName;
@@ -100,55 +101,4 @@ public static class Json
     /// </summary>
     /// <returns></returns>
     public static InventoryData InventoryData() => data.inventoryData;
-
-
-    public static bool GetBlockItem(Block.Name _blockName) => data.inventoryData.blocks.Contains(_blockName);
-    public static void AddBlockItem(Block.Name _blockName) => data.inventoryData.blocks.Add(_blockName);
-
-    public static Block.Name GetMainBlock() => data.inventoryData.currentBlock;
-    public static void SetMainBlock(Block.Name _blockName) => data.inventoryData.currentBlock = _blockName;
-
-    public static int GetPlayPoint() => data.playerData.currentPoint;
-    public static int GetPlayMaxPoint() => data.playerData.maxPoint;
-
-    public static void SetAdvertPass(int _passCount) => data.playerData.advertPassCount = _passCount;
-
-    public static int GetMaxEvade() => data.playerData.maxEvade;
-    public static int GetEvade() => data.playerData.evade;
-    public static void SetEvade(int _evade)
-    {
-        var playerData = data.playerData;
-
-        if (playerData.maxEvade < _evade) data.playerData.maxEvade = _evade;
-        data.playerData.evade = _evade;
-    }
-
-    public static void SetName(string _name) => data.playerData.nickName = _name;
-    public static string GetName() => data.playerData.nickName;
-
-    public static int GetCoin() => data.playerData.coin;
-    public static void SetCoin(int _coin)
-    {
-        if (999999999 <= _coin) _coin = 999999999;
-        else if (_coin < 0) _coin = 0;
-
-        data.playerData.coin = _coin;
-    }
-
-    public static float GetMaxPlayTime() => data.playerData.maxTime;
-    public static float GetPlayTime() => data.playerData.currentTime;
-    public static void SetPlayTime(float _time)
-    {
-        var playerData = data.playerData;
-
-        if (playerData.maxTime < _time) playerData.maxTime = _time;
-        playerData.currentTime = _time;
-    }
-
-    public static void SetPlayPoint(int _point) => data.playerData.currentPoint = _point;
-    public static void SaveMaxPoint()
-    {
-        var playerData = data.playerData;
-        if (playerData.maxPoint < playerData.currentPoint) playerData.maxPoint = playerData.currentPoint;
-    }
 }

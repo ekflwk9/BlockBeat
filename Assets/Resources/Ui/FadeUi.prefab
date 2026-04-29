@@ -116,9 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a5f82dad16eed4f9962bd066cc703e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evade: {r: 1, g: 1, b: 1, a: 0.11764706}
-  gameOver: {r: 1, g: 0, b: 0, a: 0.21568628}
-  buy: {r: 0.007145524, g: 1, b: 0, a: 0.21568628}
+  evade: {r: 1, g: 1, b: 1, a: 0.23529412}
+  gameOver: {r: 1, g: 0, b: 0, a: 0.34117648}
+  buy: {r: 0.007145524, g: 1, b: 0, a: 0.34117648}
   uiFade: {fileID: 2409662766258857256}
   gameFade: {fileID: 8694712521607236267}
 --- !u!1 &1680746359350822464
@@ -155,6 +155,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8694712521607236267
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -173,6 +174,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -194,9 +197,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -50
+  m_SortingOrder: -40
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -708003797, guid: e9d63cded95db2c49a16c19e44b8e7cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
@@ -206,7 +211,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7249950489021326333
 GameObject:

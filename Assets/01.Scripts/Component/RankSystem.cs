@@ -36,11 +36,12 @@ public class RankSystem : MonoBehaviour
     {
         Sort();
         var length = ranker.Count < maxCount ? ranker.Count : maxCount;
+        var nickName = Json.PlayerData().nickName;
 
         for (int i = 0; i < length; i++)
         {
             //본인과 이름이 같은가
-            if (string.Equals(ranker[i].Key, Json.GetName()))
+            if (string.Equals(ranker[i].Key, nickName))
             {
                 CheckNewRecord(i);
                 return;
@@ -55,16 +56,16 @@ public class RankSystem : MonoBehaviour
 
     private bool CheckNewRecord(int _targetIndex)
     {
-        var myPoint = Json.GetPlayMaxPoint();
+        var myMaxPoint = Json.PlayerData().maxPoint;
 
         //현재 랭커보다 점수가 높은지
-        if (ranker[_targetIndex].Value < myPoint)
+        if (ranker[_targetIndex].Value < myMaxPoint)
         {
             var nextRankerIndex = _targetIndex - 1;
-            var nextRankerPoint = nextRankerIndex < 0 ? myPoint + 1 : ranker[nextRankerIndex].Value;
+            var nextRankerPoint = nextRankerIndex < 0 ? myMaxPoint + 1 : ranker[nextRankerIndex].Value;
 
             //내 바로 위 랭커보다는 점수가 낮을 경우에만 (중복 점수 등록 방지)
-            if (myPoint < nextRankerPoint)
+            if (myMaxPoint < nextRankerPoint)
             {
                 newRecord = true;
                 Sort();

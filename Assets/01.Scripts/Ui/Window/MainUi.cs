@@ -23,7 +23,7 @@ public class MainUi : UiBase
     private void InitCoinText()
     {
         var coinText = this.TryGetChildComponent<TMP_Text>("CoinText");
-        if (coinText) coinText.text = Json.GetCoin().ToString("N0");
+        if (coinText) coinText.text = $"{Json.PlayerData().coin:N0}";
     }
 
     private void InitUi()

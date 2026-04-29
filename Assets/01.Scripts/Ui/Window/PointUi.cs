@@ -26,7 +26,7 @@ public class PointUi : UiBase
 
     private void Start()
     {
-        coin.text = Json.GetCoin().ToString("N0");
+        coin.text = $"{Json.PlayerData().coin:N0}";
     }
 
     public override void On()
@@ -42,7 +42,7 @@ public class PointUi : UiBase
     /// </summary>
     public void ShowPoint()
     {
-        point.text = Json.GetPlayPoint().ToString();
+        point.text = $"{Json.PlayerData().currentPoint}";
     }
 
     /// <summary>
@@ -50,6 +50,6 @@ public class PointUi : UiBase
     /// </summary>
     public void ShowCoin()
     {
-        coin.text = Json.GetCoin().ToString("N0");
+        coin.text = $"{Json.PlayerData().coin:N0}";
     }
 }

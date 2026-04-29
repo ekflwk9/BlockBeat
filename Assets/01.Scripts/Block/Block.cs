@@ -44,7 +44,7 @@ public class Block : MonoBehaviour
         Right,
     }
 
-    private const int maxLevel = 150; //해당 레벨 이후부터 None블록은 나오지 않음
+    private const int MaxLevel = 150; //해당 레벨 이후부터 None블록은 나오지 않음
 
     [field: SerializeField] public SpriteRenderer render { get; private set; }
     [SerializeField] private Rigidbody2D rigid;
@@ -84,7 +84,7 @@ public class Block : MonoBehaviour
 
     private Sprite LoadSprite(string _typeName)
     {
-        var data = Json.GetMainBlock().ToString();
+        var data = Json.InventoryData().currentBlock.ToString();
         var path = Path.Combine("Blocks", data, _typeName);
         var load = Resources.Load<Sprite>(path);
 
@@ -160,7 +160,8 @@ public class Block : MonoBehaviour
 
     private void SetBlokcDirection()
     {
-        var minRange = maxLevel < Json.GetPlayPoint() ? (int)Type.Left : (int)Type.None;
+        var startSpike = MaxLevel < Json.PlayerData().currentPoint;
+        var minRange = startSpike ? (int)Type.Left : (int)Type.None;
 
         currentType = (Type)UnityEngine.Random.Range(minRange, image.Values.Count);
         render.sprite = image[currentType];

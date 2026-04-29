@@ -96,11 +96,11 @@ public class ResultUi : UiBase
     private void OnMusic()
     {
 #if UNITY_ANDROID || UNITY_IOS
-        var passCount = Json.PlayerData().advertPassCount;
+        var playerData = Json.PlayerData();
 
-        if (AdvertisementSystem.maxPassCount < passCount)
+        if (AdvertisementSystem.maxPassCount < playerData.advertPassCount)
         {
-            Json.SetAdvertPass(0);
+            Json.PlayerData().advertPassCount = 0;
             AdvertisementSystem.ShowVideo();
         }
 
@@ -109,25 +109,25 @@ public class ResultUi : UiBase
             AdvertisementSystem.ShowBanner(true);
             SoundManager.OnMusic(SoundManager.SoundName.GameOver, false);
 
-            if (50 < Json.GetPlayPoint()) Json.SetAdvertPass(passCount + 1);
+            if (50 < playerData.currentPoint) playerData.advertPassCount++;
         }
 #endif
     }
 
     private void SetComment()
     {
-        //if (index < 0) index = 0;
-        //else if (comment.Length <= index) index = comment.Length - 1;
+        var length = comment.Length;
+        var currentPoint = Json.PlayerData().currentPoint;
+        var checkPoint = (currentPoint / 1000) * length;
+        var index = Mathf.Min(checkPoint, length - 1);
 
-        //commentTitle.text = comment[index];
-
-        commentTitle.text = "Test";
+        commentTitle.text = comment[index];
     }
 
     private void SetPlayPoint()
     {
         pointTitle.text = "Blocks Broken";
-        point.text = Json.GetPlayPoint().ToString();
+        point.text = $"{Json.PlayerData().currentPoint}";
     }
 
     private void SetMaxPoint()
@@ -162,8 +162,8 @@ public class ResultUi : UiBase
             maxPoint.text = newSize;
         }
 #else
-        var playPoint = Json.GetPlayPoint();
-        var playMaxPoint = Json.GetPlayMaxPoint();
+        var playPoint = Json.PlayerData().currentPoint;
+        var playMaxPoint = Json.PlayerData().maxPoint;
 
         var newText = $"<size={fontSize}>New !</size>";
         var newRecord = (playMaxPoint != 0 && playMaxPoint == playPoint) ? $"<color=#00FF00>{newText}</color>" : string.Empty;
@@ -175,12 +175,12 @@ public class ResultUi : UiBase
     private void SetEvade()
     {
         evadeTitle.text = "Most Evade";
-        evade.text = Json.GetEvade().ToString();
+        evade.text = $"{Json.PlayerData().maxEvade}";
     }
 
     private void SetTimer()
     {
-        var playTime = Json.GetPlayTime();
+        var playTime = Json.PlayerData().currentTime;
         var minutes = (int)(playTime / 60);
         var second = minutes < 1 ? playTime : playTime % 60;
 

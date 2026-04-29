@@ -83,7 +83,7 @@ public class AddPopupUi : UiBase
 
     public override void On()
     {
-        if (string.Equals(Json.defaultName, Json.GetName()))
+        if (string.Equals(Json.defaultName, Json.PlayerData().nickName))
         {
             base.On();
         }

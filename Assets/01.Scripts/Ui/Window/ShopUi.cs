@@ -16,7 +16,7 @@ public class ShopUi : UiBase
     [SerializeField] private Block.Info[] items;
 
     private Quest quest = new();
-    private int currentIndex = (int)Json.GetMainBlock();
+    private int currentIndex = (int)Json.InventoryData().currentBlock;
 
 #if UNITY_EDITOR
     private void Reset()
@@ -76,7 +76,7 @@ public class ShopUi : UiBase
         UiUpdate();
         ChangeBlock();
         CheckQuest();
-        coinText.text = Json.GetCoin().ToString("N0");
+        coinText.text = $"{Json.PlayerData().coin:N0}";
 
         UiManager.Add<ShopUi>(this);
         UiManager.Get<FadeUi>().FadeOut();
@@ -87,7 +87,7 @@ public class ShopUi : UiBase
     /// </summary>
     public void SetMainBlock()
     {
-        Json.SetMainBlock((Block.Name)currentIndex);
+        Json.InventoryData().currentBlock = (Block.Name)currentIndex;
         selectButton.Select(true);
     }
 
@@ -96,9 +96,12 @@ public class ShopUi : UiBase
     /// </summary>
     public void AddBlock()
     {
-        Json.AddBlockItem((Block.Name)currentIndex);
-        coinText.text = Json.GetCoin().ToString("N0");
+        var block = (Block.Name)currentIndex;
+        var inventory = Json.InventoryData().blocks;
 
+        if (!inventory.Contains(block)) inventory.Add(block);
+
+        coinText.text = $"{Json.PlayerData().coin:N0}";
         selectButton.Select(false);
         selectButton.gameObject.SetActive(true);
     }
@@ -121,9 +124,10 @@ public class ShopUi : UiBase
     private void UiUpdate()
     {
         var blockName = (Block.Name)currentIndex;
+        var currentBlock = Json.InventoryData().currentBlock;
 
         itemTitle.text = blockName.ToString();
-        selectButton.Select(blockName == Json.GetMainBlock());
+        selectButton.Select(blockName == currentBlock);
     }
 
     private void ChangeBlock()
@@ -140,7 +144,7 @@ public class ShopUi : UiBase
     {
         var currentBlock = (Block.Name)currentIndex;
         var complete = quest.Complete(currentBlock);
-        var buy = Json.GetBlockItem(currentBlock);
+        var buy = Json.InventoryData().blocks.Contains(currentBlock);
 
         var canBuy = complete && !buy;
         if (canBuy) buyButton.SetPrice(quest.Price(currentBlock));

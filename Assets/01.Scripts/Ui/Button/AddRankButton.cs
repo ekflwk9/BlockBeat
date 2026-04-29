@@ -24,7 +24,7 @@ public class AddRankButton : ButtonBase
     private void ChangeRankSene()
     {
         var newName = UiManager.Get<AddPopupUi>().InputName();
-        Json.SetName(newName);
+        Json.PlayerData().nickName = newName;
         Json.Save();
 
         FirebaseManager.AddRank();

@@ -53,7 +53,10 @@ public class TimerUi : UiBase
     public void StopTimer()
     {
         var timer = startTime == 0 ? 0 : Time.time - startTime;
-        Json.SetPlayTime(timer);
+        var playerData = Json.PlayerData();
+
+        if (playerData.maxTime < timer) playerData.maxTime = timer;
+        playerData.currentTime = timer;
     }
 
     private void ResetSlide()

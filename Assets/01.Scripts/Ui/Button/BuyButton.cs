@@ -22,20 +22,25 @@ public class BuyButton : ButtonBase
     {
         price = _coin;
         priceText.text = _coin.ToString();
-        priceText.color = Json.GetCoin() < _coin ? Color.red : Color.white;
+        priceText.color = Json.PlayerData().coin < _coin ? Color.red : Color.white;
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        var playerCoin = Json.GetCoin();
+        var playerData = Json.PlayerData();
+        var coin = playerData.coin;
 
-        if (price <= playerCoin)
+        if (price <= coin)
         {
-            SoundManager.OnEffect(SoundManager.SoundName.Buy);
+            var newCoin = coin - price;
 
-            Json.SetCoin(playerCoin - price);
+            if (PlayerData.MaxCoin < newCoin) playerData.coin = PlayerData.MaxCoin;
+            else if (newCoin < 0) playerData.coin = 0;
+            else playerData.coin  = newCoin;
+
             UiManager.Get<ShopUi>().AddBlock();
             UiManager.Get<FadeUi>().FadeOut(FadeUi.Type.Buy);
+            SoundManager.OnEffect(SoundManager.SoundName.Buy);
 
             base.OnPointerDown(eventData);
             this.gameObject.SetActive(false);

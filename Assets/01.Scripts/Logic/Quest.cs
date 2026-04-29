@@ -73,7 +73,7 @@ public class Quest
 
     private static Quest.List Point(int _point, int _price = 0)
     {
-        var complete = _point < Json.GetPlayMaxPoint();
+        var complete = _point < Json.PlayerData().maxPoint;
         var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
 
         var newText = $"{color}{_point}</color>";
@@ -84,7 +84,7 @@ public class Quest
 
     private static Quest.List Survival(float _timer, int _price = 0)
     {
-        var complete = _timer < Json.GetMaxPlayTime();
+        var complete = _timer < Json.PlayerData().maxTime;
         var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
 
         var newText = $"{color}{_timer.ToString("F2")}</color>";
@@ -95,7 +95,7 @@ public class Quest
 
     private static Quest.List Evade(int _evade, int _price = 0)
     {
-        var complete = _evade < Json.GetMaxEvade();
+        var complete = _evade < Json.PlayerData().maxEvade;
         var color = complete ? "<color=#00FF00>" : "<color=#FF0000>";
 
         var newText = $"{color}{_evade}</color>";

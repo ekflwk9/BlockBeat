@@ -159,8 +159,8 @@ public class GameManager : MonoBehaviour
 
     private void InitDate()
     {
-        Json.SetEvade(0);
-        Json.SetPlayPoint(0);
+        Json.PlayerData().evade = 0;
+        Json.PlayerData().currentPoint = 0;
     }
 
     /// <summary>
@@ -179,9 +179,9 @@ public class GameManager : MonoBehaviour
             GetCoin(direction);
             crossHair.OnAnimtion();
 
-            CamController.Instatnce.UpColor();
+            CamController.Instatnce.ChangeColor();
             SoundManager.OnEffect(SoundManager.SoundName.Block);
-            Json.SetPlayPoint(Json.GetPlayPoint() + 1);
+            Json.PlayerData().currentPoint++;
 
             UiManager.Get<PointUi>().ShowPoint();
             UiManager.Get<TimerUi>().UpTimer();
@@ -200,7 +200,11 @@ public class GameManager : MonoBehaviour
     {
         if (blocks[0].CanEatCoin(_direction))
         {
-            Json.SetCoin(Json.GetCoin() + 1);
+            var playerData = Json.PlayerData();
+
+            if (PlayerData.MaxCoin < playerData.coin) playerData.coin = PlayerData.MaxCoin;
+            else playerData.coin++;
+
             SoundManager.OnEffect(SoundManager.SoundName.Coin);
             OnCoinEffect(_direction);
         }
@@ -218,7 +222,8 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR
         if (FirebaseManager.connect) Json.SaveMaxPoint();
 #else
-        Json.SaveMaxPoint();
+        var playerData = Json.PlayerData();
+        if (playerData.maxPoint < playerData.currentPoint) playerData.maxPoint = playerData.currentPoint;
 #endif
 
         SoundManager.OffMusic();
@@ -261,7 +266,8 @@ public class GameManager : MonoBehaviour
             CamController.Instatnce.Shake(0.15f, 0.1f);
             evadeCount++;
 
-            if (Json.GetEvade() < evadeCount) Json.SetEvade(evadeCount);
+            var playerData = Json.PlayerData();
+            if (playerData.evade < evadeCount) playerData.evade = evadeCount;
         }
 
         else

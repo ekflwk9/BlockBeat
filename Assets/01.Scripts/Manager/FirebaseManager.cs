@@ -99,8 +99,9 @@ public static class FirebaseManager
         var userPath = $"{myData}/{userName}";
         var scorePath = $"{myData}/{pointName}";
 
-        var playerNickName = Json.GetName();
-        var playerPoint = Json.GetPlayMaxPoint();
+        var playerData = Json.PlayerData();
+        var playerNickName = playerData.nickName;
+        var playerPoint = playerData.maxPoint;
         var defaultReference = FirebaseDatabase.DefaultInstance.RootReference;
 
         //해당 경로 파이어 베이스 데이터에 올림
